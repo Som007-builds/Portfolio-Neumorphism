@@ -1,16 +1,23 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": false,
+  "version": 2,
+  "builds": [
+    { "src": "*.html", "use": "@vercel/static" },
+    { "src": "*.js", "use": "@vercel/static" },
+    { "src": "*.webp", "use": "@vercel/static" }
+  ],
   "routes": [
     { "src": "/", "dest": "/index.html" },
     { "src": "/systems", "dest": "/systems.html" },
-    { "src": "/lab", "dest": "/lab.html" },
-    { "src": "/codex", "dest": "/codex.html" },
-    { "src": "/contact", "dest": "/contact.html" },
     { "src": "/systems.html", "dest": "/systems.html" },
+    { "src": "/lab", "dest": "/lab.html" },
     { "src": "/lab.html", "dest": "/lab.html" },
+    { "src": "/codex", "dest": "/codex.html" },
     { "src": "/codex.html", "dest": "/codex.html" },
+    { "src": "/contact", "dest": "/contact.html" },
     { "src": "/contact.html", "dest": "/contact.html" },
-    { "src": "/theme.js", "dest": "/theme.js" }
+    { "src": "/theme.js", "dest": "/theme.js" },
+    { "src": "/profile.webp", "dest": "/profile.webp" },
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
