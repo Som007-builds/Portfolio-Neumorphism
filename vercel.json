@@ -1,0 +1,16 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "routes": [
+    { "src": "/", "dest": "/index.html" },
+    { "src": "/systems", "dest": "/systems.html" },
+    { "src": "/lab", "dest": "/lab.html" },
+    { "src": "/codex", "dest": "/codex.html" },
+    { "src": "/contact", "dest": "/contact.html" },
+    { "src": "/systems.html", "dest": "/systems.html" },
+    { "src": "/lab.html", "dest": "/lab.html" },
+    { "src": "/codex.html", "dest": "/codex.html" },
+    { "src": "/contact.html", "dest": "/contact.html" },
+    { "src": "/theme.js", "dest": "/theme.js" }
+  ]
+}
