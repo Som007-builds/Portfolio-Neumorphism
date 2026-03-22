@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Systems | Soham Singh</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>(function(){var s=localStorage.getItem('theme'),d=window.matchMedia('(prefers-color-scheme: dark)').matches;if(s==='dark'||(s===null&&d))document.documentElement.classList.add('dark');})();</script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+  tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#5d3fe0","primary-container":"#e5deff","on-primary":"#fbf6ff","on-primary-container":"#502ed3","secondary":"#5e5f5f","surface":"#f9f9f9","surface-container-low":"#f2f4f4","surface-container":"#ebeeef","surface-container-high":"#e4e9ea","surface-container-highest":"#dde4e5","on-surface":"#2d3435","on-surface-variant":"#5a6061","on-background":"#2d3435","outline":"#757c7d","outline-variant":"#adb3b4","inverse-primary":"#917eff"},fontFamily:{"headline":["Space Grotesk","sans-serif"],"body":["Inter","sans-serif"],"label":["Inter","sans-serif"]},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"}}}}
+</script>
+<style>
+  .nm-convex{box-shadow:-8px -8px 20px #ffffff,8px 8px 20px #c8c8c8}.nm-concave{box-shadow:inset -4px -4px 10px #ffffff,inset 4px 4px 10px #c8c8c8}.nm-convex-sm{box-shadow:-4px -4px 10px #ffffff,4px 4px 10px #c8c8c8}
+  .dark .nm-convex{box-shadow:-8px -8px 20px #13151f,8px 8px 20px #252840}.dark .nm-concave{box-shadow:inset -4px -4px 10px #13151f,inset 4px 4px 10px #252840}.dark .nm-convex-sm{box-shadow:-4px -4px 10px #13151f,4px 4px 10px #252840}
+  html{transition:background-color 0.35s ease}
+  body{background-color:#f9f9f9;color:#2d3435;opacity:0;transition:background-color 0.35s ease,color 0.35s ease}
+  .dark body{background-color:#1c1f2e;color:#e0e2f0}
+  body.loaded{opacity:1;transition:opacity 0.15s ease,background-color 0.35s ease,color 0.35s ease}
+  body.fade-out{opacity:0!important;transition:opacity 0.1s ease!important}
+  .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;vertical-align:middle}
+  .breathe{animation:breathe 3s ease-in-out infinite}@keyframes breathe{0%,100%{box-shadow:0 0 10px rgba(93,63,224,0.3)}50%{box-shadow:0 0 25px rgba(93,63,224,0.6)}}
+  .dark .breathe{animation:breathe-dk 3s ease-in-out infinite}@keyframes breathe-dk{0%,100%{box-shadow:0 0 12px rgba(145,126,255,0.45)}50%{box-shadow:0 0 30px rgba(145,126,255,0.8)}}
+  #theme-toggle{transition:transform 0.15s ease}#theme-toggle:hover{transform:scale(0.93)}#theme-toggle:active{transform:scale(0.87)}
+</style>
+<script src="theme.js"></script>
+</head>
+<body class="font-body bg-[#f9f9f9] dark:bg-[#1c1f2e] text-[#2d3435] dark:text-[#e0e2f0] overflow-x-hidden transition-colors duration-300">
+
+<!-- TOP NAV -->
+<nav class="w-full sticky top-0 z-50 px-8 py-4 bg-[#f9f9f9] dark:bg-[#1c1f2e] nm-convex transition-colors duration-300">
+  <div class="flex justify-between items-center max-w-7xl mx-auto">
+    <a href="index.html" onclick="navigate(event,'index.html')" class="text-xl font-bold tracking-tighter text-[#2d3435] dark:text-[#e0e2f0] font-headline">Soham Singh</a>
+    <div class="hidden md:flex items-center gap-8 font-headline font-bold text-sm tracking-tight uppercase">
+      <a href="index.html" onclick="navigate(event,'index.html')" class="text-[#2d3435] dark:text-[#c0c4e0] opacity-70 hover:opacity-100 hover:text-[#5d3fe0] dark:hover:text-[#917eff] transition-all duration-300">The Hub</a>
+      <a href="systems.html" onclick="navigate(event,'systems.html')" class="text-[#5d3fe0] dark:text-[#917eff] border-b-2 border-[#5d3fe0] dark:border-[#917eff] pb-1">Systems</a>
+      <a href="lab.html" onclick="navigate(event,'lab.html')" class="text-[#2d3435] dark:text-[#c0c4e0] opacity-70 hover:opacity-100 hover:text-[#5d3fe0] dark:hover:text-[#917eff] transition-all duration-300">The Lab</a>
+      <a href="codex.html" onclick="navigate(event,'codex.html')" class="text-[#2d3435] dark:text-[#c0c4e0] opacity-70 hover:opacity-100 hover:text-[#5d3fe0] dark:hover:text-[#917eff] transition-all duration-300">The Codex</a>
+      <a href="contact.html" onclick="navigate(event,'contact.html')" class="text-[#2d3435] dark:text-[#c0c4e0] opacity-70 hover:opacity-100 hover:text-[#5d3fe0] dark:hover:text-[#917eff] transition-all duration-300">Contact</a>
+    </div>
+    <button id="theme-toggle" onclick="toggleTheme()" class="nm-convex-sm w-10 h-10 rounded-full flex items-center justify-center">
+      <span id="theme-icon" class="material-symbols-outlined text-sm text-[#5d3fe0] dark:text-[#917eff]">dark_mode</span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<nav class="md:hidden fixed bottom-5 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1 bg-[#f9f9f9] dark:bg-[#1c1f2e] rounded-full px-5 py-2 nm-convex transition-colors duration-300">
+  <a href="index.html" onclick="navigate(event,'index.html')" class="flex flex-col items-center text-[#2d3435]/40 dark:text-white/25 px-3 py-1 hover:text-[#5d3fe0] dark:hover:text-[#917eff] transition-all"><span class="material-symbols-outlined text-xl">grid_view</span><span class="font-body text-[9px] font-medium uppercase tracking-widest">Hub</span></a>
+  <a href="systems.html" onclick="navigate(event,'systems.html')" class="flex flex-col items-center nm-concave rounded-xl px-3 py-1 text-[#5d3fe0] dark:text-[#917eff] bg-[#f2f4f4] dark:bg-[#252840]"><span class="material-symbols-outlined text-xl">layers</span><span class="font-body text-[9px] font-medium uppercase tracking-widest">Work</span></a>
+  <a href="lab.html" onclick="navigate(event,'lab.html')" class="flex flex-col items-center text-[#2d3435]/40 dark:text-white/25 px-3 py-1 hover:text-[#5d3fe0] dark:hover:text-[#917eff] transition-all"><span class="material-symbols-outlined text-xl">science</span><span class="font-body text-[9px] font-medium uppercase tracking-widest">Lab</span></a>
+  <a href="codex.html" onclick="navigate(event,'codex.html')" class="flex flex-col items-center text-[#2d3435]/40 dark:text-white/25 px-3 py-1 hover:text-[#5d3fe0] dark:hover:text-[#917eff] transition-all"><span class="material-symbols-outlined text-xl">menu_book</span><span class="font-body text-[9px] font-medium uppercase tracking-widest">Codex</span></a>
+  <a href="contact.html" onclick="navigate(event,'contact.html')" class="flex flex-col items-center text-[#2d3435]/40 dark:text-white/25 px-3 py-1 hover:text-[#5d3fe0] dark:hover:text-[#917eff] transition-all"><span class="material-symbols-outlined text-xl">send</span><span class="font-body text-[9px] font-medium uppercase tracking-widest">Contact</span></a>
+</nav>
+
+<main class="pt-20 pb-40 px-6 max-w-7xl mx-auto space-y-32">
+
+  <header class="space-y-4 max-w-3xl">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#e4e9ea] dark:bg-[#252840] nm-concave text-[10px] font-bold tracking-widest uppercase text-primary dark:text-[#917eff]">
+      <span class="w-1.5 h-1.5 rounded-full bg-primary dark:bg-[#917eff] animate-pulse"></span>Operational Systems
+    </div>
+    <h1 class="font-headline text-5xl md:text-7xl font-bold tracking-tighter text-[#2d3435] dark:text-[#e0e2f0]">Systems</h1>
+    <p class="text-[#5a6061] dark:text-[#9da3c0] text-lg leading-relaxed max-w-2xl">A curated index of real systems built from first principles. Each one started as a problem worth solving.</p>
+  </header>
+
+  <!-- ── PROJECT 01: FORETYX ── -->
+  <article class="space-y-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-5 space-y-8">
+        <div class="space-y-2">
+          <span class="text-[10px] font-black tracking-widest text-primary dark:text-[#917eff] uppercase">System 01</span>
+          <h2 class="font-headline text-4xl font-bold tracking-tight text-[#2d3435] dark:text-[#e0e2f0]">Foretyx</h2>
+          <p class="font-label text-[10px] font-bold uppercase tracking-widest text-[#adb3b4] dark:text-[#454870]">Privacy Infrastructure · Security Layer</p>
+        </div>
+        <div class="space-y-6">
+          <div class="space-y-2"><h3 class="text-xs font-bold uppercase tracking-wider text-primary dark:text-[#917eff]">Problem</h3><p class="text-sm leading-relaxed text-[#5a6061] dark:text-[#9da3c0]">Indian digital users lack a unified, privacy-first infrastructure layer. Data leaks, opaque permissions, and zero user control are the norm across apps and services.</p></div>
+          <div class="space-y-2"><h3 class="text-xs font-bold uppercase tracking-wider text-primary dark:text-[#917eff]">Approach</h3><p class="text-sm leading-relaxed text-[#5a6061] dark:text-[#9da3c0]">Building Foretyx as a platform-level privacy layer — not just a tool. A security substrate that any Indian application can integrate to give users real control over their data perimeter.</p></div>
+          <div class="space-y-2"><h3 class="text-xs font-bold uppercase tracking-wider text-primary dark:text-[#917eff]">Vision</h3><p class="text-sm leading-relaxed text-[#5a6061] dark:text-[#9da3c0] font-medium">Privacy infrastructure as a platform play. Foretyx becomes the security layer for every Indian application that takes user trust seriously.</p></div>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1 text-[9px] font-bold uppercase tracking-widest rounded-full nm-concave bg-[#e4e9ea] dark:bg-[#252840] text-[#5a6061] dark:text-[#9da3c0]">Privacy Tech</span>
+          <span class="px-3 py-1 text-[9px] font-bold uppercase tracking-widest rounded-full nm-concave bg-[#e4e9ea] dark:bg-[#252840] text-[#5a6061] dark:text-[#9da3c0]">Security</span>
+          <span class="px-3 py-1 text-[9px] font-bold uppercase tracking-widest rounded-full nm-concave bg-[#e4e9ea] dark:bg-[#252840] text-[#5a6061] dark:text-[#9da3c0]">India-first</span>
+          <span class="px-3 py-1 text-[9px] font-bold uppercase tracking-widest rounded-full nm-concave bg-[#e4e9ea] dark:bg-[#252840] text-[#5a6061] dark:text-[#9da3c0]">Platform</span>
+        </div>
+      </div>
+      <div class="lg:col-span-7">
+        <div class="relative aspect-video rounded-3xl bg-[#f2f4f4] dark:bg-[#20233a] nm-convex p-10 overflow-hidden flex items-center justify-center transition-colors duration-300">
+          <div class="absolute inset-0 opacity-20 pointer-events-none"><svg class="w-full h-full" viewBox="0 0 800 400"><defs><pattern height="40" id="grid1" patternUnits="userSpaceOnUse" width="40"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="0.5"></path></pattern></defs><rect fill="url(#grid1)" height="100%" width="100%"></rect></svg></div>
+          <div class="relative z-10 w-full h-full flex items-center justify-center" style="min-height:180px;">
+            <svg class="absolute inset-0 w-full h-full" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid meet" fill="none">
+              <line x1="200" y1="130" x2="80"  y2="100" stroke="#5d3fe0" stroke-width="1" stroke-dasharray="4 3" opacity="0.4"/>
+              <line x1="200" y1="130" x2="80"  y2="180" stroke="#5d3fe0" stroke-width="1" stroke-dasharray="4 3" opacity="0.4"/>
+              <line x1="200" y1="130" x2="320" y2="100" stroke="#5d3fe0" stroke-width="1" stroke-dasharray="4 3" opacity="0.4"/>
+              <line x1="200" y1="130" x2="320" y2="180" stroke="#5d3fe0" stroke-width="1" stroke-dasharray="4 3" opacity="0.4"/>
+              <circle r="3" fill="#917eff" opacity="0.9"><animateMotion dur="2.5s" repeatCount="indefinite" path="M80,100 L200,130"/></circle>
+              <circle r="3" fill="#917eff" opacity="0.9"><animateMotion dur="3s" repeatCount="indefinite" path="M80,180 L200,130"/></circle>
+              <circle r="3" fill="#5d3fe0" opacity="0.7"><animateMotion dur="2.8s" repeatCount="indefinite" path="M200,130 L320,100"/></circle>
+              <circle r="3" fill="#5d3fe0" opacity="0.7"><animateMotion dur="3.2s" repeatCount="indefinite" path="M200,130 L320,180"/></circle>
+            </svg>
+            <div class="absolute" style="left:8%;top:50%;transform:translateY(-50%);">
+              <div class="flex flex-col gap-4">
+                <div class="w-12 h-12 rounded-xl bg-[#e4e9ea] dark:bg-[#252840] nm-concave flex items-center justify-center"><span class="material-symbols-outlined text-lg text-primary/70 dark:text-[#917eff]/70">smartphone</span></div>
+                <div class="w-12 h-12 rounded-xl bg-[#e4e9ea] dark:bg-[#252840] nm-concave flex items-center justify-center"><span class="material-symbols-outlined text-lg text-primary/70 dark:text-[#917eff]/70">desktop_windows</span></div>
+              </div>
+            </div>
+            <div class="absolute" style="left:50%;top:50%;transform:translate(-50%,-50%);">
+              <div class="w-20 h-20 rounded-3xl nm-convex bg-[#f2f4f4] dark:bg-[#20233a] flex items-center justify-center relative" style="border:1.5px solid rgba(93,63,224,0.2);">
+                <span class="material-symbols-outlined text-4xl text-primary dark:text-[#917eff]">shield</span>
+                <div class="absolute inset-0 rounded-3xl animate-ping opacity-10" style="background:rgba(93,63,224,0.25);animation-duration:3s;"></div>
+              </div>
+            </div>
+            <div class="absolute" style="right:8%;top:50%;transform:translateY(-50%);">
+              <div class="flex flex-col gap-4">
+                <div class="w-12 h-12 rounded-xl bg-[#e4e9ea] dark:bg-[#252840] nm-concave flex items-center justify-center"><span class="material-symbols-outlined text-lg text-[#adb3b4] dark:text-[#454870]">cloud</span></div>
+                <div class="w-12 h-12 rounded-xl bg-[#e4e9ea] dark:bg-[#252840] nm-concave flex items-center justify-center"><span class="material-symbols-outlined text-lg text-[#adb3b4] dark:text-[#454870]">storage</span></div>
+              </div>
+            </div>
+            <div class="absolute bottom-2 left-0 right-0 flex justify-center">
+              <span class="font-label text-[9px] font-bold tracking-[0.2em] uppercase text-primary/50 dark:text-[#917eff]/50">Foretyx — Privacy Layer Architecture</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 p-8 rounded-3xl nm-concave bg-[#e4e9ea]/50 dark:bg-[#252840]/50 transition-colors duration-300">
+      <div class="space-y-4"><h3 class="font-headline font-bold text-lg flex items-center gap-2 text-[#2d3435] dark:text-[#e0e2f0]"><span class="material-symbols-outlined text-primary dark:text-[#917eff]">schema</span>Architecture</h3><p class="text-sm text-[#5a6061] dark:text-[#9da3c0] leading-relaxed">Foretyx sits as a middleware security layer between applications and data stores. It intercepts data flows, enforces user-defined permissions, and provides an audit trail — all without modifying the host application's core logic.</p></div>
+      <div class="space-y-4"><h3 class="font-headline font-bold text-lg flex items-center gap-2 text-[#2d3435] dark:text-[#e0e2f0]"><span class="material-symbols-outlined text-primary dark:text-[#917eff]">flag</span>Status</h3><p class="text-sm text-[#5a6061] dark:text-[#9da3c0] leading-relaxed">Currently in early design and feasibility phase. Core privacy primitives being defined. Target market: Indian SaaS companies and consumer apps handling sensitive user data. <strong>Open to collaborators.</strong></p></div>
+    </div>
+  </article>
+
+  <!-- ── PROJECT 02: AI BROWSER CHATBOT ── -->
+  <article class="space-y-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-7 order-2 lg:order-1">
+        <div class="relative aspect-video rounded-3xl bg-[#f2f4f4] dark:bg-[#20233a] nm-convex p-10 overflow-hidden flex items-center justify-center transition-colors duration-300">
+          <div class="relative z-10 w-full flex flex-col items-center gap-5">
+            <div class="w-full max-w-xs rounded-xl nm-concave bg-[#e4e9ea] dark:bg-[#252840] overflow-hidden">
+              <div class="flex items-center gap-1.5 px-3 py-2 border-b border-[#dde4e5] dark:border-[#2b2f4a]">
+                <div class="w-2 h-2 rounded-full bg-red-400/60"></div>
+                <div class="w-2 h-2 rounded-full bg-amber-400/60"></div>
+                <div class="w-2 h-2 rounded-full bg-green-400/60"></div>
+                <div class="flex-1 mx-2 h-4 rounded nm-concave bg-[#dde4e5] dark:bg-[#2b2f4a]"></div>
+              </div>
+              <div class="p-3 space-y-2">
+                <div class="flex gap-2 items-start"><div class="w-5 h-5 rounded-full bg-primary/20 dark:bg-[#917eff]/20 shrink-0 flex items-center justify-center"><span class="material-symbols-outlined text-[10px] text-primary dark:text-[#917eff]">smart_toy</span></div><div class="flex-1 h-3 rounded nm-concave bg-[#dde4e5] dark:bg-[#2b2f4a]"></div></div>
+                <div class="flex gap-2 items-start justify-end"><div class="w-24 h-3 rounded nm-convex bg-primary/20 dark:bg-[#917eff]/20"></div></div>
+                <div class="flex gap-2 items-start"><div class="w-5 h-5 rounded-full bg-primary/20 dark:bg-[#917eff]/20 shrink-0 flex items-center justify-center"><span class="material-symbols-outlined text-[10px] text-primary dark:text-[#917eff]">smart_toy</span></div><div class="flex-1 h-6 rounded nm-concave bg-[#dde4e5] dark:bg-[#2b2f4a]"></div></div>
+              </div>
+            </div>
+            <p class="text-[10px] font-bold tracking-[0.2em] uppercase text-primary/60 dark:text-[#917eff]/60">Local LLM · Browser-Native · Ollama</p>
+          </div>
+        </div>
+      </div>
+      <div class="lg:col-span-5 order-1 lg:order-2 space-y-8">
+        <div class="space-y-2">
+          <span class="text-[10px] font-black tracking-widest text-primary dark:text-[#917eff] uppercase">System 02</span>
+          <h2 class="font-headline text-4xl font-bold tracking-tight text-[#2d3435] dark:text-[#e0e2f0]">AI Browser Chatbot</h2>
+          <p class="font-label text-[10px] font-bold uppercase tracking-widest text-[#adb3b4] dark:text-[#454870]">Local LLM · Ollama · Browser Access</p>
+        </div>
+        <div class="space-y-6">
+          <div class="space-y-2"><h3 class="text-xs font-bold uppercase tracking-wider text-primary dark:text-[#917eff]">Problem</h3><p class="text-sm leading-relaxed text-[#5a6061] dark:text-[#9da3c0]">Cloud-based AI assistants send your data to remote servers. Most people cannot self-host LLMs. There's no simple, browser-based AI that runs fully local with real browsing capability.</p></div>
+          <div class="space-y-2"><h3 class="text-xs font-bold uppercase tracking-wider text-primary dark:text-[#917eff]">Approach</h3><p class="text-sm leading-relaxed text-[#5a6061] dark:text-[#9da3c0]">Browser-based chatbot powered by Ollama running local models (DeepSeek, LLaMA). The UI lives in the browser, the model runs on-device. No API keys, no data leaving the machine.</p></div>
+          <div class="space-y-2"><h3 class="text-xs font-bold uppercase tracking-wider text-primary dark:text-[#917eff]">Outcome</h3><p class="text-sm leading-relaxed text-[#5a6061] dark:text-[#9da3c0] font-medium">Fully private, zero-cost AI assistant with real browser context awareness. Works offline. No subscriptions.</p></div>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1 text-[9px] font-bold uppercase tracking-widest rounded-full nm-concave bg-[#e4e9ea] dark:bg-[#252840] text-[#5a6061] dark:text-[#9da3c0]">Ollama</span>
+          <span class="px-3 py-1 text-[9px] font-bold uppercase tracking-widest rounded-full nm-concave bg-[#e4e9ea] dark:bg-[#252840] text-[#5a6061] dark:text-[#9da3c0]">DeepSeek</span>
+          <span class="px-3 py-1 text-[9px] font-bold uppercase tracking-widest rounded-full nm-concave bg-[#e4e9ea] dark:bg-[#252840] text-[#5a6061] dark:text-[#9da3c0]">Local LLM</span>
+          <span class="px-3 py-1 text-[9px] font-bold uppercase tracking-widest rounded-full nm-concave bg-[#e4e9ea] dark:bg-[#252840] text-[#5a6061] dark:text-[#9da3c0]">Browser</span>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 p-8 rounded-3xl nm-concave bg-[#e4e9ea]/50 dark:bg-[#252840]/50 transition-colors duration-300">
+      <div class="space-y-4"><h3 class="font-headline font-bold text-lg flex items-center gap-2 text-[#2d3435] dark:text-[#e0e2f0]"><span class="material-symbols-outlined text-primary dark:text-[#917eff]">memory</span>Architecture</h3><p class="text-sm text-[#5a6061] dark:text-[#9da3c0] leading-relaxed">Frontend HTML/JS chatbot interface communicates with Ollama's local REST API. The model runs as a background process. Browser extension layer adds page context — the model can read and reason about the current page.</p></div>
+      <div class="space-y-4"><h3 class="font-headline font-bold text-lg flex items-center gap-2 text-[#2d3435] dark:text-[#e0e2f0]"><span class="material-symbols-outlined text-primary dark:text-[#917eff]">balance</span>Tradeoffs</h3><p class="text-sm text-[#5a6061] dark:text-[#9da3c0] leading-relaxed">Requires Ollama installed locally — adds setup friction. Response speed depends on hardware. In exchange: <strong>zero cost, total privacy, full offline capability.</strong> Worth it.</p></div>
+    </div>
+  </article>
+
+  <!-- ── PROJECT 03: SMART HOME AUTOMATION ── -->
+  <article class="space-y-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-5 space-y-8">
+        <div class="space-y-2">
+          <span class="text-[10px] font-black tracking-widest text-primary dark:text-[#917eff] uppercase">System 03</span>
+          <h2 class="font-headline text-4xl font-bold tracking-tight text-[#2d3435] dark:text-[#e0e2f0]">Smart Home Automation System</h2>
+          <p class="font-label text-[10px] font-bold uppercase tracking-widest text-[#adb3b4] dark:text-[#454870]">Intelligent Control · Energy Optimization Layer</p>
+        </div>
+        <div class="space-y-6">
+          <div class="space-y-2"><h3 class="text-xs font-bold uppercase tracking-wider text-primary dark:text-[#917eff]">Problem</h3><p class="text-sm leading-relaxed text-[#5a6061] dark:text-[#9da3c0]">Most Indian households lack an affordable, centralized system to manage and optimize their electrical appliances. Existing solutions are either too expensive, fragmented, or lack intelligence — leading to energy waste, manual control, and no real insight into usage patterns.</p></div>
+          <div class="space-y-2"><h3 class="text-xs font-bold uppercase tracking-wider text-primary dark:text-[#917eff]">Approach</h3><p class="text-sm leading-relaxed text-[#5a6061] dark:text-[#9da3c0]">Building a cost-effective, AI-assisted home automation system that acts as a central control layer for household devices. The system enables users to monitor, control, and automate appliances while optimizing for energy efficiency and real-world usage behavior.</p></div>
+          <div class="space-y-2"><h3 class="text-xs font-bold uppercase tracking-wider text-primary dark:text-[#917eff]">Vision</h3><p class="text-sm leading-relaxed text-[#5a6061] dark:text-[#9da3c0] font-medium">To create an accessible smart home infrastructure for Indian households — where automation is not a luxury, but a default layer that improves efficiency, comfort, and energy consumption.</p></div>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1 text-[9px] font-bold uppercase tracking-widest rounded-full nm-concave bg-[#e4e9ea] dark:bg-[#252840] text-[#5a6061] dark:text-[#9da3c0]">Home Automation</span>
+          <span class="px-3 py-1 text-[9px] font-bold uppercase tracking-widest rounded-full nm-concave bg-[#e4e9ea] dark:bg-[#252840] text-[#5a6061] dark:text-[#9da3c0]">IoT</span>
+          <span class="px-3 py-1 text-[9px] font-bold uppercase tracking-widest rounded-full nm-concave bg-[#e4e9ea] dark:bg-[#252840] text-[#5a6061] dark:text-[#9da3c0]">Energy Efficiency</span>
+          <span class="px-3 py-1 text-[9px] font-bold uppercase tracking-widest rounded-full nm-concave bg-[#e4e9ea] dark:bg-[#252840] text-[#5a6061] dark:text-[#9da3c0]">AI Control</span>
+        </div>
+      </div>
+      <div class="lg:col-span-7">
+        <div class="relative aspect-video rounded-3xl bg-[#f2f4f4] dark:bg-[#20233a] nm-convex p-10 overflow-hidden flex items-center justify-center transition-colors duration-300">
+          <div class="absolute inset-0 opacity-20 pointer-events-none"><svg class="w-full h-full" viewBox="0 0 800 400"><defs><pattern height="40" id="grid3" patternUnits="userSpaceOnUse" width="40"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="0.5"></path></pattern></defs><rect fill="url(#grid3)" height="100%" width="100%"></rect></svg></div>
+                    <!-- Smart Home Architecture: hub-and-spoke radial diagram -->
+          <div class="relative z-10 w-full h-full flex items-center justify-center" style="min-height:200px;">
+            <svg class="absolute inset-0 w-full h-full" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid meet" fill="none">
+              <line x1="200" y1="130" x2="80"  y2="55"  stroke="#5d3fe0" stroke-width="1" stroke-dasharray="5 3" opacity="0.35"/>
+              <line x1="200" y1="130" x2="320" y2="55"  stroke="#5d3fe0" stroke-width="1" stroke-dasharray="5 3" opacity="0.35"/>
+              <line x1="200" y1="130" x2="55"  y2="155" stroke="#5d3fe0" stroke-width="1" stroke-dasharray="5 3" opacity="0.35"/>
+              <line x1="200" y1="130" x2="345" y2="155" stroke="#5d3fe0" stroke-width="1" stroke-dasharray="5 3" opacity="0.35"/>
+              <line x1="200" y1="130" x2="120" y2="220" stroke="#5d3fe0" stroke-width="1" stroke-dasharray="5 3" opacity="0.35"/>
+              <line x1="200" y1="130" x2="280" y2="220" stroke="#5d3fe0" stroke-width="1" stroke-dasharray="5 3" opacity="0.35"/>
+              <circle r="3" fill="#917eff" opacity="0.9"><animateMotion dur="2.2s" repeatCount="indefinite" path="M200,130 L80,55"/></circle>
+              <circle r="3" fill="#917eff" opacity="0.9"><animateMotion dur="2.8s" repeatCount="indefinite" path="M200,130 L320,55"/></circle>
+              <circle r="3" fill="#5d3fe0" opacity="0.8"><animateMotion dur="2.5s" repeatCount="indefinite" path="M200,130 L55,155"/></circle>
+              <circle r="3" fill="#5d3fe0" opacity="0.8"><animateMotion dur="3.0s" repeatCount="indefinite" path="M200,130 L345,155"/></circle>
+              <circle r="3" fill="#917eff" opacity="0.85"><animateMotion dur="2.6s" repeatCount="indefinite" path="M200,130 L120,220"/></circle>
+              <circle r="3" fill="#5d3fe0" opacity="0.85"><animateMotion dur="2.4s" repeatCount="indefinite" path="M200,130 L280,220"/></circle>
+            </svg>
+            <!-- Top-left: Light -->
+            <div class="absolute" style="left:11%;top:6%;">
+              <div class="w-12 h-12 rounded-xl bg-[#e4e9ea] dark:bg-[#252840] nm-concave flex flex-col items-center justify-center gap-0.5">
+                <span class="material-symbols-outlined text-base text-primary/70 dark:text-[#917eff]/70">lightbulb</span>
+                <span class="font-label text-[7px] uppercase tracking-wide text-[#adb3b4] dark:text-[#454870] leading-none">Light</span>
+              </div>
+            </div>
+            <!-- Top-right: Climate -->
+            <div class="absolute" style="right:11%;top:6%;">
+              <div class="w-12 h-12 rounded-xl bg-[#e4e9ea] dark:bg-[#252840] nm-concave flex flex-col items-center justify-center gap-0.5">
+                <span class="material-symbols-outlined text-base text-primary/70 dark:text-[#917eff]/70">ac_unit</span>
+                <span class="font-label text-[7px] uppercase tracking-wide text-[#adb3b4] dark:text-[#454870] leading-none">Climate</span>
+              </div>
+            </div>
+            <!-- Mid-left: Camera -->
+            <div class="absolute" style="left:2%;top:50%;transform:translateY(-50%);">
+              <div class="w-12 h-12 rounded-xl bg-[#e4e9ea] dark:bg-[#252840] nm-concave flex flex-col items-center justify-center gap-0.5">
+                <span class="material-symbols-outlined text-base text-primary/70 dark:text-[#917eff]/70">videocam</span>
+                <span class="font-label text-[7px] uppercase tracking-wide text-[#adb3b4] dark:text-[#454870] leading-none">Camera</span>
+              </div>
+            </div>
+            <!-- Mid-right: Energy -->
+            <div class="absolute" style="right:2%;top:50%;transform:translateY(-50%);">
+              <div class="w-12 h-12 rounded-xl bg-[#e4e9ea] dark:bg-[#252840] nm-concave flex flex-col items-center justify-center gap-0.5">
+                <span class="material-symbols-outlined text-base text-primary/70 dark:text-[#917eff]/70">bolt</span>
+                <span class="font-label text-[7px] uppercase tracking-wide text-[#adb3b4] dark:text-[#454870] leading-none">Energy</span>
+              </div>
+            </div>
+            <!-- Bottom-left: App -->
+            <div class="absolute" style="left:17%;bottom:4%;">
+              <div class="w-12 h-12 rounded-xl bg-[#e4e9ea] dark:bg-[#252840] nm-concave flex flex-col items-center justify-center gap-0.5">
+                <span class="material-symbols-outlined text-base text-primary/70 dark:text-[#917eff]/70">smartphone</span>
+                <span class="font-label text-[7px] uppercase tracking-wide text-[#adb3b4] dark:text-[#454870] leading-none">App</span>
+              </div>
+            </div>
+            <!-- Bottom-right: Network -->
+            <div class="absolute" style="right:17%;bottom:4%;">
+              <div class="w-12 h-12 rounded-xl bg-[#e4e9ea] dark:bg-[#252840] nm-concave flex flex-col items-center justify-center gap-0.5">
+                <span class="material-symbols-outlined text-base text-primary/70 dark:text-[#917eff]/70">wifi</span>
+                <span class="font-label text-[7px] uppercase tracking-wide text-[#adb3b4] dark:text-[#454870] leading-none">Network</span>
+              </div>
+            </div>
+            <!-- Centre: AI Hub -->
+            <div class="absolute" style="left:50%;top:50%;transform:translate(-50%,-50%);">
+              <div class="w-20 h-20 rounded-3xl nm-convex bg-[#f2f4f4] dark:bg-[#20233a] flex flex-col items-center justify-center gap-1 relative" style="border:1.5px solid rgba(93,63,224,0.2);">
+                <span class="material-symbols-outlined text-3xl text-primary dark:text-[#917eff]">home</span>
+                <span class="font-label text-[7px] uppercase tracking-wider text-primary/60 dark:text-[#917eff]/60 font-bold">AI Hub</span>
+                <div class="absolute inset-0 rounded-3xl animate-ping opacity-10" style="background:rgba(93,63,224,0.25);animation-duration:3s;"></div>
+              </div>
+            </div>
+            <!-- Label -->
+            <div class="absolute bottom-0 left-0 right-0 flex justify-center pb-0.5">
+              <span class="font-label text-[9px] font-bold tracking-[0.2em] uppercase text-primary/50 dark:text-[#917eff]/50">Smart Home — AI Control Layer</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 p-8 rounded-3xl nm-concave bg-[#e4e9ea]/50 dark:bg-[#252840]/50 transition-colors duration-300">
+      <div class="space-y-4">
+        <h3 class="font-headline font-bold text-lg flex items-center gap-2 text-[#2d3435] dark:text-[#e0e2f0]"><span class="material-symbols-outlined text-primary dark:text-[#917eff]">schema</span>Architecture</h3>
+        <p class="text-sm text-[#5a6061] dark:text-[#9da3c0] leading-relaxed">A central AI hub (SBC/custom PCB) connects to household devices via WiFi and relay modules. The hub runs local inference for usage prediction and scheduling. A mobile app provides real-time control and energy dashboards — no cloud dependency required.</p>
+      </div>
+      <div class="space-y-4">
+        <h3 class="font-headline font-bold text-lg flex items-center gap-2 text-[#2d3435] dark:text-[#e0e2f0]"><span class="material-symbols-outlined text-primary dark:text-[#917eff]">bolt</span>Target</h3>
+        <p class="text-sm text-[#5a6061] dark:text-[#9da3c0] leading-relaxed">Budget under ₹10,000 for a full household setup. Built for Tier 1 &amp; Tier 2 Indian homes. Expansion path toward small-scale industrial and manufacturing unit automation. <strong>Hardware-first, cloud-optional.</strong></p>
+      </div>
+    </div>
+  </article>
+  </article>
+
+</main>
+
+<footer class="w-full py-12 px-8 mt-20 border-t border-[#ebebeb] dark:border-[#252840] bg-[#f9f9f9] dark:bg-[#1c1f2e] transition-colors duration-300">
+  <div class="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto gap-4">
+    <p class="font-body text-[10px] uppercase tracking-widest text-[#2d3435] dark:text-[#5a5e7a] opacity-60">© 2026 Soham Singh  </p>
+    <div class="flex gap-8">
+      <a href="https://github.com/Som007-builds" class="font-body text-[10px] uppercase tracking-widest text-[#2d3435] dark:text-[#5a5e7a] opacity-60 hover:opacity-100 hover:text-[#5d3fe0] dark:hover:text-[#917eff] transition-all">Github</a>
+      <a href="https://www.linkedin.com/in/soham-singh-a21688307/" class="font-body text-[10px] uppercase tracking-widest text-[#2d3435] dark:text-[#5a5e7a] opacity-60 hover:opacity-100 hover:text-[#5d3fe0] dark:hover:text-[#917eff] transition-all">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

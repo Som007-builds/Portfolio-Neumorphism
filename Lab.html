@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Lab | Soham Singh</title>
+<script>(function(){var s=localStorage.getItem('theme'),d=window.matchMedia('(prefers-color-scheme: dark)').matches;if(s==='dark'||(s===null&&d))document.documentElement.classList.add('dark');})();</script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#5d3fe0","primary-container":"#e5deff","on-primary":"#fbf6ff","surface":"#f9f9f9","surface-container-low":"#f2f4f4","surface-container":"#ebeeef","surface-container-high":"#e4e9ea","surface-container-highest":"#dde4e5","on-surface":"#2d3435","on-surface-variant":"#5a6061","secondary":"#5e5f5f","outline":"#757c7d","outline-variant":"#adb3b4"},fontFamily:{"headline":["Space Grotesk","sans-serif"],"body":["Inter","sans-serif"],"label":["Inter","sans-serif"]},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"}}}}</script>
+<style>
+  .nm-convex{box-shadow:-8px -8px 20px #ffffff,8px 8px 20px #bebebe}.nm-concave{box-shadow:inset -4px -4px 10px #ffffff,inset 4px 4px 10px #bebebe}.nm-convex-sm{box-shadow:-4px -4px 10px #ffffff,4px 4px 10px #bebebe}
+  .dark .nm-convex{box-shadow:-8px -8px 20px #12141f,8px 8px 20px #22263a}.dark .nm-concave{box-shadow:inset -8px -8px 16px #12141f,inset 8px 8px 16px #22263a}.dark .nm-convex-sm{box-shadow:-4px -4px 10px #12141f,4px 4px 10px #22263a}
+  body{background:#f9f9f9;color:#2d3435;opacity:0;transition:opacity 0.15s ease,background-color 0.35s ease,color 0.35s ease}body.loaded{opacity:1}body.fade-out{opacity:0!important;transition:opacity 0.1s ease!important}
+  .dark body{background:#1a1d2e;color:#e2e4f0}
+  .surf{background-color:#f9f9f9}.dark .surf{background-color:#1a1d2e}
+  .surf-low{background-color:#f2f4f4}.dark .surf-low{background-color:#1e2133}
+  .surf-high{background-color:#e4e9ea}.dark .surf-high{background-color:#242840}
+  .surf-highest{background-color:#dde4e5}.dark .surf-highest{background-color:#2a2e47}
+  .surf-container{background-color:#ebeeef}.dark .surf-container{background-color:#1e2133}
+  .t-primary{color:#5d3fe0}.dark .t-primary{color:#917eff}
+  .t-surface{color:#2d3435}.dark .t-surface{color:#e2e4f0}
+  .t-muted{color:#5a6061}.dark .t-muted{color:#9da3c0}
+  .t-faint{color:#757c7d}.dark .t-faint{color:#5a6080}
+  .b-surface{border-color:#f2f4f4}.dark .b-surface{border-color:#252840}
+  .b-primary{border-color:#5d3fe0}.dark .b-primary{border-color:#917eff}
+  .b-highest{border-color:#dde4e5}.dark .b-highest{border-color:#2a2e47}
+  .nav-bg{background-color:#f9f9f9;box-shadow:-8px -8px 20px #ffffff,8px 8px 20px #bebebe}.dark .nav-bg{background-color:#1a1d2e;box-shadow:-4px -4px 12px #12141f,4px 4px 12px #22263a}
+  .mob-nav-bg{background-color:#f9f9f9;box-shadow:-8px -8px 20px #ffffff,8px 8px 20px #bebebe}.dark .mob-nav-bg{background-color:#1a1d2e;box-shadow:-4px -4px 12px #12141f,4px 4px 12px #22263a}
+  .mob-active{background-color:#f2f4f4;box-shadow:inset -2px -2px 5px #ffffff,inset 2px 2px 5px #bebebe;border-radius:12px;color:#5d3fe0}.dark .mob-active{background-color:#22263a;box-shadow:inset -2px -2px 5px #12141f,inset 2px 2px 5px #2a2e47;color:#917eff}
+  #theme-toggle{transition:transform 0.15s ease}#theme-toggle:hover{transform:scale(0.93)}
+  .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;vertical-align:middle}
+  .breathe{animation:breathe 3s ease-in-out infinite}@keyframes breathe{0%,100%{box-shadow:0 0 10px rgba(93,63,224,0.3)}50%{box-shadow:0 0 28px rgba(93,63,224,0.65)}}
+  .dark .breathe{animation:breathe-d 3s ease-in-out infinite}@keyframes breathe-d{0%,100%{box-shadow:0 0 10px rgba(145,126,255,0.4)}50%{box-shadow:0 0 32px rgba(145,126,255,0.85)}}
+  .blink{animation:blink 2s ease-in-out infinite}@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+  .neuo-input{background:#f2f4f4;box-shadow:inset -4px -4px 10px #ffffff,inset 4px 4px 10px #bebebe;border:none;outline:none;transition:box-shadow 0.25s ease}.neuo-input:focus{box-shadow:inset -4px -4px 10px #ffffff,inset 4px 4px 10px #c0b0ff,0 0 0 2px rgba(93,63,224,0.15)}.neuo-input::placeholder{color:#adb3b4}
+  .dark .neuo-input{background:#1e2133;color:#e2e4f0;box-shadow:inset -4px -4px 10px #12141f,inset 4px 4px 10px #22263a}.dark .neuo-input::placeholder{color:#4a5070}.dark .neuo-input:focus{box-shadow:inset -4px -4px 10px #12141f,inset 4px 4px 10px #22263a,0 0 0 2px rgba(145,126,255,0.2)}.dark select option{background:#1e2133;color:#e2e4f0}
+  .btn-send{background:#5d3fe0;position:relative;overflow:hidden;transition:transform 0.15s ease,box-shadow 0.15s ease;color:#fbf6ff}.dark .btn-send{background:#7c5cfc}.btn-send::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);transition:left 0.5s ease}.btn-send:hover::after{left:150%}.btn-send:hover{transform:scale(1.03);box-shadow:0 8px 24px rgba(93,63,224,0.35)}.btn-send:active{transform:scale(0.97)}
+  .channel-card{transition:transform 0.2s ease}.channel-card:hover{transform:translateY(-3px)}
+  .dot-grid{background-image:radial-gradient(circle at 1px 1px,rgba(93,63,224,0.08) 1px,transparent 0);background-size:28px 28px}.dark .dot-grid{background-image:radial-gradient(circle at 1px 1px,rgba(145,126,255,0.06) 1px,transparent 0)}
+</style>
+<script src="theme.js"></script>
+</head>
+<body class="font-body overflow-x-hidden surf t-surface">
+<nav class="nav-bg w-full sticky top-0 z-50 px-8 py-4"><div class="flex justify-between items-center max-w-7xl mx-auto"><a href="index.html" onclick="navigate(event,'index.html')" class="text-xl font-bold tracking-tighter t-surface font-headline">Soham Singh</a><div class="hidden md:flex items-center gap-8"><a href="index.html" onclick="navigate(event,'index.html')" class="t-surface opacity-70 hover:opacity-100 hover:t-primary transition-all duration-300 font-bold text-sm tracking-tight uppercase font-headline">The Hub</a> <a href="systems.html" onclick="navigate(event,'systems.html')" class="t-surface opacity-70 hover:opacity-100 hover:t-primary transition-all duration-300 font-bold text-sm tracking-tight uppercase font-headline">Systems</a> <a href="lab.html" onclick="navigate(event,'lab.html')" class="t-primary b-primary border-b-2 pb-1 font-bold text-sm tracking-tight uppercase font-headline">The Lab</a> <a href="codex.html" onclick="navigate(event,'codex.html')" class="t-surface opacity-70 hover:opacity-100 hover:t-primary transition-all duration-300 font-bold text-sm tracking-tight uppercase font-headline">The Codex</a> <a href="contact.html" onclick="navigate(event,'contact.html')" class="t-surface opacity-70 hover:opacity-100 hover:t-primary transition-all duration-300 font-bold text-sm tracking-tight uppercase font-headline">Contact</a></div><button id="theme-toggle" onclick="toggleTheme()" class="nm-convex-sm w-10 h-10 rounded-full flex items-center justify-center"><span id="theme-icon" class="material-symbols-outlined text-sm t-primary">dark_mode</span></button></div></nav>
+<main class="pt-20 pb-40 px-6 max-w-7xl mx-auto">
+  <header class="mb-16 border-l-4 b-primary pl-8 py-4 surf-low/30 rounded-r-xl">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full surf-high nm-convex mb-6">
+      <span class="w-2 h-2 rounded-full bg-[#5d3fe0] dark:bg-[#917eff] animate-pulse blink"></span>
+      <span class="text-[10px] font-bold tracking-widest uppercase t-muted font-label">Session: 2026.ACTIVE — Year 1</span>
+    </div>
+    <h1 class="font-headline text-6xl font-black t-surface tracking-tighter mb-4">The Lab<span class="t-primary">.</span></h1>
+    <p class="max-w-2xl t-muted font-body leading-relaxed text-base italic">Experimental log — rapid prototyping of AI systems, privacy tools, and infrastructure ideas. Where Foretyx started. Proceed with curiosity.</p>
+  </header>
+
+  <!-- Skills & Stack -->
+  <section class="mb-24">
+    <div class="flex items-center justify-between mb-10">
+      <h2 class="font-headline text-2xl font-bold tracking-tight t-surface flex items-center gap-2"><span class="material-symbols-outlined t-primary">code</span>Technical Foundation</h2>
+      <span class="font-label text-[10px] font-medium uppercase tracking-[0.2em] t-faint">Building from first principles</span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <article class="surf-low rounded-xl p-6 nm-convex border border-white/40 dark:border-white/5 hover:-translate-y-1 transition-transform duration-300">
+        <div class="flex justify-between items-center mb-6"><span class="text-[9px] font-mono font-bold t-faint uppercase">Foundation · Now</span><span class="material-symbols-outlined t-primary/40">terminal</span></div>
+        <h3 class="font-headline text-lg font-bold mb-2 t-surface">Systems Programming</h3>
+        <p class="text-xs t-muted leading-relaxed mb-6 h-12 overflow-hidden">C and Java — building strong low-level foundations before abstracting upward. Memory, pointers, OOP.</p>
+        <div class="nm-concave rounded-lg p-3 font-mono text-[9px] t-faint overflow-hidden surf-container/40 mb-6">
+          <div class="t-primary mb-1">// C · Java · Learning</div>
+          <div class="opacity-60">→ Memory management</div>
+          <div class="opacity-60">→ OOP + design patterns</div>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t b-highest">
+          <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#5d3fe0] dark:bg-[#917eff]"></span><span class="text-[9px] font-bold t-muted uppercase tracking-widest">Active</span></div>
+          <span class="text-[9px] font-bold t-primary">Year 2+</span>
+        </div>
+      </article>
+      <article class="surf-low rounded-xl p-6 nm-convex border border-white/40 dark:border-white/5 hover:-translate-y-1 transition-transform duration-300">
+        <div class="flex justify-between items-center mb-6"><span class="text-[9px] font-mono font-bold t-faint uppercase">Roadmap · Doing now</span><span class="material-symbols-outlined t-primary/40">psychology</span></div>
+        <h3 class="font-headline text-lg font-bold mb-2 t-surface">AI/ML Engineering</h3>
+        <p class="text-xs t-muted leading-relaxed mb-6 h-12 overflow-hidden">Python · DSA · ML frameworks. Moving from system foundations toward AI infrastructure and model integration.</p>
+        <div class="nm-concave rounded-lg h-24 w-full mb-6 flex items-center justify-center surf-container/40 relative overflow-hidden">
+          <div class="absolute inset-0 opacity-10" style="background-image:radial-gradient(circle at 2px 2px,#5d3fe0 1px,transparent 0);background-size:8px 8px;"></div>
+          <div class="w-10 h-10 border border-[#5d3fe0]/30 dark:border-[#917eff]/30 rounded-full animate-pulse"></div>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t b-highest">
+          <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span><span class="text-[9px] font-bold t-muted uppercase tracking-widest">Incoming</span></div>
+          <span class="text-[9px] font-bold t-primary">Year 1+</span>
+        </div>
+      </article>
+      <article class="surf-low rounded-xl p-6 nm-convex border border-white/40 dark:border-white/5 hover:-translate-y-1 transition-transform duration-300">
+        <div class="flex justify-between items-center mb-6"><span class="text-[9px] font-mono font-bold t-faint uppercase">Edge · Always</span><span class="material-symbols-outlined t-primary/40">hub</span></div>
+        <h3 class="font-headline text-lg font-bold mb-2 t-surface">Systems Architecture</h3>
+        <p class="text-xs t-muted leading-relaxed mb-6 h-12 overflow-hidden">Thinking in flows, not just functions. How components connect, scale, and fail — this is the real edge.</p>
+        <div class="nm-concave rounded-lg h-24 w-full mb-6 flex items-center justify-center gap-3 surf-container/40">
+          <div class="w-6 h-6 rounded-sm bg-[#5d3fe0]/20 dark:bg-[#917eff]/15 border border-[#5d3fe0]/10"></div>
+          <div class="w-4 h-[1px] bg-[#757c7d]/20"></div>
+          <div class="w-8 h-8 rounded-full nm-concave surf-highest flex items-center justify-center"><span class="material-symbols-outlined text-xs t-primary">hub</span></div>
+          <div class="w-4 h-[1px] bg-[#757c7d]/20"></div>
+          <div class="w-6 h-6 rounded-sm surf-highest nm-concave"></div>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t b-highest">
+          <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span><span class="text-[9px] font-bold t-muted uppercase tracking-widest">Core Skill</span></div>
+          <span class="text-[9px] font-bold t-primary">Rare</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Incubation -->
+  <section class="mb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 border-t b-highest pt-12">
+    <div class="lg:col-span-4">
+      <h2 class="font-headline text-2xl font-bold tracking-tight mb-4 t-surface">Ideas in Incubation</h2>
+      <p class="t-muted text-sm leading-relaxed mb-8">What's being explored. Not ready to build yet — but worth thinking about.</p>
+      <div class="bg-[#5d3fe0]/5 dark:bg-[#917eff]/8 p-5 rounded-xl border-l-2 b-primary nm-convex">
+        <div class="flex items-center gap-2 mb-3"><span class="material-symbols-outlined t-primary text-xs">stylus</span><span class="font-label text-[10px] font-bold uppercase tracking-widest t-primary">Lab Note</span></div>
+        <p class="text-xs t-muted italic leading-relaxed">"Privacy infrastructure is a platform play, not just a tool. Foretyx could become the security layer for every Indian company that adopts AI."</p>
+      </div>
+    </div>
+    <div class="lg:col-span-8 flex flex-col gap-4">
+      <div class="group flex items-center gap-6 p-4 rounded-xl hover:surf-low transition-colors duration-300">
+        <div class="w-12 h-12 shrink-0 rounded-full nm-convex flex items-center justify-center t-faint group-hover:t-primary transition-colors"><span class="material-symbols-outlined text-xl"></span></div>
+        <div class="flex-1 flex flex-col md:flex-row md:items-center justify-between gap-2">
+          <div><h4 class="font-headline font-bold text-sm t-surface">Financial Literacy App</h4><p class="text-[11px] t-muted">AI-powered financial education for Indian youth. Vernacular-first.</p></div>
+          <div class="flex gap-4"><span class="text-[9px] font-mono t-faint">Feasibility: 80%</span><span class="text-[9px] font-mono text-green-600 dark:text-green-400 font-bold uppercase">Low Risk</span></div>
+        </div>
+      </div>
+      <div class="group flex items-center gap-6 p-4 rounded-xl hover:surf-low transition-colors duration-300">
+        <div class="w-12 h-12 shrink-0 rounded-full nm-convex flex items-center justify-center t-faint group-hover:t-primary transition-colors"><span class="material-symbols-outlined text-xl">factory</span></div>
+        <div class="flex-1 flex flex-col md:flex-row md:items-center justify-between gap-2">
+          <div><h4 class="font-headline font-bold text-sm t-surface">Industrial Automation Expansion</h4><p class="text-[11px] t-muted">Scale the home automation system to small-scale Indian manufacturing units.</p></div>
+          <div class="flex gap-4"><span class="text-[9px] font-mono t-faint">Feasibility: 60%</span><span class="text-[9px] font-mono text-amber-600 dark:text-amber-400 font-bold uppercase">Med Risk</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stored Files -->
+  <section class="mb-12">
+    <h2 class="font-headline text-lg font-bold tracking-tight mb-8 t-faint uppercase tracking-[0.2em]">Research Folders[private]</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+      <div class="nm-convex p-3 rounded-lg surf-low flex items-center gap-3 group cursor-pointer"><span class="material-symbols-outlined t-faint text-base group-hover:t-primary transition-colors">folder</span><span class="text-[9px] font-bold font-label uppercase tracking-widest t-muted">AI_ARCH</span></div>
+      <div class="nm-convex p-3 rounded-lg surf-low flex items-center gap-3 group cursor-pointer"><span class="material-symbols-outlined t-faint text-base group-hover:t-primary transition-colors">folder</span><span class="text-[9px] font-bold font-label uppercase tracking-widest t-muted">FORETYX_R&D</span></div>
+      <div class="nm-convex p-3 rounded-lg surf-low flex items-center gap-3 group cursor-pointer"><span class="material-symbols-outlined t-faint text-base group-hover:t-primary transition-colors">folder</span><span class="text-[9px] font-bold font-label uppercase tracking-widest t-muted">LLM_NOTES</span></div>
+    </div>
+  </section>
+</main>
+<footer class="surf w-full py-12 px-8 mt-20 border-t b-surface"><div class="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto gap-4"><div class="font-body text-[10px] uppercase tracking-widest t-surface opacity-40">© 2026 Soham Singh ·</div><div class="flex gap-8"><a href="https://github.com/Som007-builds" target="_blank" class="font-body text-[10px] uppercase tracking-widest t-surface opacity-40 hover:opacity-100 hover:t-primary transition-all">Github</a><a href="https://www.linkedin.com/in/soham-singh-a21688307" target="_blank" class="font-body text-[10px] uppercase tracking-widest t-surface opacity-40 hover:opacity-100 hover:t-primary transition-all">LinkedIn</a><a href="mailto:sohamsingh572@gmail.com" class="font-body text-[10px] uppercase tracking-widest t-surface opacity-40 hover:opacity-100 hover:t-primary transition-all">Email</a></div></div></footer>
+<nav class="mob-nav-bg md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex gap-1 items-center rounded-full px-5 py-3 w-max">
+  <a href="index.html" onclick="navigate(event,'index.html')" class="flex flex-col items-center t-surface opacity-30 hover:opacity-80 px-3 py-1 transition-all"><span class="material-symbols-outlined text-xl">grid_view</span><span class="font-body text-[9px] font-medium uppercase tracking-widest">Hub</span></a>
+  <a href="systems.html" onclick="navigate(event,'systems.html')" class="flex flex-col items-center t-surface opacity-30 hover:opacity-80 px-3 py-1 transition-all"><span class="material-symbols-outlined text-xl">layers</span><span class="font-body text-[9px] font-medium uppercase tracking-widest">Work</span></a>
+  <a href="lab.html" onclick="navigate(event,'lab.html')" class="mob-active flex flex-col items-center px-3 py-1"><span class="material-symbols-outlined text-xl">science</span><span class="font-body text-[9px] font-medium uppercase tracking-widest">Lab</span></a>
+  <a href="codex.html" onclick="navigate(event,'codex.html')" class="flex flex-col items-center t-surface opacity-30 hover:opacity-80 px-3 py-1 transition-all"><span class="material-symbols-outlined text-xl">menu_book</span><span class="font-body text-[9px] font-medium uppercase tracking-widest">Codex</span></a>
+  <a href="contact.html" onclick="navigate(event,'contact.html')" class="flex flex-col items-center t-surface opacity-30 hover:opacity-80 px-3 py-1 transition-all"><span class="material-symbols-outlined text-xl">send</span><span class="font-body text-[9px] font-medium uppercase tracking-widest"

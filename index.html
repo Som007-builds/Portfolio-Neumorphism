@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Hub | Soham Singh</title>
+<script>(function(){var s=localStorage.getItem('theme'),d=window.matchMedia('(prefers-color-scheme: dark)').matches;if(s==='dark'||(s===null&&d))document.documentElement.classList.add('dark');})();</script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#5d3fe0","primary-container":"#e5deff","on-primary":"#fbf6ff","surface":"#f9f9f9","surface-container-low":"#f2f4f4","surface-container":"#ebeeef","surface-container-high":"#e4e9ea","surface-container-highest":"#dde4e5","on-surface":"#2d3435","on-surface-variant":"#5a6061","secondary":"#5e5f5f","outline":"#757c7d","outline-variant":"#adb3b4"},fontFamily:{"headline":["Space Grotesk","sans-serif"],"body":["Inter","sans-serif"],"label":["Inter","sans-serif"]},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"}}}}
+</script>
+<style>
+  .nm-convex{box-shadow:-8px -8px 20px #ffffff,8px 8px 20px #bebebe}.nm-concave{box-shadow:inset -4px -4px 10px #ffffff,inset 4px 4px 10px #bebebe}.nm-convex-sm{box-shadow:-4px -4px 10px #ffffff,4px 4px 10px #bebebe}
+  .dark .nm-convex{box-shadow:-8px -8px 20px #12141f,8px 8px 20px #22263a}.dark .nm-concave{box-shadow:inset -8px -8px 16px #12141f,inset 8px 8px 16px #22263a}.dark .nm-convex-sm{box-shadow:-4px -4px 10px #12141f,4px 4px 10px #22263a}
+  body{background:#f9f9f9;color:#2d3435;opacity:0;transition:opacity 0.15s ease,background-color 0.35s ease,color 0.35s ease}body.loaded{opacity:1}body.fade-out{opacity:0!important;transition:opacity 0.1s ease!important}
+  .dark body{background:#1a1d2e;color:#e2e4f0}
+  .surf{background-color:#f9f9f9}.dark .surf{background-color:#1a1d2e}
+  .surf-low{background-color:#f2f4f4}.dark .surf-low{background-color:#1e2133}
+  .surf-high{background-color:#e4e9ea}.dark .surf-high{background-color:#242840}
+  .surf-highest{background-color:#dde4e5}.dark .surf-highest{background-color:#2a2e47}
+  .surf-container{background-color:#ebeeef}.dark .surf-container{background-color:#1e2133}
+  .t-primary{color:#5d3fe0}.dark .t-primary{color:#917eff}
+  .t-surface{color:#2d3435}.dark .t-surface{color:#e2e4f0}
+  .t-muted{color:#5a6061}.dark .t-muted{color:#9da3c0}
+  .t-faint{color:#757c7d}.dark .t-faint{color:#5a6080}
+  .b-surface{border-color:#f2f4f4}.dark .b-surface{border-color:#252840}
+  .b-primary{border-color:#5d3fe0}.dark .b-primary{border-color:#917eff}
+  .b-highest{border-color:#dde4e5}.dark .b-highest{border-color:#2a2e47}
+  .nav-bg{background-color:#f9f9f9;box-shadow:-8px -8px 20px #ffffff,8px 8px 20px #bebebe}.dark .nav-bg{background-color:#1a1d2e;box-shadow:-4px -4px 12px #12141f,4px 4px 12px #22263a}
+  .mob-nav-bg{background-color:#f9f9f9;box-shadow:-8px -8px 20px #ffffff,8px 8px 20px #bebebe}.dark .mob-nav-bg{background-color:#1a1d2e;box-shadow:-4px -4px 12px #12141f,4px 4px 12px #22263a}
+  .mob-active{background-color:#f2f4f4;box-shadow:inset -2px -2px 5px #ffffff,inset 2px 2px 5px #bebebe;border-radius:12px;color:#5d3fe0}.dark .mob-active{background-color:#22263a;box-shadow:inset -2px -2px 5px #12141f,inset 2px 2px 5px #2a2e47;color:#917eff}
+  #theme-toggle{transition:transform 0.15s ease}#theme-toggle:hover{transform:scale(0.93)}
+  .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;vertical-align:middle}
+  .breathe{animation:breathe 3s ease-in-out infinite}@keyframes breathe{0%,100%{box-shadow:0 0 10px rgba(93,63,224,0.3)}50%{box-shadow:0 0 28px rgba(93,63,224,0.65)}}
+  .dark .breathe{animation:breathe-d 3s ease-in-out infinite}@keyframes breathe-d{0%,100%{box-shadow:0 0 10px rgba(145,126,255,0.4)}50%{box-shadow:0 0 32px rgba(145,126,255,0.85)}}
+  .blink{animation:blink 2s ease-in-out infinite}@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+  .photo-ring{box-shadow:-12px -12px 28px #ffffff,12px 12px 28px #bebebe}.dark .photo-ring{box-shadow:-12px -12px 28px #12141f,12px 12px 28px #22263a}
+</style>
+<script src="theme.js"></script>
+</head>
+<body class="font-body overflow-x-hidden surf t-surface">
+
+<nav class="nav-bg w-full sticky top-0 z-50 px-8 py-4">
+  <div class="flex justify-between items-center max-w-7xl mx-auto">
+    <a href="index.html" onclick="navigate(event,'index.html')" class="text-xl font-bold tracking-tighter t-surface font-headline">Soham Singh</a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="index.html" onclick="navigate(event,'index.html')" class="t-primary b-primary border-b-2 pb-1 font-bold text-sm tracking-tight uppercase font-headline">The Hub</a>
+      <a href="systems.html" onclick="navigate(event,'systems.html')" class="t-surface opacity-70 hover:opacity-100 hover:t-primary transition-all duration-300 font-bold text-sm tracking-tight uppercase font-headline">Systems</a>
+      <a href="lab.html" onclick="navigate(event,'lab.html')" class="t-surface opacity-70 hover:opacity-100 hover:t-primary transition-all duration-300 font-bold text-sm tracking-tight uppercase font-headline">The Lab</a>
+      <a href="codex.html" onclick="navigate(event,'codex.html')" class="t-surface opacity-70 hover:opacity-100 hover:t-primary transition-all duration-300 font-bold text-sm tracking-tight uppercase font-headline">The Codex</a>
+      <a href="contact.html" onclick="navigate(event,'contact.html')" class="t-surface opacity-70 hover:opacity-100 hover:t-primary transition-all duration-300 font-bold text-sm tracking-tight uppercase font-headline">Contact</a>
+    </div>
+    <button id="theme-toggle" onclick="toggleTheme()" class="nm-convex-sm w-10 h-10 rounded-full flex items-center justify-center">
+      <span id="theme-icon" class="material-symbols-outlined text-sm t-primary">dark_mode</span>
+    </button>
+  </div>
+</nav>
+
+<main class="pt-20 pb-40 px-6 max-w-screen-2xl mx-auto min-h-screen">
+
+  <!-- HERO -->
+  <section class="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-32 items-center pt-12">
+    <div class="lg:col-span-7 order-2 lg:order-1">
+      <div class="mb-8 inline-flex items-center gap-3 px-4 py-2 rounded-full nm-concave">
+        <div class="w-2 h-2 rounded-full bg-[#5d3fe0] dark:bg-[#917eff] breathe blink"></div>
+        <span class="font-label text-[10px] font-bold uppercase tracking-widest t-muted">System Status: Active — Open to Collabs</span>
+      </div>
+      <h1 class="font-headline text-6xl md:text-8xl font-black tracking-tighter t-surface mb-3 leading-none">Soham Singh</h1>
+      <p class="font-headline text-xl md:text-2xl font-semibold t-primary mb-6 tracking-tight">Building AI Systems That Think, Adapt, and Scale</p>
+      <p class="font-body text-lg t-muted leading-relaxed max-w-2xl mb-10">
+        1st-year IT student @ NSEC, Kolkata. Building Foretyx, an AI data privacy infrastructure startup. Focused on privacy-first systems, real products, and becoming a 0.1% AI engineer.
+      </p>
+      <div class="flex flex-wrap gap-5 mb-12">
+        <a href="systems.html" onclick="navigate(event,'systems.html')" class="nm-convex px-8 py-4 rounded-xl bg-[#5d3fe0] dark:bg-[#7c5cfc] text-[#fbf6ff] font-headline font-bold tracking-tight uppercase transition-all hover:scale-105 active:scale-95">View Projects</a>
+        <a href="contact.html" onclick="navigate(event,'contact.html')" class="nm-convex px-8 py-4 rounded-xl surf-low t-surface font-headline font-bold tracking-tight uppercase transition-all hover:scale-105 active:scale-95">Get In Touch</a>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <div class="nm-concave px-3 py-1.5 rounded-lg inline-flex items-center gap-2"><span class="material-symbols-outlined text-xs t-primary">school</span><span class="font-label text-[9px] uppercase tracking-widest t-muted font-bold">NSEC Kolkata · IT</span></div>
+        <div class="nm-concave px-3 py-1.5 rounded-lg inline-flex items-center gap-2"><span class="material-symbols-outlined text-xs t-primary">location_on</span><span class="font-label text-[9px] uppercase tracking-widest t-muted font-bold">Kolkata, India</span></div>
+        <div class="nm-concave px-3 py-1.5 rounded-lg inline-flex items-center gap-2"><span class="material-symbols-outlined text-xs t-primary">rocket_launch</span><span class="font-label text-[9px] uppercase tracking-widest t-muted font-bold">Building Foretyx</span></div>
+      </div>
+    </div>
+
+    <!-- PHOTO — shifted left: justify-center on both mobile and desktop -->
+    <div class="lg:col-span-4 order-1 lg:order-2 flex justify-center">
+      <div class="relative">
+        <div class="w-64 h-64 md:w-80 md:h-80 rounded-full photo-ring surf-low flex items-center justify-center p-2">
+          <div class="w-full h-full rounded-full nm-concave flex items-center justify-center overflow-hidden relative">
+            
+              
+              <img src="profile.webp" alt="Soham Singh" class="w-full h-full object-cover"/>
+            <div class="absolute inset-0 opacity-5" style="background-image:radial-gradient(circle at 2px 2px,#5d3fe0 1px,transparent 0);background-size:20px 20px;"></div>
+            <!-- <div class="relative z-10 flex flex-col items-center gap-3 text-center px-6">
+              <div class="w-16 h-16 rounded-full nm-convex surf flex items-center justify-center"><span class="material-symbols-outlined t-primary text-3xl">person</span></div>
+              <span class="font-label text-[9px] uppercase tracking-[0.2em] t-muted font-bold">Your Photo Here</span>
+              <span class="font-label text-[8px] t-faint opacity-60">Replace with &lt;img&gt; tag</span>
+            </div> -->
+          </div>
+        </div>
+        <div class="absolute -bottom-3 -right-3 px-4 py-2 rounded-xl nm-convex surf-low flex items-center gap-2 border b-surface">
+          <span class="material-symbols-outlined text-xs t-primary">verified</span>
+          <span class="font-label text-[9px] font-bold t-muted uppercase tracking-widest">1st Year · IT</span>
+        </div>
+        <div class="absolute -top-3 -left-3 px-4 py-2 rounded-xl nm-convex surf-low flex items-center gap-2 border b-surface">
+          <span class="w-1.5 h-1.5 rounded-full bg-green-500 blink"></span>
+          <span class="font-label text-[9px] font-bold t-muted uppercase tracking-widest">Available</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLAGSHIP: FORETYX -->
+  <section class="mb-32">
+    <!-- Label -->
+    <div class="flex items-center gap-4 mb-10">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full nm-concave">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#5d3fe0] dark:bg-[#917eff] blink"></span>
+        <span class="font-label text-[9px] uppercase tracking-widest t-muted font-bold">Flagship Project · Active</span>
+      </div>
+      <div class="flex-1 h-[1px] b-highest" style="border-top-width:1px;border-style:solid;opacity:0.5;"></div>
+      <span class="font-label text-[9px] uppercase tracking-widest t-faint font-bold opacity-50">System 01</span>
+    </div>
+
+    <!-- Main card -->
+    <div class="rounded-3xl nm-convex surf-low overflow-hidden">
+
+      <!-- Top accent bar -->
+      <div class="h-1 w-full" style="background:linear-gradient(90deg,#5d3fe0,#917eff,#5d3fe0);background-size:200% 100%;animation:shimmer 4s linear infinite;"></div>
+      <style>@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}</style>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-0">
+
+        <!-- LEFT: content -->
+        <div class="lg:col-span-7 p-8 md:p-12 space-y-8">
+
+          <!-- Header -->
+          <div>
+            <h2 class="font-headline text-5xl md:text-6xl font-black tracking-tighter t-surface leading-none mb-2">Foretyx</h2>
+            <p class="font-headline text-base t-primary font-semibold tracking-wide">AI Data Privacy Infrastructure</p>
+          </div>
+
+          <!-- Description -->
+          <p class="font-body text-base t-muted leading-relaxed">
+            A secure middleware layer between AI models and sensitive enterprise data. Foretyx handles real-time anonymization, PII filtering, and access control — letting companies adopt AI without sacrificing privacy or compliance.
+          </p>
+
+          <!-- How it works: 3-step flow -->
+          <div class="space-y-3">
+            <span class="font-label text-[9px] uppercase tracking-widest t-faint font-bold block mb-4">How it works</span>
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-lg nm-concave flex items-center justify-center shrink-0"><span class="material-symbols-outlined t-primary text-sm">input</span></div>
+              <div class="flex-1 h-[1px] b-highest" style="border-top:1px dashed;opacity:0.4;"></div>
+              <div class="w-8 h-8 rounded-lg nm-concave flex items-center justify-center shrink-0 relative">
+                <span class="material-symbols-outlined t-primary text-sm">shield</span>
+                <span class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-[#5d3fe0] dark:bg-[#917eff] breathe"></span>
+              </div>
+              <div class="flex-1 h-[1px] b-highest" style="border-top:1px dashed;opacity:0.4;"></div>
+              <div class="w-8 h-8 rounded-lg nm-concave flex items-center justify-center shrink-0"><span class="material-symbols-outlined t-primary text-sm">output</span></div>
+            </div>
+            <div class="flex justify-between px-1">
+              <span class="font-label text-[8px] uppercase tracking-wider t-faint font-bold">Raw Data In</span>
+              <span class="font-label text-[8px] uppercase tracking-wider t-primary font-bold">Foretyx Layer</span>
+              <span class="font-label text-[8px] uppercase tracking-wider t-faint font-bold">Safe Data Out</span>
+            </div>
+          </div>
+
+          <!-- Feature pills -->
+          <div class="flex flex-wrap gap-2">
+            <div class="nm-concave px-3 py-2 rounded-lg inline-flex items-center gap-1.5"><span class="material-symbols-outlined t-primary text-sm">filter_alt</span><span class="font-label text-[9px] uppercase tracking-widest t-muted font-bold">PII Filtering</span></div>
+            <div class="nm-concave px-3 py-2 rounded-lg inline-flex items-center gap-1.5"><span class="material-symbols-outlined t-primary text-sm">visibility_off</span><span class="font-label text-[9px] uppercase tracking-widest t-muted font-bold">Anonymization</span></div>
+            <div class="nm-concave px-3 py-2 rounded-lg inline-flex items-center gap-1.5"><span class="material-symbols-outlined t-primary text-sm">manage_accounts</span><span class="font-label text-[9px] uppercase tracking-widest t-muted font-bold">Access Control</span></div>
+            <div class="nm-concave px-3 py-2 rounded-lg inline-flex items-center gap-1.5"><span class="material-symbols-outlined t-primary text-sm">corporate_fare</span><span class="font-label text-[9px] uppercase tracking-widest t-muted font-bold">Enterprise Ready</span></div>
+          </div>
+
+          <!-- CTA -->
+          <div class="flex items-center gap-6 pt-2">
+            <a href="systems.html" onclick="navigate(event,'systems.html')" class="inline-flex items-center gap-2 nm-convex px-6 py-3 rounded-xl bg-[#5d3fe0] dark:bg-[#7c5cfc] text-[#fbf6ff] font-headline font-bold text-sm uppercase tracking-tight transition-all hover:scale-105 active:scale-95">
+              Case Study <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-green-500 blink"></span>
+              <span class="font-label text-[9px] uppercase tracking-widest t-muted font-bold">In Development</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: visual -->
+        <div class="lg:col-span-5 relative flex items-center justify-center p-8 md:p-12">
+          <!-- Vertical divider on desktop -->
+          <div class="hidden lg:block absolute left-0 top-8 bottom-8 w-[1px] b-highest" style="border-left:1px solid;opacity:0.3;"></div>
+
+          <div class="w-full max-w-xs space-y-4">
+            <!-- Central shield -->
+            <div class="flex justify-center mb-6">
+              <div class="w-24 h-24 rounded-3xl nm-convex surf-low flex items-center justify-center relative">
+                <span class="material-symbols-outlined t-primary text-5xl">security</span>
+                <div class="absolute inset-0 rounded-3xl" style="background:radial-gradient(circle at 50% 0%,rgba(93,63,224,0.08),transparent 70%);"></div>
+              </div>
+            </div>
+
+            <!-- Data flow rows -->
+            <div class="nm-concave rounded-2xl p-4 space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined t-muted text-sm">person</span>
+                  <span class="font-mono text-[9px] t-muted">user_id: 8f3a...</span>
+                </div>
+                <span class="font-label text-[8px] uppercase tracking-widest px-2 py-0.5 rounded" style="background:rgba(158,63,78,0.12);color:#9e3f4e;">RAW</span>
+              </div>
+              <div class="h-[1px] b-highest" style="border-top:1px dashed;opacity:0.3;"></div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined t-primary text-sm">shield</span>
+                  <span class="font-mono text-[9px] t-muted">user_id: ████</span>
+                </div>
+                <span class="font-label text-[8px] uppercase tracking-widest px-2 py-0.5 rounded" style="background:rgba(93,63,224,0.12);color:#5d3fe0;" class="dark:color-[#917eff]">SAFE</span>
+              </div>
+              <div class="h-[1px] b-highest" style="border-top:1px dashed;opacity:0.3;"></div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined t-primary text-sm">check_circle</span>
+                  <span class="font-mono text-[9px] t-muted">access: granted</span>
+                </div>
+                <span class="font-label text-[8px] uppercase tracking-widest px-2 py-0.5 rounded" style="background:rgba(34,197,94,0.12);color:#16a34a;">OK</span>
+              </div>
+            </div>
+
+            <p class="text-center font-label text-[8px] uppercase tracking-[0.2em] t-faint opacity-50">Live Data Sanitization</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE APPROACH -->
+  <section class="mb-32 pt-8">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+      <div>
+        <span class="font-label text-[10px] font-black uppercase tracking-widest t-primary mb-4 block">How I Think</span>
+        <h3 class="font-headline text-5xl font-bold tracking-tighter t-surface">The Approach</h3>
+      </div>
+      <span class="hidden md:block font-body text-sm t-muted italic opacity-60">"Systems before scripts. Scale matters."</span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="p-8 rounded-2xl nm-convex surf-low hover:scale-[1.02] transition-all group">
+        <div class="w-10 h-10 rounded-xl nm-concave flex items-center justify-center mb-6 group-hover:t-primary transition-colors"><span class="material-symbols-outlined text-xl">first_page</span></div>
+        <h4 class="font-headline text-lg font-bold mb-2 t-surface">First Principles</h4>
+        <p class="font-body text-sm t-muted leading-relaxed">Deconstruct every problem to its core before building. No borrowed assumptions.</p>
+      </div>
+      <div class="p-8 rounded-2xl nm-convex surf-low hover:scale-[1.02] transition-all group">
+        <div class="w-10 h-10 rounded-xl nm-concave flex items-center justify-center mb-6 group-hover:t-primary transition-colors"><span class="material-symbols-outlined text-xl">hub</span></div>
+        <h4 class="font-headline text-lg font-bold mb-2 t-surface">Systems Over Scripts</h4>
+        <p class="font-body text-sm t-muted leading-relaxed">Design architecture first. Code is just the expression of a well-thought system.</p>
+      </div>
+      <div class="p-8 rounded-2xl nm-convex surf-low hover:scale-[1.02] transition-all group">
+        <div class="w-10 h-10 rounded-xl nm-concave flex items-center justify-center mb-6 group-hover:t-primary transition-colors"><span class="material-symbols-outlined text-xl">shield</span></div>
+        <h4 class="font-headline text-lg font-bold mb-2 t-surface">Privacy is Foundational</h4>
+        <p class="font-body text-sm t-muted leading-relaxed">Not a feature to bolt on. Privacy-by-design in every AI system I build.</p>
+      </div>
+      <div class="p-8 rounded-2xl nm-convex surf-low hover:scale-[1.02] transition-all group">
+        <div class="w-10 h-10 rounded-xl nm-concave flex items-center justify-center mb-6 group-hover:t-primary transition-colors"><span class="material-symbols-outlined text-xl">trending_up</span></div>
+        <h4 class="font-headline text-lg font-bold mb-2 t-surface">Scale Matters</h4>
+        <p class="font-body text-sm t-muted leading-relaxed">Building for real users at real scale. Hobby projects are training grounds, not destinations.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- METRICS -->
+  <section class="flex flex-wrap gap-12 justify-between items-center opacity-40">
+    <div class="flex items-center gap-3"><span class="font-headline font-black text-xl t-surface">3</span><span class="font-label text-[9px] uppercase tracking-widest font-bold t-muted">Active Projects</span></div>
+    <div class="flex items-center gap-3"><span class="font-headline font-black text-xl t-surface">Y1</span><span class="font-label text-[9px] uppercase tracking-widest font-bold t-muted">NSEC · IT</span></div>
+    <div class="flex items-center gap-3"><span class="material-symbols-outlined text-sm t-primary">verified</span><span class="font-label text-[9px] uppercase tracking-widest font-bold t-muted">Systems Thinker</span></div>
+    <div class="flex items-center gap-3"><span class="font-headline font-black text-xl t-surface">&#8734;</span><span class="font-label text-[9px] uppercase tracking-widest font-bold t-muted">Long-term Builder</span></div>
+  </section>
+</main>
+
+<footer class="surf w-full py-12 px-8 mt-20 border-t b-surface">
+  <div class="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto gap-4">
+    <div class="font-body text-[10px] uppercase tracking-widest t-surface opacity-40">© 2026 Soham Singh</div>
+    <div class="flex gap-8">
+      <a href="https://github.com/Som007-builds" target="_blank" class="font-body text-[10px] uppercase tracking-widest t-surface opacity-40 hover:opacity-100 hover:t-primary transition-all">Github</a>
+      <a href="https://www.linkedin.com/in/soham-singh-a21688307/" target="_blank" class="font-body text-[10px] uppercase tracking-widest t-surface opacity-40 hover:opacity-100 hover:t-primary transition-all">LinkedIn</a>
+      <a href="mailto:sohamsingh572@gmail.com" class="font-body text-[10px] uppercase tracking-widest t-surface opacity-40 hover:opacity-100 hover:t-primary transition-all">Email</a>
+    </div>
+  </div>
+</footer>
+
+<nav class="mob-nav-bg md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex gap-1 items-center rounded-full px-5 py-3 w-max">
+  <a href="index.html" onclick="navigate(event,'index.html')" class="mob-active flex flex-col items-center px-3 py-1"><span class="material-symbols-outlined text-xl">grid_view</span><span class="font-body text-[9px] font-medium uppercase tracking-widest">Hub</span></a>
+  <a href="systems.html" onclick="navigate(event,'systems.html')" class="flex flex-col items-center t-surface opacity-30 hover:opacity-80 px-3 py-1 transition-all"><span class="material-symbols-outlined text-xl">layers</span><span class="font-body text-[9px] font-medium uppercase tracking-widest">Work</span></a>
+  <a href="lab.html" onclick="navigate(event,'lab.html')" class="flex flex-col items-center t-surface opacity-30 hover:opacity-80 px-3 py-1 transition-all"><span class="material-symbols-outlined text-xl">science</span><span class="font-body text-[9px] font-medium uppercase tracking-widest">Lab</span></a>
+  <a href="codex.html" onclick="navigate(event,'codex.html')" class="flex flex-col items-center t-surface opacity-30 hover:opacity-80 px-3 py-1 transition-all"><span class="material-symbols-outlined text-xl">menu_book</span><span class="font-body text-[9px] font-medium uppercase tracking-widest">Codex</span></a>
+  <a href="contact.html" onclick="navigate(event,'contact.html')" class="flex flex-col items-center t-surface opacity-30 hover:opacity-80 px-3 py-1 transition-all"><span class="material-symbols-outlined text-xl">send</span><span class="font-body text-[9px] font-medium uppercase tracking-widest">Contact</span></a>
+</nav>
+</body>
+</html>
