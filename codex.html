@@ -2,7 +2,22 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>The Codex | Soham Singhh </title>
+
+<!-- SEO: Primary -->
+<meta name="description" content="The Codex — Soham Singh's engineering journal. Notes on building Foretyx, AI security, privacy-first systems, and real products from a 1st-year IT student at NSEC Kolkata."/>
+<meta name="keywords" content="Soham Singh, Soham Singh NSEC, Foretyx, AI security, engineering journal, AI systems, NSEC Kolkata"/>
+<meta name="author" content="Soham Singh"/>
+<link rel="canonical" href="https://sohamsingh.indevs.in/codex"/>
+
+<!-- SEO: Open Graph -->
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://sohamsingh.indevs.in/codex"/>
+<meta property="og:title" content="The Codex — Soham Singh's Engineering Journal"/>
+<meta property="og:description" content="High-signal observations from Year 1 of building real AI systems. Foretyx, privacy-first architecture, and systems thinking."/>
+<meta property="og:image" content="https://sohamsingh.indevs.in/profile.webp"/>
+<meta property="og:site_name" content="Soham Singh"/>
+
+<title>The Codex | Soham Singh</title>
 <script>(function(){var s=localStorage.getItem('theme'),d=window.matchMedia('(prefers-color-scheme: dark)').matches;if(s==='dark'||(s===null&&d))document.documentElement.classList.add('dark');})();</script>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -43,61 +58,85 @@
 </head>
 <body class="font-body overflow-x-hidden surf t-surface">
 <nav class="nav-bg w-full sticky top-0 z-50 px-8 py-4"><div class="flex justify-between items-center max-w-7xl mx-auto"><a href="index.html" onclick="navigate(event,'index.html')" class="text-xl font-bold tracking-tighter t-surface font-headline">Soham Singh</a><div class="hidden md:flex items-center gap-8"><a href="index.html" onclick="navigate(event,'index.html')" class="t-surface opacity-70 hover:opacity-100 hover:t-primary transition-all duration-300 font-bold text-sm tracking-tight uppercase font-headline">The Hub</a> <a href="systems.html" onclick="navigate(event,'systems.html')" class="t-surface opacity-70 hover:opacity-100 hover:t-primary transition-all duration-300 font-bold text-sm tracking-tight uppercase font-headline">Systems</a> <a href="lab.html" onclick="navigate(event,'lab.html')" class="t-surface opacity-70 hover:opacity-100 hover:t-primary transition-all duration-300 font-bold text-sm tracking-tight uppercase font-headline">The Lab</a> <a href="codex.html" onclick="navigate(event,'codex.html')" class="t-primary b-primary border-b-2 pb-1 font-bold text-sm tracking-tight uppercase font-headline">The Codex</a> <a href="contact.html" onclick="navigate(event,'contact.html')" class="t-surface opacity-70 hover:opacity-100 hover:t-primary transition-all duration-300 font-bold text-sm tracking-tight uppercase font-headline">Contact</a></div><button id="theme-toggle" onclick="toggleTheme()" class="nm-convex-sm w-10 h-10 rounded-full flex items-center justify-center"><span id="theme-icon" class="material-symbols-outlined text-sm t-primary">dark_mode</span></button></div></nav>
+
 <div class="fixed top-0 left-0 w-full h-full pointer-events-none -z-10 overflow-hidden opacity-20">
   <div class="absolute top-[10%] right-[10%] w-[30%] h-[30%] bg-[#5d3fe0]/10 dark:bg-[#917eff]/10 blur-[150px] rounded-full"></div>
   <div class="absolute bottom-[20%] left-[-5%] w-[40%] h-[40%] bg-[#5d3fe0]/5 blur-[120px] rounded-full"></div>
 </div>
+
 <main class="pt-20 pb-40 px-6 max-w-4xl mx-auto">
   <header class="mb-24 text-center">
     <h1 class="font-headline text-5xl md:text-7xl font-bold tracking-tighter t-surface mb-6">The Engineering Journal</h1>
     <p class="font-body text-lg t-muted max-w-2xl mx-auto leading-relaxed opacity-80">High-signal observations from Year 1 of building real AI systems. Just thinking out loud about AI, privacy, and systems design.</p>
   </header>
+
   <section class="space-y-12">
+
+    <!-- ENTRY #001 — NEW: Foretyx origin -->
     <article class="group relative surf-low p-8 rounded-2xl nm-convex border border-white/40 dark:border-white/5 hover:scale-[1.01] transition-all duration-300">
       <div class="flex flex-wrap justify-between items-center mb-6 gap-4">
         <div class="flex gap-2">
-          <span class="px-3 py-1 bg-[#e5deff] dark:bg-[#2d2460] t-primary font-headline text-[10px] font-bold uppercase tracking-widest rounded-full nm-concave">AI SYSTEMS</span>
+          <span class="px-3 py-1 bg-[#e5deff] dark:bg-[#2d2460] t-primary font-headline text-[10px] font-bold uppercase tracking-widest rounded-full nm-concave">FORETYX</span>
           <span class="px-3 py-1 surf-high t-surface font-headline text-[10px] font-bold uppercase tracking-widest rounded-full">SIGNAL: HIGH</span>
         </div>
-        <time class="text-xs font-mono t-faint uppercase">2026</time>
+        <time class="text-xs font-mono t-faint uppercase">April 2026</time>
       </div>
-      <h2 class="font-headline text-2xl font-bold mb-4 t-surface tracking-tight">Privacy is Not a Feature</h2>
-      <p class="font-body t-muted leading-relaxed mb-6 opacity-90">Every AI product I see treats privacy as a checkbox — GDPR compliance here, a toggle there. That's backwards. When you design for privacy first, you end up with fundamentally different architecture. Foretyx exists because I needed to build that architecture before someone just bolted compliance on top of an inherently leaky system.</p>
+      <h2 class="font-headline text-2xl font-bold mb-4 t-surface tracking-tight">Why I Built a Security Gateway Before I Built Anything Else</h2>
+      <p class="font-body t-muted leading-relaxed mb-4 opacity-90">
+        When I started thinking about what kind of AI products actually matter, I kept hitting the same wall every serious enterprise hits: you can't send real data to a third-party model. Not because you don't trust the model — because you legally, contractually, sometimes ethically cannot. Healthcare records. Employee data. Customer PII. Financial transactions. It's all off-limits the moment you try to pipe it into an external API.
+      </p>
+      <p class="font-body t-muted leading-relaxed mb-6 opacity-90">
+        That's not a niche problem. That's the reason most enterprise AI adoption is stuck in pilot hell. Everyone's doing proofs of concept with sanitized dummy data, then hitting a wall when real deployment means real data exposure. Foretyx is the layer that removes that wall. A control plane that intercepts, filters, anonymizes, and enforces policy before data ever reaches the model — so companies can actually ship AI products, not just demo them. I'm a first-year student. I'm also the person building the infrastructure that makes enterprise AI deployable. That gap between those two sentences is where I live.
+      </p>
       <div class="flex items-center gap-4 t-faint">
         <div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">edit_note</span><span class="text-[10px] font-bold uppercase tracking-widest">Entry #001</span></div>
-        <div class="flex items-center gap-1.5 ml-auto"><span class="material-symbols-outlined text-sm">schedule</span><span class="text-[10px] font-bold uppercase tracking-widest">2m read</span></div>
+        <div class="flex items-center gap-1.5 ml-auto"><span class="material-symbols-outlined text-sm">schedule</span><span class="text-[10px] font-bold uppercase tracking-widest">3m read</span></div>
       </div>
     </article>
-    <!-- <article class="group relative surf-low p-8 rounded-2xl nm-convex border border-white/40 dark:border-white/5 hover:scale-[1.01] transition-all duration-300">
-      <div class="flex flex-wrap justify-between items-center mb-6 gap-4">
-        <div class="flex gap-2">
-          <span class="px-3 py-1 bg-[#e5deff] dark:bg-[#2d2460] t-primary font-headline text-[10px] font-bold uppercase tracking-widest rounded-full nm-concave">MINDSET</span>
-          <span class="px-3 py-1 surf-high t-surface font-headline text-[10px] font-bold uppercase tracking-widest rounded-full">SIGNAL: HIGH</span>
-        </div>
-        <time class="text-xs font-mono t-faint uppercase">2025</time>
-      </div>
-      <h2 class="font-headline text-2xl font-bold mb-4 t-surface tracking-tight">Year 1 with a 5-Year Plan</h2>
-      <p class="font-body t-muted leading-relaxed mb-6 opacity-90">Most first-year CS students are trying to pass exams. I'm building a startup and mapping a path to ₹50 LPA. The gap isn't talent — it's time horizon. If you're thinking in semesters, you can't make the same decisions as someone thinking in years. The plan isn't rigid; it's a forcing function.</p>
-      <div class="flex items-center gap-4 t-faint">
-        <div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">edit_note</span><span class="text-[10px] font-bold uppercase tracking-widest">Entry #002</span></div>
-        <div class="flex items-center gap-1.5 ml-auto"><span class="material-symbols-outlined text-sm">schedule</span><span class="text-[10px] font-bold uppercase tracking-widest">1m read</span></div>
-      </div>
-    </article> -->
+
+    <!-- ENTRY #002 — NEW: Foretyx architecture thinking -->
     <article class="group relative surf-high p-8 rounded-2xl nm-concave transition-all duration-300">
       <div class="flex flex-wrap justify-between items-center mb-6 gap-4">
         <div class="flex gap-2">
-          <span class="px-3 py-1 bg-[#5d3fe0] dark:bg-[#7c5cfc] text-[#fbf6ff] font-headline text-[10px] font-bold uppercase tracking-widest rounded-full shadow-lg">CORE BELIEF</span>
+          <span class="px-3 py-1 bg-[#5d3fe0] dark:bg-[#7c5cfc] text-[#fbf6ff] font-headline text-[10px] font-bold uppercase tracking-widest rounded-full shadow-lg">FORETYX</span>
           <span class="px-3 py-1 surf-low t-primary font-headline text-[10px] font-bold uppercase tracking-widest rounded-full">SIGNAL: CRITICAL</span>
+        </div>
+        <time class="text-xs font-mono t-faint uppercase">April 2026</time>
+      </div>
+      <h2 class="font-headline text-2xl font-bold mb-4 t-surface tracking-tight">The Architecture Decision That Changed How I Think About AI Middleware</h2>
+      <p class="font-body t-muted leading-relaxed mb-4">
+        The first version of Foretyx I designed was a simple proxy. Request comes in, strip the PII, forward to the model, return the response. Clean. Obvious. Wrong. A proxy is reactive — it sees data after the application has already decided to send it. By that point, the damage pattern is already set. You're just sanitizing symptoms, not fixing the architecture.
+      </p>
+      <p class="font-body t-muted leading-relaxed mb-4">
+        The redesign was a control plane. Policy enforcement happens at the IAM layer before a request is even formed. The Policy Engine evaluates what data a given role is allowed to expose, to which model, under what context. The request gets shaped by those rules — not filtered after the fact, but constructed within them from the start. That's a fundamentally different trust model. It means Foretyx isn't just a data cleaner. It's an access control system for AI. The difference matters because one of those is a feature you add, and the other is infrastructure you build on top of.
+      </p>
+      <p class="font-body t-muted leading-relaxed mb-6">
+        WebSocket-based real-time policy push means rule changes propagate instantly without redeployment. That was the detail that made it real enterprise infra instead of a dev tool with enterprise branding.
+      </p>
+      <div class="flex items-center gap-4 t-faint">
+        <div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">edit_note</span><span class="text-[10px] font-bold uppercase tracking-widest">Entry #002</span></div>
+        <div class="flex items-center gap-1.5 ml-auto t-primary"><span class="material-symbols-outlined text-sm">star</span><span class="text-[10px] font-bold uppercase tracking-widest">Architecture</span></div>
+      </div>
+    </article>
+
+    <!-- ENTRY #003 — kept: Systems Before Scripts -->
+    <article class="group relative surf-low p-8 rounded-2xl nm-convex border border-white/40 dark:border-white/5 hover:scale-[1.01] transition-all duration-300">
+      <div class="flex flex-wrap justify-between items-center mb-6 gap-4">
+        <div class="flex gap-2">
+          <span class="px-3 py-1 bg-[#e5deff] dark:bg-[#2d2460] t-primary font-headline text-[10px] font-bold uppercase tracking-widest rounded-full nm-concave">CORE BELIEF</span>
+          <span class="px-3 py-1 surf-high t-surface font-headline text-[10px] font-bold uppercase tracking-widest rounded-full">SIGNAL: CRITICAL</span>
         </div>
         <time class="text-xs font-mono t-faint uppercase">2025</time>
       </div>
       <h2 class="font-headline text-2xl font-bold mb-4 t-surface tracking-tight">Systems Before Scripts</h2>
-      <p class="font-body t-muted leading-relaxed mb-6">Writing code is the last thing I do. Before a single line, I'm drawing architecture, asking what breaks first, what scales worst, what the real user actually needs. Scripts are temporary. Systems compound. The engineer who understands the system controls the engineer who just knows the syntax.</p>
+      <p class="font-body t-muted leading-relaxed mb-6 opacity-90">Writing code is the last thing I do. Before a single line, I'm drawing architecture, asking what breaks first, what scales worst, what the real user actually needs. Scripts are temporary. Systems compound. The engineer who understands the system controls the engineer who just knows the syntax.</p>
       <div class="flex items-center gap-4 t-faint">
         <div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">edit_note</span><span class="text-[10px] font-bold uppercase tracking-widest">Entry #003</span></div>
-        <div class="flex items-center gap-1.5 ml-auto t-primary"><span class="material-symbols-outlined text-sm">star</span><span class="text-[10px] font-bold uppercase tracking-widest">Foundation</span></div>
+        <div class="flex items-center gap-1.5 ml-auto"><span class="material-symbols-outlined text-sm">schedule</span><span class="text-[10px] font-bold uppercase tracking-widest">1m read</span></div>
       </div>
     </article>
+
+    <!-- ENTRY #004 — kept: Local LLMs -->
     <article class="group relative surf-low p-8 rounded-2xl nm-convex border border-white/40 dark:border-white/5 hover:scale-[1.01] transition-all duration-300">
       <div class="flex flex-wrap justify-between items-center mb-6 gap-4">
         <div class="flex gap-2">
@@ -113,7 +152,9 @@
         <div class="flex items-center gap-1.5 ml-auto"><span class="material-symbols-outlined text-sm">schedule</span><span class="text-[10px] font-bold uppercase tracking-widest">1m read</span></div>
       </div>
     </article>
+
   </section>
+
   <div class="mt-16 flex items-center gap-6">
     <div class="flex-1 h-[1px] bg-[#dde4e5] dark:bg-[#252840]"></div>
     <div class="flex items-center gap-3 px-5 py-2 rounded-full nm-concave">
@@ -122,10 +163,16 @@
       <span class="w-1.5 h-1.5 rounded-full bg-primary dark:bg-[#917eff] animate-pulse"></span>
     </div>
     <div class="flex-1 h-[1px] bg-[#dde4e5] dark:bg-[#252840]"></div>
-  </div></footer>
+  </div>
+</main>
+
 <nav class="mob-nav-bg md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex gap-1 items-center rounded-full px-5 py-3 w-max">
   <a href="index.html" onclick="navigate(event,'index.html')" class="flex flex-col items-center t-surface opacity-30 hover:opacity-80 px-3 py-1 transition-all"><span class="material-symbols-outlined text-xl">grid_view</span><span class="font-body text-[9px] font-medium uppercase tracking-widest">Hub</span></a>
   <a href="systems.html" onclick="navigate(event,'systems.html')" class="flex flex-col items-center t-surface opacity-30 hover:opacity-80 px-3 py-1 transition-all"><span class="material-symbols-outlined text-xl">layers</span><span class="font-body text-[9px] font-medium uppercase tracking-widest">Work</span></a>
   <a href="lab.html" onclick="navigate(event,'lab.html')" class="flex flex-col items-center t-surface opacity-30 hover:opacity-80 px-3 py-1 transition-all"><span class="material-symbols-outlined text-xl">science</span><span class="font-body text-[9px] font-medium uppercase tracking-widest">Lab</span></a>
   <a href="codex.html" onclick="navigate(event,'codex.html')" class="mob-active flex flex-col items-center px-3 py-1"><span class="material-symbols-outlined text-xl">menu_book</span><span class="font-body text-[9px] font-medium uppercase tracking-widest">Codex</span></a>
-  <a href="contact.html" onclick="navigate(event,'contact.html')" class="flex flex-col items-center t-surface opacity-30 hover:opacity-80 px-3 py-1 transition-all"><span class="material-symbols-outlined text-xl">send</span><span class="font-body text-[9px] font-medium uppercase tracking-widest"
+  <a href="contact.html" onclick="navigate(event,'contact.html')" class="flex flex-col items-center t-surface opacity-30 hover:opacity-80 px-3 py-1 transition-all"><span class="material-symbols-outlined text-xl">send</span><span class="font-body text-[9px] font-medium uppercase tracking-widest">Contact</span></a>
+</nav>
+
+</body>
+</html>
