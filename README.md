@@ -17,14 +17,16 @@ A static personal portfolio about privacy-first AI, local inference, and hardwar
 
 ## Visual system
 
-Monochrome editorial layouts, pixel display headings, dotted section separators, square controls, and custom inline SVG illustrations. No runtime CSS generator or icon library.
+Edge-to-edge monochrome surfaces with centered content, pixel display headings, dotted section separators, square controls, and custom inline SVG illustrations. No runtime CSS generator or icon library.
 
 - **Display:** Silkscreen; **body:** DM Sans; **metadata:** system monospace.
 - **Dark edition:** near-black `#080808`, off-white `#f1f0eb`.
 - **Light edition:** warm paper `#f4f3ed`, ink `#151515`.
 - Dark is the first-visit default; an explicit light/dark selection is saved in `localStorage`. Storage failures do not prevent the site from working.
 - Navigation and content remain available without JavaScript. The mobile menu is progressively enhanced.
-- Skip links, visible keyboard focus, native form labels, and reduced-motion preferences are supported.
+- Skip links, visible keyboard focus, and native form labels are supported.
+- One-time staggered entrances and scroll reveals use the native Web Animations API and IntersectionObserver. Links, buttons, and the mobile menu have subtle interaction transitions. No animation libraries, looping effects, or scroll hijacking.
+- Reduced-motion preferences disable reveals and interaction motion, including changes made while the page is open. Content remains visible if JavaScript or the animation APIs are unavailable; keyboard focus finishes any reveal containing the focused control.
 
 The site describes project intentions and constraints rather than implying production deployments. Foretyx is in early design/feasibility; the smart-home budget is a target, not a verified build cost.
 

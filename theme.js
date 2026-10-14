@@ -75,6 +75,8 @@
       else mobile.addListener(syncMenu);
     }
 
+    initMotion();
+
     var form = document.getElementById('contact-form');
     var button = document.getElementById('submit-btn');
     var label = document.getElementById('submit-label');
@@ -117,6 +119,61 @@
         label.textContent = 'Send message';
         form.removeAttribute('aria-busy');
       }
+    });
+  }
+
+  function initMotion() {
+    if (!window.matchMedia || !window.IntersectionObserver || !Element.prototype.animate) return;
+    var preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (preference.matches) return;
+    var active = new Map();
+    var observer;
+
+    function reveal(element, delay) {
+      if (preference.matches || element.contains(document.activeElement)) return;
+      // Content is visible by default; motion never becomes a loading gate.
+      var animation = element.animate([
+        { opacity: 0, transform: 'translateY(18px)' },
+        { opacity: 1, transform: 'translateY(0)' }
+      ], { duration: 650, delay: delay || 0, easing: 'cubic-bezier(.22, 1, .36, 1)', fill: 'backwards' });
+      active.set(element, animation);
+      animation.onfinish = animation.oncancel = function () { active.delete(element); };
+    }
+
+    document.querySelectorAll('.hero-copy > *, .page-heading > *').forEach(function (element, index) {
+      reveal(element, Math.min(index * 65, 195));
+    });
+    var artwork = document.querySelector('.hero-art');
+    if (artwork) reveal(artwork, 120);
+
+    observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry, index) {
+        if (!entry.isIntersecting) return;
+        observer.unobserve(entry.target);
+        reveal(entry.target, Math.min(index * 45, 135));
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -24px 0px' });
+    document.querySelectorAll('.section-heading, .feature-visual, .feature-copy, .work-row, .about-layout > *, .notes-preview > *, .contact-strip > *, .case-heading, .case-art, .learning-list > article, .idea-row, .journal-entry > header').forEach(function (element) {
+      observer.observe(element);
+    });
+
+    document.addEventListener('focusin', function (event) {
+      active.forEach(function (animation, element) {
+        if (element.contains(event.target)) animation.cancel();
+      });
+    });
+    var stopMotion = function () {
+      if (!preference.matches) return;
+      observer.disconnect();
+      active.forEach(function (animation) { animation.cancel(); });
+      active.clear();
+    };
+    if (preference.addEventListener) preference.addEventListener('change', stopMotion);
+    else preference.addListener(stopMotion);
+    window.addEventListener('pagehide', function () {
+      observer.disconnect();
+      active.forEach(function (animation) { animation.cancel(); });
+      active.clear();
     });
   }
 

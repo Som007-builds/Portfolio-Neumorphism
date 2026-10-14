@@ -210,7 +210,7 @@ try {
     await evaluate(`(async () => { for (const image of document.images) { image.scrollIntoView({behavior:'instant'}); await new Promise(resolve=>requestAnimationFrame(resolve)); } })()`);
     await until(() => evaluate('[...document.images].every(image=>image.complete&&image.naturalWidth>0)'), 'screenshot images loaded');
     await evaluate('window.scrollTo({top:0,behavior:"instant"})');
-    await delay(70);
+    await delay(850);
     const metrics = await cdp.send('Page.getLayoutMetrics');
     const width = await evaluate('innerWidth');
     const image = await cdp.send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true, clip: { x: 0, y: 0, width, height: Math.ceil(metrics.cssContentSize.height), scale: 1 } });
@@ -254,6 +254,8 @@ try {
       await viewport(width); await delay(60);
       const layout = await evaluate(`(() => { const visible=e=>!!e.getClientRects().length&&getComputedStyle(e).visibility!=='hidden'; const n=document.querySelector('.site-nav'),m=document.querySelector('.menu-toggle'); return { width:innerWidth, client:document.documentElement.clientWidth, scroll:document.documentElement.scrollWidth, body:document.body.scrollWidth, menu:visible(m),nav:visible(n),expanded:m.getAttribute('aria-expanded'),offenders:[...document.querySelectorAll('main *')].filter(e=>{const r=e.getBoundingClientRect();return r.width&& (r.right>innerWidth+1||r.left< -1)}).slice(0,8).map(e=>({tag:e.tagName,class:e.getAttribute('class')}))}; })()`);
       check(`${file}: no horizontal overflow at ${width}`, layout.width === width && layout.scroll <= width && layout.body <= width, layout);
+      const frame = await evaluate(`(() => { const shell=document.querySelector('.site-shell'), r=shell.getBoundingClientRect(), s=getComputedStyle(shell); return {left:r.left, width:r.width, viewport:document.documentElement.clientWidth, margin:s.margin, border:s.borderTopWidth, body:getComputedStyle(document.body).backgroundColor, shell:s.backgroundColor}; })()`);
+      check(`${file}: edge-to-edge without outer frame at ${width}`, frame.left === 0 && Math.abs(frame.width-frame.viewport) < 1 && frame.margin === '0px' && frame.border === '0px' && frame.body === frame.shell, frame);
       check(`${file}: responsive navigation at ${width}`, width <= 760 ? layout.menu && !layout.nav && layout.expanded === 'false' : !layout.menu && layout.nav, layout);
       if (width === 375 || width === 1440) {
               await capture(`${path.basename(file, '.html')}-${width}`);
@@ -275,6 +277,43 @@ try {
     await click('main h1');
     check(`${file}: outside click closes menu`, await evaluate(`document.querySelector('.menu-toggle').getAttribute('aria-expanded')==='false'`));
   }
+
+  // Native focus events require the headless page to be focused, not just activeElement.
+  await cdp.send('Emulation.setFocusEmulationEnabled', { enabled: true });
+  // Record actual Web Animations calls without changing production behavior.
+  const motionScript = await cdp.send('Page.addScriptToEvaluateOnNewDocument', { source: `window.motionCalls=[]; const originalAnimate=Element.prototype.animate; Element.prototype.animate=function(frames,options){window.motionCalls.push({className:this.className,duration:options.duration,delay:options.delay,frames});return originalAnimate.call(this,frames,options);};` });
+  await viewport(1440);
+  await cdp.send('Emulation.setEmulatedMedia', { features: [{name:'prefers-reduced-motion',value:'no-preference'}] });
+  await navigate('index.html');
+  await delay(900);
+  const entrance = await evaluate(`({calls:window.motionCalls, opacity:getComputedStyle(document.querySelector('.hero-art')).opacity, transform:getComputedStyle(document.querySelector('.hero-art')).transform, active:document.getAnimations().length})`);
+  check('Motion: staggered hero and artwork entrance', entrance.calls.some(call=>call.className==='hero-art'&&call.delay===120) && entrance.calls.filter(call=>call.delay>0).length>=3, entrance);
+  check('Motion: entrance settles visibly without persistent transforms', entrance.opacity==='1'&&entrance.transform==='none'&&entrance.active===0, entrance);
+  const revealBefore = await evaluate('window.motionCalls.length');
+  await evaluate(`document.querySelector('.work-row').scrollIntoView({block:'center',behavior:'instant'})`);
+  await delay(80);
+  check('Motion: scrolling reveals newly visible work', await evaluate(`window.motionCalls.length>${revealBefore} && window.motionCalls.some(call=>call.className==='work-row')`));
+  await evaluate(`document.querySelector('.work-row').focus()`);
+  const focusedReveal = await evaluate(`(() => {const row=document.querySelector('.work-row');return {focused:document.activeElement===row,opacity:getComputedStyle(row).opacity,states:row.getAnimations().map(animation=>animation.playState)};})()`);
+  check('Motion: keyboard focus immediately finishes containing reveal', focusedReveal.focused && focusedReveal.opacity==='1' && focusedReveal.states.length===0, focusedReveal);
+  await cdp.send('Emulation.setEmulatedMedia', { features: [{name:'prefers-reduced-motion',value:'reduce'}] });
+  await delay(80);
+  check('Motion: live reduced-motion change cancels running effects', await evaluate(`document.getAnimations().length===0`));
+  const stoppedCount = await evaluate('window.motionCalls.length');
+  await evaluate(`document.querySelector('.contact-strip').scrollIntoView({behavior:'instant'})`);
+  await delay(80);
+  check('Motion: reduced motion disconnects scroll observer', await evaluate(`window.motionCalls.length===${stoppedCount}`));
+  await navigate('index.html');
+  check('Motion: reduced-motion first load skips all reveals', await evaluate(`window.motionCalls.length===0 && document.getAnimations().length===0 && getComputedStyle(document.querySelector('h1')).opacity==='1'`));
+  await viewport(375);
+  await click('.menu-toggle');
+  check('Motion: reduced-motion mobile menu remains functional without animation', await evaluate(`document.getAnimations().length===0 && document.querySelector('.menu-toggle').getAttribute('aria-expanded')==='true'`));
+  await cdp.send('Emulation.setEmulatedMedia', { features: [{name:'prefers-reduced-motion',value:'no-preference'}] });
+  const missingObserver = await cdp.send('Page.addScriptToEvaluateOnNewDocument', {source:'window.IntersectionObserver=undefined;'});
+  await navigate('index.html');
+  check('Motion: unsupported observer keeps content visible', await evaluate(`window.motionCalls.length===0 && getComputedStyle(document.querySelector('.hero-art')).opacity==='1' && getComputedStyle(document.querySelector('.feature-copy')).opacity==='1'`));
+  await cdp.send('Page.removeScriptToEvaluateOnNewDocument', {identifier:missingObserver.identifier});
+  await cdp.send('Page.removeScriptToEvaluateOnNewDocument', {identifier:motionScript.identifier});
 
   // Inspect browser-parsed selector relevance without installing a CSS parser.
   await viewport(1440); await navigate('index.html');
