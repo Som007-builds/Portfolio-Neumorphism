@@ -1,178 +1,134 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-<!-- SEO: Primary -->
-<meta name="description" content="The Codex — Soham Singh's engineering journal. Notes on building Foretyx, AI security, privacy-first systems, and real products from a 1st-year IT student at NSEC Kolkata."/>
-<meta name="keywords" content="Soham Singh, Soham Singh NSEC, Foretyx, AI security, engineering journal, AI systems, NSEC Kolkata"/>
-<meta name="author" content="Soham Singh"/>
-<link rel="canonical" href="https://sohamsingh.indevs.in/codex"/>
-
-<!-- SEO: Open Graph -->
-<meta property="og:type" content="website"/>
-<meta property="og:url" content="https://sohamsingh.indevs.in/codex"/>
-<meta property="og:title" content="The Codex — Soham Singh's Engineering Journal"/>
-<meta property="og:description" content="High-signal observations from Year 1 of building real AI systems. Foretyx, privacy-first architecture, and systems thinking."/>
-<meta property="og:image" content="https://sohamsingh.indevs.in/profile.webp"/>
-<meta property="og:site_name" content="Soham Singh"/>
-
-<title>The Codex | Soham Singh</title>
-<script>(function(){var s=localStorage.getItem('theme'),d=window.matchMedia('(prefers-color-scheme: dark)').matches;if(s==='dark'||(s===null&&d))document.documentElement.classList.add('dark');})();</script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script>tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#5d3fe0","primary-container":"#e5deff","on-primary":"#fbf6ff","surface":"#f9f9f9","surface-container-low":"#f2f4f4","surface-container":"#ebeeef","surface-container-high":"#e4e9ea","surface-container-highest":"#dde4e5","on-surface":"#2d3435","on-surface-variant":"#5a6061","secondary":"#5e5f5f","outline":"#757c7d","outline-variant":"#adb3b4"},fontFamily:{"headline":["Space Grotesk","sans-serif"],"body":["Inter","sans-serif"],"label":["Inter","sans-serif"]},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"}}}}</script>
-<style>
-  .nm-convex{box-shadow:-8px -8px 20px #ffffff,8px 8px 20px #bebebe}.nm-concave{box-shadow:inset -4px -4px 10px #ffffff,inset 4px 4px 10px #bebebe}.nm-convex-sm{box-shadow:-4px -4px 10px #ffffff,4px 4px 10px #bebebe}
-  .dark .nm-convex{box-shadow:-8px -8px 20px #12141f,8px 8px 20px #22263a}.dark .nm-concave{box-shadow:inset -8px -8px 16px #12141f,inset 8px 8px 16px #22263a}.dark .nm-convex-sm{box-shadow:-4px -4px 10px #12141f,4px 4px 10px #22263a}
-  body{background:#f9f9f9;color:#2d3435;opacity:0;transition:opacity 0.15s ease,background-color 0.35s ease,color 0.35s ease}body.loaded{opacity:1}body.fade-out{opacity:0!important;transition:opacity 0.1s ease!important}
-  .dark body{background:#1a1d2e;color:#e2e4f0}
-  .surf{background-color:#f9f9f9}.dark .surf{background-color:#1a1d2e}
-  .surf-low{background-color:#f2f4f4}.dark .surf-low{background-color:#1e2133}
-  .surf-high{background-color:#e4e9ea}.dark .surf-high{background-color:#242840}
-  .surf-highest{background-color:#dde4e5}.dark .surf-highest{background-color:#2a2e47}
-  .surf-container{background-color:#ebeeef}.dark .surf-container{background-color:#1e2133}
-  .t-primary{color:#5d3fe0}.dark .t-primary{color:#917eff}
-  .t-surface{color:#2d3435}.dark .t-surface{color:#e2e4f0}
-  .t-muted{color:#5a6061}.dark .t-muted{color:#9da3c0}
-  .t-faint{color:#757c7d}.dark .t-faint{color:#5a6080}
-  .b-surface{border-color:#f2f4f4}.dark .b-surface{border-color:#252840}
-  .b-primary{border-color:#5d3fe0}.dark .b-primary{border-color:#917eff}
-  .b-highest{border-color:#dde4e5}.dark .b-highest{border-color:#2a2e47}
-  .nav-bg{background-color:#f9f9f9;box-shadow:-8px -8px 20px #ffffff,8px 8px 20px #bebebe}.dark .nav-bg{background-color:#1a1d2e;box-shadow:-4px -4px 12px #12141f,4px 4px 12px #22263a}
-  .mob-nav-bg{background-color:#f9f9f9;box-shadow:-8px -8px 20px #ffffff,8px 8px 20px #bebebe}.dark .mob-nav-bg{background-color:#1a1d2e;box-shadow:-4px -4px 12px #12141f,4px 4px 12px #22263a}
-  .mob-active{background-color:#f2f4f4;box-shadow:inset -2px -2px 5px #ffffff,inset 2px 2px 5px #bebebe;border-radius:12px;color:#5d3fe0}.dark .mob-active{background-color:#22263a;box-shadow:inset -2px -2px 5px #12141f,inset 2px 2px 5px #2a2e47;color:#917eff}
-  #theme-toggle{transition:transform 0.15s ease}#theme-toggle:hover{transform:scale(0.93)}
-  .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;vertical-align:middle}
-  .breathe{animation:breathe 3s ease-in-out infinite}@keyframes breathe{0%,100%{box-shadow:0 0 10px rgba(93,63,224,0.3)}50%{box-shadow:0 0 28px rgba(93,63,224,0.65)}}
-  .dark .breathe{animation:breathe-d 3s ease-in-out infinite}@keyframes breathe-d{0%,100%{box-shadow:0 0 10px rgba(145,126,255,0.4)}50%{box-shadow:0 0 32px rgba(145,126,255,0.85)}}
-  .blink{animation:blink 2s ease-in-out infinite}@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
-  .neuo-input{background:#f2f4f4;box-shadow:inset -4px -4px 10px #ffffff,inset 4px 4px 10px #bebebe;border:none;outline:none;transition:box-shadow 0.25s ease}.neuo-input:focus{box-shadow:inset -4px -4px 10px #ffffff,inset 4px 4px 10px #c0b0ff,0 0 0 2px rgba(93,63,224,0.15)}.neuo-input::placeholder{color:#adb3b4}
-  .dark .neuo-input{background:#1e2133;color:#e2e4f0;box-shadow:inset -4px -4px 10px #12141f,inset 4px 4px 10px #22263a}.dark .neuo-input::placeholder{color:#4a5070}.dark .neuo-input:focus{box-shadow:inset -4px -4px 10px #12141f,inset 4px 4px 10px #22263a,0 0 0 2px rgba(145,126,255,0.2)}.dark select option{background:#1e2133;color:#e2e4f0}
-  .btn-send{background:#5d3fe0;position:relative;overflow:hidden;transition:transform 0.15s ease,box-shadow 0.15s ease;color:#fbf6ff}.dark .btn-send{background:#7c5cfc}.btn-send::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);transition:left 0.5s ease}.btn-send:hover::after{left:150%}.btn-send:hover{transform:scale(1.03);box-shadow:0 8px 24px rgba(93,63,224,0.35)}.btn-send:active{transform:scale(0.97)}
-  .channel-card{transition:transform 0.2s ease}.channel-card:hover{transform:translateY(-3px)}
-  .dot-grid{background-image:radial-gradient(circle at 1px 1px,rgba(93,63,224,0.08) 1px,transparent 0);background-size:28px 28px}.dark .dot-grid{background-image:radial-gradient(circle at 1px 1px,rgba(145,126,255,0.06) 1px,transparent 0)}
-</style>
-<script src="theme.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Field notes by Soham Singh on privacy-first AI, Foretyx policy architecture, systems thinking, and local language models.">
+  <title>Codex — Soham Singh</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Silkscreen&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="theme.js"></script>
 </head>
-<body class="font-body overflow-x-hidden surf t-surface">
-<nav class="nav-bg w-full sticky top-0 z-50 px-8 py-4"><div class="flex justify-between items-center max-w-7xl mx-auto"><a href="index.html" onclick="navigate(event,'index.html')" class="text-xl font-bold tracking-tighter t-surface font-headline">Soham Singh</a><div class="hidden md:flex items-center gap-8"><a href="index.html" onclick="navigate(event,'index.html')" class="t-surface opacity-70 hover:opacity-100 hover:t-primary transition-all duration-300 font-bold text-sm tracking-tight uppercase font-headline">The Hub</a> <a href="systems.html" onclick="navigate(event,'systems.html')" class="t-surface opacity-70 hover:opacity-100 hover:t-primary transition-all duration-300 font-bold text-sm tracking-tight uppercase font-headline">Systems</a> <a href="lab.html" onclick="navigate(event,'lab.html')" class="t-surface opacity-70 hover:opacity-100 hover:t-primary transition-all duration-300 font-bold text-sm tracking-tight uppercase font-headline">The Lab</a> <a href="codex.html" onclick="navigate(event,'codex.html')" class="t-primary b-primary border-b-2 pb-1 font-bold text-sm tracking-tight uppercase font-headline">The Codex</a> <a href="contact.html" onclick="navigate(event,'contact.html')" class="t-surface opacity-70 hover:opacity-100 hover:t-primary transition-all duration-300 font-bold text-sm tracking-tight uppercase font-headline">Contact</a></div><button id="theme-toggle" onclick="toggleTheme()" class="nm-convex-sm w-10 h-10 rounded-full flex items-center justify-center"><span id="theme-icon" class="material-symbols-outlined text-sm t-primary">dark_mode</span></button></div></nav>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Soham Singh — home">
+        <span class="brand-mark" aria-hidden="true">S/S</span>
+        <span class="brand-name">Soham Singh</span>
+      </a>
+      <div class="header-controls">
+        <button class="theme-toggle" type="button" data-theme-toggle hidden aria-label="Switch to light theme"><span data-theme-label>Light</span></button>
+        <button class="menu-toggle" type="button" hidden aria-expanded="false" aria-controls="site-nav">Menu <span class="menu-lines" aria-hidden="true"></span></button>
+      </div>
+      <nav id="site-nav" class="site-nav" aria-label="Primary">
+        <a href="index.html">Overview</a>
+        <a href="systems.html">Systems</a>
+        <a href="lab.html">Lab</a>
+        <a href="codex.html" aria-current="page">Codex</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
 
-<div class="fixed top-0 left-0 w-full h-full pointer-events-none -z-10 overflow-hidden opacity-20">
-  <div class="absolute top-[10%] right-[10%] w-[30%] h-[30%] bg-[#5d3fe0]/10 dark:bg-[#917eff]/10 blur-[150px] rounded-full"></div>
-  <div class="absolute bottom-[20%] left-[-5%] w-[40%] h-[40%] bg-[#5d3fe0]/5 blur-[120px] rounded-full"></div>
-</div>
+    <main id="main">
+      <header class="page-heading">
+        <p class="eyebrow">/ 04 — Codex</p>
+        <h1 class="display-title">FIELD<br>NOTES.</h1>
+        <p class="page-intro">Working through privacy, local AI, and the decisions between components. These are learning notes and design thinking—not production case studies or claims that the hard parts are solved.</p>
+      </header>
 
-<main class="pt-20 pb-40 px-6 max-w-4xl mx-auto">
-  <header class="mb-24 text-center">
-    <h1 class="font-headline text-5xl md:text-7xl font-bold tracking-tighter t-surface mb-6">The Engineering Journal</h1>
-    <p class="font-body text-lg t-muted max-w-2xl mx-auto leading-relaxed opacity-80">High-signal observations from Year 1 of building real AI systems. Just thinking out loud about AI, privacy, and systems design.</p>
-  </header>
+      <div class="journal-layout">
+        <nav class="journal-index" aria-label="Journal entries">
+          <p class="eyebrow">In this journal</p>
+          <a href="#privacy-first">01 / Start with the data boundary</a>
+          <a href="#policy-architecture">02 / From proxy to policy</a>
+          <a href="#systems-before-scripts">03 / Systems before scripts</a>
+          <a href="#local-models">04 / The case for local models</a>
+        </nav>
 
-  <section class="space-y-12">
+        <div class="journal-entries">
+          <article id="privacy-first" class="journal-entry" aria-labelledby="privacy-title">
+            <header>
+              <div class="entry-meta">
+                <span class="entry-number">Entry 001 / Foretyx</span>
+                <time datetime="2026-04">April 2026</time>
+              </div>
+              <h2 id="privacy-title" class="entry-title">Why I’m starting with a security gateway</h2>
+              <p class="eyebrow">Design thinking / Early feasibility</p>
+            </header>
+            <div class="entry-body">
+              <p>When I started thinking about useful AI products, I kept coming back to the data they would need. Healthcare records, employee information, customer PII, and financial transactions are not interchangeable with a public example prompt. Sending that information to a third-party model can raise legal, contractual, and ethical questions before model quality even enters the discussion.</p>
+              <p>That does not mean external models are always off-limits. It means the application needs an explicit answer to what may leave, for what purpose, and under whose authority. A proof of concept with sanitized dummy data does not establish that the same workflow is appropriate for real records.</p>
+              <p>Foretyx is my early design exploration of that boundary: middleware that checks access policy, filters PII, and removes or anonymizes sensitive information before an approved request reaches a model. The aim is to make privacy decisions visible in the request path rather than leaving them as assumptions inside application code.</p>
+              <p>I’m still defining the primitives and testing whether the approach is feasible. A gateway cannot promise perfect detection, eliminate re-identification risk, or establish compliance on its own. The useful next step is a narrow testable flow: identify the sensitive fields, state the policy, and verify both what is sent and what happens when a check fails.</p>
+            </div>
+          </article>
 
-    <!-- ENTRY #001 — NEW: Foretyx origin -->
-    <article class="group relative surf-low p-8 rounded-2xl nm-convex border border-white/40 dark:border-white/5 hover:scale-[1.01] transition-all duration-300">
-      <div class="flex flex-wrap justify-between items-center mb-6 gap-4">
-        <div class="flex gap-2">
-          <span class="px-3 py-1 bg-[#e5deff] dark:bg-[#2d2460] t-primary font-headline text-[10px] font-bold uppercase tracking-widest rounded-full nm-concave">FORETYX</span>
-          <span class="px-3 py-1 surf-high t-surface font-headline text-[10px] font-bold uppercase tracking-widest rounded-full">SIGNAL: HIGH</span>
+          <article id="policy-architecture" class="journal-entry" aria-labelledby="policy-title">
+            <header>
+              <div class="entry-meta">
+                <span class="entry-number">Entry 002 / Architecture</span>
+                <time datetime="2026-04">April 2026</time>
+              </div>
+              <h2 id="policy-title" class="entry-title">From a filtering proxy to a policy-aware boundary</h2>
+              <p class="eyebrow">Design thinking / Proposed architecture</p>
+            </header>
+            <div class="entry-body">
+              <p>The first Foretyx design I sketched was a simple proxy: receive a request, strip PII, forward it to the model, and return the response. That is an understandable starting point, and filtering remains useful. But it leaves an important question unanswered: should this user have been able to include that information in a model request in the first place?</p>
+              <p>The direction I’m exploring adds identity and access management (IAM) context before the request is constructed. A policy engine would evaluate the user’s role, the permitted data, the model destination, and the purpose of the request. The application could then build the prompt within those constraints, with filtering as a separate check rather than the entire security model.</p>
+              <p>That separates policy decisions from payload transformation. Access control asks whether information may be used; a PII filter asks whether sensitive information is still present. Neither replaces the other, and both need clear failure behavior. The design also needs to account for applications that cannot move policy checks earlier in their request flow.</p>
+              <p>A WebSocket-based policy push is one proposed way to distribute rule updates without redeploying every integration. It would not make updates instant or reliable by itself. Disconnections, missed messages, policy versions, acknowledgements, and stale cached rules all need a defined response. For sensitive requests, I would rather make the failure explicit than quietly continue with an unknown policy state.</p>
+              <p>This remains an architecture concept, not a deployed control plane. The next proof is whether a small integration can apply the same policy consistently during ordinary requests, policy changes, and connection failures.</p>
+            </div>
+          </article>
+
+          <article id="systems-before-scripts" class="journal-entry" aria-labelledby="systems-title">
+            <header>
+              <div class="entry-meta">
+                <span class="entry-number">Entry 003 / Practice</span>
+                <time datetime="2025">2025</time>
+              </div>
+              <h2 id="systems-title" class="entry-title">Systems before scripts</h2>
+              <p class="eyebrow">Learning note / Design habits</p>
+            </header>
+            <div class="entry-body">
+              <p>Before jumping into code, I try to draw the path a user’s request will take. What does the user actually need? Which component owns the data? What breaks first, and what would be hardest to change later? Even a rough sketch can uncover a dependency that is easy to overlook inside a single function.</p>
+              <p>The point is not to avoid scripts or design a large system for every small task. A short script is often the right tool. The habit I want to build is understanding where that tool fits, which assumptions it makes, and what happens when those assumptions stop holding.</p>
+              <p>Architecture only helps if implementation can challenge it. I’m learning to move between a small working example and the wider picture: sketch a boundary, implement the narrow path, test a failure, and revise the design. Understanding syntax and understanding the system are complementary skills, not competing identities.</p>
+            </div>
+          </article>
+
+          <article id="local-models" class="journal-entry" aria-labelledby="local-title">
+            <header>
+              <div class="entry-meta">
+                <span class="entry-number">Entry 004 / Local AI</span>
+                <time datetime="2025">2025</time>
+              </div>
+              <h2 id="local-title" class="entry-title">Why local language models are worth exploring</h2>
+              <p class="eyebrow">Learning note / Inference tradeoffs</p>
+            </header>
+            <div class="entry-body">
+              <p>Large hosted models get most of the attention, but running a DeepSeek or LLaMA model on a personal machine changes the questions I can ask. What can I build when the inference path stays local? Which tasks work well with a smaller model? How much control does a simple browser interface need to make that useful?</p>
+              <p>Local inference can avoid sending prompt content to a hosted model provider and remove the need for a per-request API subscription. It is not free computation. Model downloads take storage, inference uses electricity, and usable model size and response time depend on the available RAM, CPU, and GPU. A local setup also needs careful handling of logs, browser permissions, and the runtime’s network exposure.</p>
+              <p>There is an offline advantage once the model and runtime are installed, but it has boundaries: a local model cannot fetch a new web page without a connection, and running locally does not make its answers correct. Hosted models still have useful capabilities and operational advantages. I’m exploring local models because they offer a different set of tradeoffs—not because one approach has already replaced the other.</p>
+              <p>The browser chatbot is a way to make those tradeoffs concrete: start with a prompt and a local REST call, then add page context only with explicit permission. The interesting result would be a workflow that is useful and understandable on the hardware someone actually has.</p>
+            </div>
+          </article>
         </div>
-        <time class="text-xs font-mono t-faint uppercase">April 2026</time>
       </div>
-      <h2 class="font-headline text-2xl font-bold mb-4 t-surface tracking-tight">Why I Built a Security Gateway Before I Built Anything Else</h2>
-      <p class="font-body t-muted leading-relaxed mb-4 opacity-90">
-        When I started thinking about what kind of AI products actually matter, I kept hitting the same wall every serious enterprise hits: you can't send real data to a third-party model. Not because you don't trust the model — because you legally, contractually, sometimes ethically cannot. Healthcare records. Employee data. Customer PII. Financial transactions. It's all off-limits the moment you try to pipe it into an external API.
-      </p>
-      <p class="font-body t-muted leading-relaxed mb-6 opacity-90">
-        That's not a niche problem. That's the reason most enterprise AI adoption is stuck in pilot hell. Everyone's doing proofs of concept with sanitized dummy data, then hitting a wall when real deployment means real data exposure. Foretyx is the layer that removes that wall. A control plane that intercepts, filters, anonymizes, and enforces policy before data ever reaches the model — so companies can actually ship AI products, not just demo them. I'm a first-year student. I'm also the person building the infrastructure that makes enterprise AI deployable. That gap between those two sentences is where I live.
-      </p>
-      <div class="flex items-center gap-4 t-faint">
-        <div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">edit_note</span><span class="text-[10px] font-bold uppercase tracking-widest">Entry #001</span></div>
-        <div class="flex items-center gap-1.5 ml-auto"><span class="material-symbols-outlined text-sm">schedule</span><span class="text-[10px] font-bold uppercase tracking-widest">3m read</span></div>
-      </div>
-    </article>
+    </main>
 
-    <!-- ENTRY #002 — NEW: Foretyx architecture thinking -->
-    <article class="group relative surf-high p-8 rounded-2xl nm-concave transition-all duration-300">
-      <div class="flex flex-wrap justify-between items-center mb-6 gap-4">
-        <div class="flex gap-2">
-          <span class="px-3 py-1 bg-[#5d3fe0] dark:bg-[#7c5cfc] text-[#fbf6ff] font-headline text-[10px] font-bold uppercase tracking-widest rounded-full shadow-lg">FORETYX</span>
-          <span class="px-3 py-1 surf-low t-primary font-headline text-[10px] font-bold uppercase tracking-widest rounded-full">SIGNAL: CRITICAL</span>
-        </div>
-        <time class="text-xs font-mono t-faint uppercase">April 2026</time>
+    <footer class="site-footer">
+      <p>© 2026 Soham Singh</p>
+      <div class="footer-links">
+        <a href="https://github.com/Som007-builds" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/soham-singh-a21688307/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="mailto:sohamsingh572@gmail.com" target="_blank" rel="noopener noreferrer">Email</a>
+        <a href="#main">Back to top ↑</a>
       </div>
-      <h2 class="font-headline text-2xl font-bold mb-4 t-surface tracking-tight">The Architecture Decision That Changed How I Think About AI Middleware</h2>
-      <p class="font-body t-muted leading-relaxed mb-4">
-        The first version of Foretyx I designed was a simple proxy. Request comes in, strip the PII, forward to the model, return the response. Clean. Obvious. Wrong. A proxy is reactive — it sees data after the application has already decided to send it. By that point, the damage pattern is already set. You're just sanitizing symptoms, not fixing the architecture.
-      </p>
-      <p class="font-body t-muted leading-relaxed mb-4">
-        The redesign was a control plane. Policy enforcement happens at the IAM layer before a request is even formed. The Policy Engine evaluates what data a given role is allowed to expose, to which model, under what context. The request gets shaped by those rules — not filtered after the fact, but constructed within them from the start. That's a fundamentally different trust model. It means Foretyx isn't just a data cleaner. It's an access control system for AI. The difference matters because one of those is a feature you add, and the other is infrastructure you build on top of.
-      </p>
-      <p class="font-body t-muted leading-relaxed mb-6">
-        WebSocket-based real-time policy push means rule changes propagate instantly without redeployment. That was the detail that made it real enterprise infra instead of a dev tool with enterprise branding.
-      </p>
-      <div class="flex items-center gap-4 t-faint">
-        <div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">edit_note</span><span class="text-[10px] font-bold uppercase tracking-widest">Entry #002</span></div>
-        <div class="flex items-center gap-1.5 ml-auto t-primary"><span class="material-symbols-outlined text-sm">star</span><span class="text-[10px] font-bold uppercase tracking-widest">Architecture</span></div>
-      </div>
-    </article>
-
-    <!-- ENTRY #003 — kept: Systems Before Scripts -->
-    <article class="group relative surf-low p-8 rounded-2xl nm-convex border border-white/40 dark:border-white/5 hover:scale-[1.01] transition-all duration-300">
-      <div class="flex flex-wrap justify-between items-center mb-6 gap-4">
-        <div class="flex gap-2">
-          <span class="px-3 py-1 bg-[#e5deff] dark:bg-[#2d2460] t-primary font-headline text-[10px] font-bold uppercase tracking-widest rounded-full nm-concave">CORE BELIEF</span>
-          <span class="px-3 py-1 surf-high t-surface font-headline text-[10px] font-bold uppercase tracking-widest rounded-full">SIGNAL: CRITICAL</span>
-        </div>
-        <time class="text-xs font-mono t-faint uppercase">2025</time>
-      </div>
-      <h2 class="font-headline text-2xl font-bold mb-4 t-surface tracking-tight">Systems Before Scripts</h2>
-      <p class="font-body t-muted leading-relaxed mb-6 opacity-90">Writing code is the last thing I do. Before a single line, I'm drawing architecture, asking what breaks first, what scales worst, what the real user actually needs. Scripts are temporary. Systems compound. The engineer who understands the system controls the engineer who just knows the syntax.</p>
-      <div class="flex items-center gap-4 t-faint">
-        <div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">edit_note</span><span class="text-[10px] font-bold uppercase tracking-widest">Entry #003</span></div>
-        <div class="flex items-center gap-1.5 ml-auto"><span class="material-symbols-outlined text-sm">schedule</span><span class="text-[10px] font-bold uppercase tracking-widest">1m read</span></div>
-      </div>
-    </article>
-
-    <!-- ENTRY #004 — kept: Local LLMs -->
-    <article class="group relative surf-low p-8 rounded-2xl nm-convex border border-white/40 dark:border-white/5 hover:scale-[1.01] transition-all duration-300">
-      <div class="flex flex-wrap justify-between items-center mb-6 gap-4">
-        <div class="flex gap-2">
-          <span class="px-3 py-1 bg-[#e5deff] dark:bg-[#2d2460] t-primary font-headline text-[10px] font-bold uppercase tracking-widest rounded-full nm-concave">AI INFRA</span>
-          <span class="px-3 py-1 surf-high t-surface font-headline text-[10px] font-bold uppercase tracking-widest rounded-full">SIGNAL: MEDIUM</span>
-        </div>
-        <time class="text-xs font-mono t-faint uppercase">2025</time>
-      </div>
-      <h2 class="font-headline text-2xl font-bold mb-4 t-surface tracking-tight">Local LLMs Are the Real Disruption</h2>
-      <p class="font-body t-muted leading-relaxed mb-6 opacity-90">Everyone talks about GPT-4 and Gemini. The more interesting story is DeepSeek running locally on consumer hardware. When AI inference becomes free and private, the entire cloud AI business model breaks. I'm building for that world now, not waiting for it to arrive.</p>
-      <div class="flex items-center gap-4 t-faint">
-        <div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">edit_note</span><span class="text-[10px] font-bold uppercase tracking-widest">Entry #004</span></div>
-        <div class="flex items-center gap-1.5 ml-auto"><span class="material-symbols-outlined text-sm">schedule</span><span class="text-[10px] font-bold uppercase tracking-widest">1m read</span></div>
-      </div>
-    </article>
-
-  </section>
-
-  <div class="mt-16 flex items-center gap-6">
-    <div class="flex-1 h-[1px] bg-[#dde4e5] dark:bg-[#252840]"></div>
-    <div class="flex items-center gap-3 px-5 py-2 rounded-full nm-concave">
-      <span class="w-1.5 h-1.5 rounded-full bg-primary dark:bg-[#917eff] animate-pulse"></span>
-      <span class="font-label text-[10px] font-black uppercase tracking-[0.25em] text-[#5a6061] dark:text-[#9da3c0]">More entries incoming</span>
-      <span class="w-1.5 h-1.5 rounded-full bg-primary dark:bg-[#917eff] animate-pulse"></span>
-    </div>
-    <div class="flex-1 h-[1px] bg-[#dde4e5] dark:bg-[#252840]"></div>
+    </footer>
   </div>
-</main>
-
-<nav class="mob-nav-bg md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex gap-1 items-center rounded-full px-5 py-3 w-max">
-  <a href="index.html" onclick="navigate(event,'index.html')" class="flex flex-col items-center t-surface opacity-30 hover:opacity-80 px-3 py-1 transition-all"><span class="material-symbols-outlined text-xl">grid_view</span><span class="font-body text-[9px] font-medium uppercase tracking-widest">Hub</span></a>
-  <a href="systems.html" onclick="navigate(event,'systems.html')" class="flex flex-col items-center t-surface opacity-30 hover:opacity-80 px-3 py-1 transition-all"><span class="material-symbols-outlined text-xl">layers</span><span class="font-body text-[9px] font-medium uppercase tracking-widest">Work</span></a>
-  <a href="lab.html" onclick="navigate(event,'lab.html')" class="flex flex-col items-center t-surface opacity-30 hover:opacity-80 px-3 py-1 transition-all"><span class="material-symbols-outlined text-xl">science</span><span class="font-body text-[9px] font-medium uppercase tracking-widest">Lab</span></a>
-  <a href="codex.html" onclick="navigate(event,'codex.html')" class="mob-active flex flex-col items-center px-3 py-1"><span class="material-symbols-outlined text-xl">menu_book</span><span class="font-body text-[9px] font-medium uppercase tracking-widest">Codex</span></a>
-  <a href="contact.html" onclick="navigate(event,'contact.html')" class="flex flex-col items-center t-surface opacity-30 hover:opacity-80 px-3 py-1 transition-all"><span class="material-symbols-outlined text-xl">send</span><span class="font-body text-[9px] font-medium uppercase tracking-widest">Contact</span></a>
-</nav>
-
 </body>
 </html>

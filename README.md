@@ -1,131 +1,71 @@
-# Portfolio — Soham Singh
+# Soham Singh — Portfolio
 
-> Personal portfolio website built with a neumorphic design system. Pure HTML, CSS (Tailwind), and vanilla JS — no frameworks, no build step.
-
-[![Live Site](https://img.shields.io/badge/Live%20Site-netlify-00C7B7?style=flat&logo=netlify)](https://your-site.netlify.app)
-[![GitHub](https://img.shields.io/badge/GitHub-Som007--builds-181717?style=flat&logo=github)](https://github.com/Som007-builds)
-
----
+A static personal portfolio about privacy-first AI, local inference, and hardware. Plain HTML, shared CSS, and vanilla JavaScript; no framework, package installation, or build step.
 
 ## Pages
 
-| Page | Route | Description |
-|------|-------|-------------|
-| The Hub | `/` | Hero, Foretyx flagship, approach cards |
-| Systems | `/systems.html` | 3 project case studies with architecture diagrams |
-| The Lab | `/lab.html` | Experiments, incubation ideas |
-| The Codex | `/codex.html` | Engineering journal entries |
-| Contact | `/contact.html` | Contact form (Formspree) |
+| File | Content |
+| --- | --- |
+| `index.html` | Introduction, selected work, portrait, and journal highlights |
+| `systems.html` | Foretyx, AI Browser Chatbot, and Smart Home Automation designs |
+| `lab.html` | Learning tracks and early product concepts |
+| `codex.html` | Four full journal entries with an in-page index |
+| `contact.html` | Contact form and direct email/social links |
+| `styles.css` | Shared layout, typography, dark/light palettes, responsive rules |
+| `theme.js` | Theme persistence, mobile navigation, progressive form handling |
+| `profile.webp` | Original portrait, displayed in grayscale using CSS |
 
----
+## Visual system
 
-## Stack
+Monochrome editorial layouts, pixel display headings, dotted section separators, square controls, and custom inline SVG illustrations. No runtime CSS generator or icon library.
 
-- **HTML5** — semantic, no framework
-- **Tailwind CSS** — via CDN, no build step
-- **Vanilla JS** — dark mode, page transitions, form handling
-- **Formspree** — contact form backend
-- **Google Fonts** — Space Grotesk + Inter
-- **Material Symbols** — icon system
+- **Display:** Silkscreen; **body:** DM Sans; **metadata:** system monospace.
+- **Dark edition:** near-black `#080808`, off-white `#f1f0eb`.
+- **Light edition:** warm paper `#f4f3ed`, ink `#151515`.
+- Dark is the first-visit default; an explicit light/dark selection is saved in `localStorage`. Storage failures do not prevent the site from working.
+- Navigation and content remain available without JavaScript. The mobile menu is progressively enhanced.
+- Skip links, visible keyboard focus, native form labels, and reduced-motion preferences are supported.
 
----
+The site describes project intentions and constraints rather than implying production deployments. Foretyx is in early design/feasibility; the smart-home budget is a target, not a verified build cost.
 
-## Design System
+## Preview locally
 
-Neumorphic soft UI with full dark mode support.
+Open `index.html` directly for a quick look, or use an editor's static preview server. If Python is installed, run from this directory:
 
-```
-Light surface:  #f9f9f9
-Dark surface:   #1a1d2e
-
-Primary:        #5d3fe0  (light)
-Primary dark:   #917eff  (dark)
-
-Light shadows:  -8px -8px 20px #ffffff, 8px 8px 20px #bebebe
-Dark shadows:   -8px -8px 20px #12141f, 8px 8px 20px #22263a
+```sh
+python -m http.server 8000
 ```
 
-Theme is persisted via `localStorage` and respects `prefers-color-scheme` on first visit.
+Then visit `http://localhost:8000`. An HTTP origin is preferable when testing cross-page theme persistence and form requests.
 
----
+## External services
 
-## Projects Featured
+- **Google Fonts** supplies the two typefaces. The browser requests resources from Google; system fonts are used if those requests fail. The layout does not depend on the font service being available.
+- **Formspree** receives contact submissions at the existing endpoint `https://formspree.io/f/xaqpzvdv`. Name, email, topic, and message are sent to that service. There are no API keys in the frontend.
+- Without JavaScript, the contact form submits to Formspree normally. With JavaScript, it shows pending/success/error feedback, prevents duplicate in-flight submissions, and preserves entered text after errors. Requests have a 20-second timeout; a timeout cannot confirm whether a message was received.
 
-### 1. Foretyx
-AI data privacy infrastructure — a middleware security layer between AI models and sensitive enterprise data. Handles PII filtering, anonymization, and access control.
+Test form behavior with mocked requests before making real submissions. Actual delivery depends on the Formspree account, endpoint configuration, and service availability.
 
-### 2. AI Browser Chatbot
-Browser-native AI assistant powered by Ollama (DeepSeek/LLaMA). Fully local, zero API cost, works offline.
+## Validation
 
-### 3. Smart Home Automation System
-Cost-effective AI-assisted home automation for Indian households. Central hub controlling appliances via WiFi relays, under ₹10,000.
+The dependency-free smoke suite requires Node 24+ and Microsoft Edge:
 
----
-
-## File Structure
-
-```
-Portfolio-Neumorphism/
-├── index.html        # The Hub (home)
-├── systems.html      # Projects / case studies
-├── lab.html          # Experiments
-├── codex.html        # Engineering journal
-├── contact.html      # Contact form
-├── theme.js          # Dark mode logic (shared)
-├── profile.webp      # Profile photo
-└── README.md
+```sh
+node tests/smoke.mjs
 ```
 
----
+It starts and stops its own local server and headless browser. External page requests are blocked, and Formspree is mocked. It checks all five pages at 320, 375, 760, 1024, and 1440 pixels, internal links, document structure, keyboard/mobile navigation, theme persistence, no-JavaScript fallback, and form success/error/timeout handling.
 
-## Local Development
+For a font-aware visual check, `ALLOW_FONTS=1 node tests/smoke.mjs` in a POSIX-compatible shell permits the two Google Fonts hosts. Reports and screenshots are generated under `tests/` and ignored by Git. See `tests/README.md` for details and browser-path configuration.
 
-No build step needed. Just open any HTML file in a browser:
+## Deployment and SEO
 
-```bash
-# Clone the repo
-git clone https://github.com/Som007-builds/Portfolio-Neumorphism.git
+Deploy the directory as a static site. `vercel.json` enables clean URLs while keeping the underlying `.html` files usable. No deployment account or live domain is assumed.
 
-# Open in browser
-open index.html
-# or use Live Server in VS Code
-```
+Home includes descriptive social metadata and structured Person data. Before publishing, configure canonical URLs and absolute social-image URLs using the actual production domain. The pre-existing `sitemap.xml` and `robot.txt` were not changed during the visual redesign; review their domain values and crawler configuration separately.
 
----
+## Links
 
-## Deployment
-
-Hosted on **Netlify** with auto-deploy on every push to `main`.
-
-```bash
-# Make changes locally, then:
-git add .
-git commit -m "your change description"
-git push
-# Netlify redeploys automatically in ~20 seconds
-```
-
----
-
-## Adding Your Photo
-
-Replace the photo placeholder in `index.html`:
-
-```html
-<!-- Find this comment block and replace with: -->
-<img src="profile.webp"
-     alt="Soham Singh"
-     class="w-full h-full object-cover"/>
-```
-
----
-
-## Contact
-
-- **GitHub** — [Som007-builds](https://github.com/Som007-builds)
-- **LinkedIn** — [soham-singh-a21688307](https://www.linkedin.com/in/soham-singh-a21688307/)
-- **College** — IT @ Netaji Subhash Engineering College, Garia (NSEC)
-
----
-
-*Built with Tactical Softness.*
+- [GitHub — Som007-builds](https://github.com/Som007-builds)
+- [LinkedIn — Soham Singh](https://www.linkedin.com/in/soham-singh-a21688307/)
+- Email: `sohamsingh572@gmail.com`
