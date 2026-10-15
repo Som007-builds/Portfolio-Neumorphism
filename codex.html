@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Field notes by Soham Singh on privacy-first AI, Foretyx policy architecture, systems thinking, and local language models.">
-  <title>Codex — Soham Singh</title>
+  <meta name="description" content="Soham Singh’s design notes on Arbiter, Foretyx’s proposed AI privacy product, IAM and policy boundaries, systems thinking, and local inference tradeoffs.">
+  <title>Codex: AI &amp; Systems Notes — Soham Singh</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Silkscreen&display=swap" rel="stylesheet">
@@ -24,9 +24,9 @@
         <button class="menu-toggle" type="button" hidden aria-expanded="false" aria-controls="site-nav">Menu <span class="menu-lines" aria-hidden="true"></span></button>
       </div>
       <nav id="site-nav" class="site-nav" aria-label="Primary">
-        <a href="index.html">Overview</a>
-        <a href="systems.html">Systems</a>
-        <a href="lab.html">Lab</a>
+        <a href="index.html">Home</a>
+        <a href="systems.html">Projects</a>
+        <a href="lab.html">Skills &amp; Lab</a>
         <a href="codex.html" aria-current="page">Codex</a>
         <a href="contact.html">Contact</a>
       </nav>
@@ -52,17 +52,25 @@
           <article id="privacy-first" class="journal-entry" aria-labelledby="privacy-title">
             <header>
               <div class="entry-meta">
-                <span class="entry-number">Entry 001 / Foretyx</span>
-                <time datetime="2026-04">April 2026</time>
+                <span class="entry-number">Entry 001 / Arbiter</span>
+                <span>Original note · <time datetime="2026-04">April 2026</time></span>
+                <span class="entry-reading-time">2 min read (estimate)</span>
               </div>
-              <h2 id="privacy-title" class="entry-title">Why I’m starting with a security gateway</h2>
+              <h2 id="privacy-title" class="entry-title">Start with the data boundary</h2>
               <p class="eyebrow">Design thinking / Early feasibility</p>
+              <p class="entry-summary">Decide what information may leave an application before choosing a model. Filtering is one control, not proof of privacy.</p>
             </header>
             <div class="entry-body">
-              <p>When I started thinking about useful AI products, I kept coming back to the data they would need. Healthcare records, employee information, customer PII, and financial transactions are not interchangeable with a public example prompt. Sending that information to a third-party model can raise legal, contractual, and ethical questions before model quality even enters the discussion.</p>
+              <h3>The question before model quality</h3>
+                            <p>When I started thinking about useful AI products, I kept coming back to the data they would need. Healthcare records, employee information, customer PII, and financial transactions are not interchangeable with a public example prompt. Sending that information to a third-party model can raise legal, contractual, and ethical questions before model quality even enters the discussion.</p>
               <p>That does not mean external models are always off-limits. It means the application needs an explicit answer to what may leave, for what purpose, and under whose authority. A proof of concept with sanitized dummy data does not establish that the same workflow is appropriate for real records.</p>
-              <p>Foretyx is my early design exploration of that boundary: middleware that checks access policy, filters PII, and removes or anonymizes sensitive information before an approved request reaches a model. The aim is to make privacy decisions visible in the request path rather than leaving them as assumptions inside application code.</p>
-              <p>I’m still defining the primitives and testing whether the approach is feasible. A gateway cannot promise perfect detection, eliminate re-identification risk, or establish compliance on its own. The useful next step is a narrow testable flow: identify the sensitive fields, state the policy, and verify both what is sent and what happens when a check fails.</p>
+              <h3>A proposed boundary, not a guarantee</h3>
+                            <p>Foretyx is my venture; Arbiter is its proposed AI privacy and policy product. The design explores middleware that would check access policy and redact or tokenize personally identifiable information (PII) before an approved request reaches a model. The aim is to make privacy decisions visible in the request path rather than leaving them as assumptions inside application code.</p>
+                            <p>Redaction is not the same as anonymization: remaining context can still identify a person. <a href="https://genai.owasp.org/llmrisk/llm022025-sensitive-information-disclosure/" target="_blank" rel="noopener noreferrer">OWASP’s sensitive information disclosure guidance</a> is useful here because it treats data minimization, access controls, and sanitization as complementary measures. A filter alone cannot establish who was allowed to retrieve the source record.</p>
+              <h3>What would make the design testable?</h3>
+                            <p>I’m still defining the primitives and how to assess feasibility; these notes are design reasoning, not runtime proof. A gateway cannot promise perfect detection, eliminate re-identification risk, or establish compliance on its own. The next step would be a narrow flow using synthetic records: identify sensitive fields, state the policy, and inspect both the outgoing payload and the failure path.</p>
+                            <p>That inspection would need to include logs and error messages, not just the model request. Moving a secret out of a prompt but into a diagnostic log would move the exposure rather than resolve it.</p>
+                            <p class="article-links">Related case study: <a href="systems.html#foretyx">Foretyx / Arbiter — proposed privacy boundary</a>.</p>
             </div>
           </article>
 
@@ -70,17 +78,30 @@
             <header>
               <div class="entry-meta">
                 <span class="entry-number">Entry 002 / Architecture</span>
-                <time datetime="2026-04">April 2026</time>
+                <span>Original note · <time datetime="2026-04">April 2026</time></span>
+                <span class="entry-reading-time">3 min read (estimate)</span>
               </div>
-              <h2 id="policy-title" class="entry-title">From a filtering proxy to a policy-aware boundary</h2>
+              <h2 id="policy-title" class="entry-title">From proxy to policy</h2>
               <p class="eyebrow">Design thinking / Proposed architecture</p>
+              <p class="entry-summary">Authorize data use before constructing the prompt, then check the payload. A policy-update channel also needs explicit rules for stale state.</p>
             </header>
             <div class="entry-body">
-              <p>The first Foretyx design I sketched was a simple proxy: receive a request, strip PII, forward it to the model, and return the response. That is an understandable starting point, and filtering remains useful. But it leaves an important question unanswered: should this user have been able to include that information in a model request in the first place?</p>
+              <h3>Authorization before transformation</h3>
+                            <p>The first Arbiter design I sketched for Foretyx was a simple proxy: receive a request, strip PII, forward it to the model, and return the response. That is an understandable starting point, and filtering remains useful. But it leaves an important question unanswered: should this user have been able to include that information in a model request in the first place?</p>
               <p>The direction I’m exploring adds identity and access management (IAM) context before the request is constructed. A policy engine would evaluate the user’s role, the permitted data, the model destination, and the purpose of the request. The application could then build the prompt within those constraints, with filtering as a separate check rather than the entire security model.</p>
               <p>That separates policy decisions from payload transformation. Access control asks whether information may be used; a PII filter asks whether sensitive information is still present. Neither replaces the other, and both need clear failure behavior. The design also needs to account for applications that cannot move policy checks earlier in their request flow.</p>
-              <p>A WebSocket-based policy push is one proposed way to distribute rule updates without redeploying every integration. It would not make updates instant or reliable by itself. Disconnections, missed messages, policy versions, acknowledgements, and stale cached rules all need a defined response. For sensitive requests, I would rather make the failure explicit than quietly continue with an unknown policy state.</p>
-              <p>This remains an architecture concept, not a deployed control plane. The next proof is whether a small integration can apply the same policy consistently during ordinary requests, policy changes, and connection failures.</p>
+              <p>Prompt injection is a separate concern from PII detection. As <a href="https://genai.owasp.org/llmrisk/llm01-prompt-injection/" target="_blank" rel="noopener noreferrer">OWASP’s prompt injection guidance</a> explains, untrusted documents or web pages can carry instructions. A model’s interpretation of that text must not grant new data access or tool privileges. Authorization belongs in deterministic application controls, not in a promise inside the system prompt.</p>
+                            <h3>Policy delivery is not policy consistency</h3>
+                            <p>A WebSocket-based policy push is one proposed way to distribute rule updates without redeploying every integration. It would not make updates instant or reliable by itself. Disconnections, missed messages, policy versions, acknowledgements, and stale cached rules all need a defined response. For sensitive requests, I would rather make the failure explicit than quietly continue with an unknown policy state.</p>
+              <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API" target="_blank" rel="noopener noreferrer">MDN’s WebSocket documentation</a> describes a two-way communication channel, not a policy protocol. I would need application-level version checks, authenticated updates, and a resynchronization path. Reconnecting should fetch an authoritative policy snapshot rather than assume no updates were missed.</p>
+                            <h3>Proposed checks, not executed results</h3>
+                            <ul>
+                              <li><strong>Denied field:</strong> a synthetic record includes a field outside the caller’s role. The proposed check is that it never enters prompt construction, even if the PII detector would miss it.</li>
+                              <li><strong>Policy revoked:</strong> access changes between prompt construction and dispatch. The proposed check is to revalidate the applicable policy version before forwarding, with a defined rule for in-flight requests.</li>
+                              <li><strong>Disconnected client:</strong> cached policy expires while the update channel is unavailable. The proposed check is that sensitive requests stop with an explicit error until trusted state is restored.</li>
+                            </ul>
+                            <p>This remains an architecture concept, not a deployed control plane. These checks describe evidence a future integration should produce; they are not gateway test results.</p>
+                            <p class="article-links">Related case study: <a href="systems.html#foretyx">Foretyx / Arbiter — policy-aware architecture</a>.</p>
             </div>
           </article>
 
@@ -88,15 +109,24 @@
             <header>
               <div class="entry-meta">
                 <span class="entry-number">Entry 003 / Practice</span>
-                <time datetime="2025">2025</time>
+                <span>Original note · <time datetime="2025">2025</time></span>
+                <span class="entry-reading-time">2 min read (estimate)</span>
               </div>
               <h2 id="systems-title" class="entry-title">Systems before scripts</h2>
               <p class="eyebrow">Learning note / Design habits</p>
+              <p class="entry-summary">Sketch the request path, choose the smallest useful implementation, and use failure cases to challenge the architecture.</p>
             </header>
             <div class="entry-body">
-              <p>Before jumping into code, I try to draw the path a user’s request will take. What does the user actually need? Which component owns the data? What breaks first, and what would be hardest to change later? Even a rough sketch can uncover a dependency that is easy to overlook inside a single function.</p>
+              <h3>Sketch ownership and failure</h3>
+                            <p>Before jumping into code, I try to draw the path a user’s request will take. What does the user actually need? Which component owns the data? What breaks first, and what would be hardest to change later? Even a rough sketch can uncover a dependency that is easy to overlook inside a single function.</p>
               <p>The point is not to avoid scripts or design a large system for every small task. A short script is often the right tool. The habit I want to build is understanding where that tool fits, which assumptions it makes, and what happens when those assumptions stop holding.</p>
-              <p>Architecture only helps if implementation can challenge it. I’m learning to move between a small working example and the wider picture: sketch a boundary, implement the narrow path, test a failure, and revise the design. Understanding syntax and understanding the system are complementary skills, not competing identities.</p>
+              <h3>Let a small implementation push back</h3>
+                            <p>Architecture only helps if implementation can challenge it. I’m learning to move between a small working example and the wider picture: sketch a boundary, implement the narrow path, test a failure, and revise the design. Understanding syntax and understanding the system are complementary skills, not competing identities.</p>
+                                          <p>For a home-automation design, that means asking who owns an actuator’s state before adding a dashboard. What should happen if a scheduled command and a manual command disagree? What should a restart restore? Those questions identify decisions the code must express; they do not require a distributed platform to answer.</p>
+                                          <h3>Separate a decision from its evidence</h3>
+                                          <p>A useful design note records the assumption, the simplest choice, and what would make that choice wrong. A local controller might be a reasonable starting point for avoiding a network dependency. It would still need checks for restart behavior, conflicting commands, and safe defaults before I could claim reliable operation.</p>
+                                          <p>This is a learning habit, not evidence that those checks have passed. The case study records the intended boundaries; runtime behavior would need its own implementation and observations.</p>
+                                          <p class="article-links">Related case study: <a href="systems.html#home-automation">Smart Home Automation — local control and scheduling</a>.</p>
             </div>
           </article>
 
@@ -104,16 +134,24 @@
             <header>
               <div class="entry-meta">
                 <span class="entry-number">Entry 004 / Local AI</span>
-                <time datetime="2025">2025</time>
+                <span>Original note · <time datetime="2025">2025</time></span>
+                <span class="entry-reading-time">2 min read (estimate)</span>
               </div>
-              <h2 id="local-title" class="entry-title">Why local language models are worth exploring</h2>
+              <h2 id="local-title" class="entry-title">The case for local models</h2>
               <p class="eyebrow">Learning note / Inference tradeoffs</p>
+              <p class="entry-summary">Local inference changes the data path and resource budget. It does not automatically make a browser workflow private, offline, or accurate.</p>
             </header>
             <div class="entry-body">
-              <p>Large hosted models get most of the attention, but running a DeepSeek or LLaMA model on a personal machine changes the questions I can ask. What can I build when the inference path stays local? Which tasks work well with a smaller model? How much control does a simple browser interface need to make that useful?</p>
+              <h3>Control over a different data path</h3>
+                            <p>Large hosted models get most of the attention, but running a DeepSeek or LLaMA model on a personal machine changes the questions I can ask. What can I build when the inference path stays local? Which tasks work well with a smaller model? How much control does a simple browser interface need to make that useful?</p>
               <p>Local inference can avoid sending prompt content to a hosted model provider and remove the need for a per-request API subscription. It is not free computation. Model downloads take storage, inference uses electricity, and usable model size and response time depend on the available RAM, CPU, and GPU. A local setup also needs careful handling of logs, browser permissions, and the runtime’s network exposure.</p>
-              <p>There is an offline advantage once the model and runtime are installed, but it has boundaries: a local model cannot fetch a new web page without a connection, and running locally does not make its answers correct. Hosted models still have useful capabilities and operational advantages. I’m exploring local models because they offer a different set of tradeoffs—not because one approach has already replaced the other.</p>
-              <p>The browser chatbot is a way to make those tradeoffs concrete: start with a prompt and a local REST call, then add page context only with explicit permission. The interesting result would be a workflow that is useful and understandable on the hardware someone actually has.</p>
+              <h3>Local is a configuration, not a guarantee</h3>
+                            <p>The <a href="https://docs.ollama.com/api/introduction" target="_blank" rel="noopener noreferrer">official Ollama API documentation</a> distinguishes local and cloud access. A local server address alone is not proof that inference stays on the device: the selected model and any cloud features also matter. The intended setup would use a downloaded local model and verify where requests go, without silently falling back to a hosted provider.</p>
+                            <p>There is an offline advantage once the model and runtime are installed, but it has boundaries: a local model cannot fetch a new web page without a connection, and running locally does not make its answers correct. Hosted models still have useful capabilities and operational advantages. I’m exploring local models because they offer a different set of tradeoffs—not because one approach has already replaced the other.</p>
+              <h3>A narrow browser workflow to evaluate</h3>
+                            <p>The browser chatbot is a way to make those tradeoffs concrete: start with a prompt and a local REST call, then add page context only with explicit permission. Page text should remain untrusted input, not authority to access more tabs or invoke tools. Permissions should be narrow enough that choosing one page does not imply access to everything in the browser.</p>
+                            <p>A useful evaluation would record the hardware, model, task, response time, and failure behavior with networking unavailable. I’m not reporting benchmark results here. The goal is a workflow that is understandable on the hardware someone actually has, with a visible error when the local runtime cannot serve the request.</p>
+                            <p class="article-links">Related case study: <a href="systems.html#browser-chatbot">AI Browser Chatbot — local inference and browser context</a>.</p>
             </div>
           </article>
         </div>
@@ -126,7 +164,8 @@
         <a href="https://github.com/Som007-builds" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="https://www.linkedin.com/in/soham-singh-a21688307/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href="mailto:sohamsingh572@gmail.com" target="_blank" rel="noopener noreferrer">Email</a>
-        <a href="#main">Back to top ↑</a>
+        <span class="resume-unavailable" aria-label="Résumé not available yet">Résumé forthcoming</span>
+                <a href="#main">Back to top ↑</a>
       </div>
     </footer>
   </div>
