@@ -9,7 +9,7 @@ import { createHash } from 'node:crypto';
 const tests = path.dirname(fileURLToPath(import.meta.url));
 const root = path.dirname(tests);
 const pages = ['index.html', 'systems.html', 'lab.html', 'codex.html', 'contact.html'];
-const production = [...pages, 'styles.css', 'theme.js', 'README.md', 'vercel.json'];
+const production = [...pages, 'styles.css', 'theme.js', 'README.md', 'vercel.json', 'robots.txt', 'sitemap.xml', 'assets/favicon.svg', 'assets/social-preview.png', 'assets/resume/README.md'];
 const profile = path.join(tests, '.tmp', 'edge-profile');
 const screenshots = path.join(tests, 'screenshots');
 const edgePath = process.env.EDGE_PATH || 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe';
@@ -89,6 +89,37 @@ function validateSource(file, source) {
 try {
   await mkdir(screenshots, { recursive: true }); await mkdir(profile, { recursive: true });
   for (const file of pages) validateSource(file, await readFile(path.join(root, file), 'utf8'));
+  // Overhaul metadata, résumé, and content checks from static sources (no browser needed).
+  const canonical = {
+    'index.html': 'https://sohamsingh.indevs.in/',
+    'systems.html': 'https://sohamsingh.indevs.in/systems',
+    'lab.html': 'https://sohamsingh.indevs.in/lab',
+    'codex.html': 'https://sohamsingh.indevs.in/codex',
+    'contact.html': 'https://sohamsingh.indevs.in/contact'
+  };
+  const sources = {};
+  for (const file of pages) {
+    const source = sources[file] = await readFile(path.join(root, file), 'utf8');
+    check(`${file}: canonical URL`, source.includes(`<link rel="canonical" href="${canonical[file]}">`), canonical[file]);
+    check(`${file}: favicon linked`, source.includes('<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">'));
+    check(`${file}: social preview metadata`, source.includes('<meta property="og:image" content="https://sohamsingh.indevs.in/assets/social-preview.png">') && source.includes('<meta property="og:image:width" content="1200">') && source.includes('<meta property="og:image:height" content="630">') && source.includes('<meta name="twitter:card" content="summary_large_image">'));
+    check(`${file}: footer résumé placeholder standardized`, source.includes('data-resume-slot="footer"'));
+    check(`${file}: no link to a missing résumé PDF`, !source.includes('href="assets/resume/'));
+  }
+  check('Home: three project cards', (sources['index.html'].match(/class="project-card"/g) || []).length === 3);
+  check('Home: hero + footer résumé slots', sources['index.html'].includes('data-resume-slot="hero"') && sources['index.html'].includes('data-resume-slot="footer"'));
+  check('Lab: skills target exists', sources['lab.html'].includes('id="skills"'));
+  check('Lab: consistent navigation labels', sources['lab.html'].includes('>Skills &amp; Lab</a>') && sources['lab.html'].includes('>Projects</a>'));
+  check('Systems: case-study scaffolding', ['class="case-index"', 'class="case-details"', 'class="table-scroll"', 'class="evidence-list"', 'class="case-status"'].every(token => sources['systems.html'].includes(token)));
+  check('Systems: all case anchors preserved', ['id="foretyx"', 'id="browser-chatbot"', 'id="home-automation"'].every(token => sources['systems.html'].includes(token)));
+  check('Codex: four entry summaries', (sources['codex.html'].match(/class="entry-summary"/g) || []).length === 4);
+  check('Arbiter naming normalized', !/Arbiter AI/.test(sources['systems.html']) && !/Arbiter AI/.test(sources['index.html']) && !/Arbiter AI/.test(await readFile(path.join(root, 'PROJECT_EVIDENCE.md'), 'utf8')));
+  check('No stale first-year biography in pages', pages.every(file => !/first[- ]year|year 1|\bY1\b|1st[- ]year/i.test(sources[file])));
+  const robots = await readFile(path.join(root, 'robots.txt'), 'utf8').catch(() => '');
+  check('robots.txt present with canonical sitemap', /User-agent: \*/.test(robots) && robots.includes('Sitemap: https://sohamsingh.indevs.in/sitemap.xml'));
+  const sitemap = await readFile(path.join(root, 'sitemap.xml'), 'utf8');
+  check('sitemap lists all canonical clean paths', ['/', '/systems', '/codex', '/lab', '/contact'].every(p => sitemap.includes(`https://sohamsingh.indevs.in${p}`)));
+  check('Social preview image is a 1200×630 raster', (await readFile(path.join(root, 'assets/social-preview.png'))).subarray(1, 4).toString('latin1') === 'PNG');
   server = http.createServer(async (req, res) => {
     try {
       const pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
@@ -96,7 +127,7 @@ try {
       const file = path.resolve(root, '.' + (pathname === '/' ? '/index.html' : pathname));
       if (!file.startsWith(root + path.sep)) { res.writeHead(403); res.end(); return; }
       const bytes = await readFile(file);
-      res.writeHead(200, { 'Content-Type': ({ '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.webp': 'image/webp' })[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-store' }); res.end(bytes);
+      res.writeHead(200, { 'Content-Type': ({ '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.webp': 'image/webp', '.svg': 'image/svg+xml', '.png': 'image/png', '.xml': 'application/xml', '.txt': 'text/plain', '.md': 'text/markdown', '.pdf': 'application/pdf', '.ico': 'image/x-icon' })[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-store' }); res.end(bytes);
     } catch { res.writeHead(404); res.end('Not found'); }
   });
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
@@ -233,6 +264,8 @@ try {
     check(`${file}: assets retained in head`, dom.headCSS && dom.headScript, dom);
     check(`${file}: no stray body text`, dom.stray.length === 0, dom.stray);
     check(`${file}: main heading and eager images render`, dom.main && dom.images);
+    const headings = await evaluate(`(() => { const hs=[...document.querySelectorAll('main h1,main h2,main h3,main h4')].map(h=>Number(h.tagName[1])); return { count:hs.length, oneH1:document.querySelectorAll('main h1').length===1, ok:hs.length>0 && hs[0]===1 && hs.every((l,i)=>i===0||l<=hs[i-1]+1) }; })()`);
+    check(`${file}: single h1 with no skipped levels`, headings.oneH1 && headings.ok, headings);
     const broken = [], dummy = [];
     for (const link of dom.links) {
       const url = new URL(link.value, origin + '/' + file);
@@ -250,13 +283,17 @@ try {
     }
     check(`${file}: local assets, links and anchors resolve`, broken.length === 0, broken);
     check(`${file}: no dummy links`, dummy.length === 0, dummy);
-    for (const width of [320, 375, 760, 1024, 1440]) {
+    for (const width of [320, 360, 375, 390, 760, 768, 1024, 1440]) {
       await viewport(width); await delay(60);
       const layout = await evaluate(`(() => { const visible=e=>!!e.getClientRects().length&&getComputedStyle(e).visibility!=='hidden'; const n=document.querySelector('.site-nav'),m=document.querySelector('.menu-toggle'); return { width:innerWidth, client:document.documentElement.clientWidth, scroll:document.documentElement.scrollWidth, body:document.body.scrollWidth, menu:visible(m),nav:visible(n),expanded:m.getAttribute('aria-expanded'),offenders:[...document.querySelectorAll('main *')].filter(e=>{const r=e.getBoundingClientRect();return r.width&& (r.right>innerWidth+1||r.left< -1)}).slice(0,8).map(e=>({tag:e.tagName,class:e.getAttribute('class')}))}; })()`);
       check(`${file}: no horizontal overflow at ${width}`, layout.width === width && layout.scroll <= width && layout.body <= width, layout);
       const frame = await evaluate(`(() => { const shell=document.querySelector('.site-shell'), r=shell.getBoundingClientRect(), s=getComputedStyle(shell); return {left:r.left, width:r.width, viewport:document.documentElement.clientWidth, margin:s.margin, border:s.borderTopWidth, body:getComputedStyle(document.body).backgroundColor, shell:s.backgroundColor}; })()`);
       check(`${file}: edge-to-edge without outer frame at ${width}`, frame.left === 0 && Math.abs(frame.width-frame.viewport) < 1 && frame.margin === '0px' && frame.border === '0px' && frame.body === frame.shell, frame);
       check(`${file}: responsive navigation at ${width}`, width <= 760 ? layout.menu && !layout.nav && layout.expanded === 'false' : !layout.menu && layout.nav, layout);
+      if (width === 375) {
+        const targets = await evaluate(`[...document.querySelectorAll('.site-nav a, .button, .menu-toggle, .theme-toggle, .text-link, .notes-list a, .journal-index a, .channel-list a')].filter(e=>{const r=e.getBoundingClientRect();return r.width&&r.height&&r.height<24;}).map(e=>({cls:String(e.className),h:Math.round(e.getBoundingClientRect().height)})).slice(0,8)`);
+        check(`${file}: primary controls meet 24px target height at 375`, targets.length === 0, targets);
+      }
       if (width === 375 || width === 1440) {
               await capture(`${path.basename(file, '.html')}-${width}`);
               if (file === 'index.html') {
@@ -290,11 +327,11 @@ try {
   check('Motion: staggered hero and artwork entrance', entrance.calls.some(call=>call.className==='hero-art'&&call.delay===120) && entrance.calls.filter(call=>call.delay>0).length>=3, entrance);
   check('Motion: entrance settles visibly without persistent transforms', entrance.opacity==='1'&&entrance.transform==='none'&&entrance.active===0, entrance);
   const revealBefore = await evaluate('window.motionCalls.length');
-  await evaluate(`document.querySelector('.work-row').scrollIntoView({block:'center',behavior:'instant'})`);
+  await evaluate(`document.querySelector('.project-card').scrollIntoView({block:'center',behavior:'instant'})`);
   await delay(80);
-  check('Motion: scrolling reveals newly visible work', await evaluate(`window.motionCalls.length>${revealBefore} && window.motionCalls.some(call=>call.className==='work-row')`));
-  await evaluate(`document.querySelector('.work-row').focus()`);
-  const focusedReveal = await evaluate(`(() => {const row=document.querySelector('.work-row');return {focused:document.activeElement===row,opacity:getComputedStyle(row).opacity,states:row.getAnimations().map(animation=>animation.playState)};})()`);
+  check('Motion: scrolling reveals newly visible work', await evaluate(`window.motionCalls.length>${revealBefore} && window.motionCalls.some(call=>String(call.className).includes('project-card'))`));
+  await evaluate(`document.querySelector('.project-card .text-link').focus()`);
+  const focusedReveal = await evaluate(`(() => {const card=document.querySelector('.project-card');const link=card.querySelector('.text-link');return {focused:document.activeElement===link,opacity:getComputedStyle(card).opacity,states:card.getAnimations().map(animation=>animation.playState)};})()`);
   check('Motion: keyboard focus immediately finishes containing reveal', focusedReveal.focused && focusedReveal.opacity==='1' && focusedReveal.states.length===0, focusedReveal);
   await cdp.send('Emulation.setEmulatedMedia', { features: [{name:'prefers-reduced-motion',value:'reduce'}] });
   await delay(80);
@@ -311,7 +348,7 @@ try {
   await cdp.send('Emulation.setEmulatedMedia', { features: [{name:'prefers-reduced-motion',value:'no-preference'}] });
   const missingObserver = await cdp.send('Page.addScriptToEvaluateOnNewDocument', {source:'window.IntersectionObserver=undefined;'});
   await navigate('index.html');
-  check('Motion: unsupported observer keeps content visible', await evaluate(`window.motionCalls.length===0 && getComputedStyle(document.querySelector('.hero-art')).opacity==='1' && getComputedStyle(document.querySelector('.feature-copy')).opacity==='1'`));
+  check('Motion: unsupported observer keeps content visible', await evaluate(`window.motionCalls.length===0 && getComputedStyle(document.querySelector('.hero-art')).opacity==='1' && getComputedStyle(document.querySelector('.project-card')).opacity==='1'`));
   await cdp.send('Page.removeScriptToEvaluateOnNewDocument', {identifier:missingObserver.identifier});
   await cdp.send('Page.removeScriptToEvaluateOnNewDocument', {identifier:motionScript.identifier});
 
@@ -326,7 +363,7 @@ try {
   }
   const unmatched = selectors.filter(selector => !relevant.has(selector));
   check('Stylesheet: valid browser-parsed selectors', invalidSelectors.length === 0, invalidSelectors);
-  check('Stylesheet: core component selectors are relevant', ['.site-shell','.site-header','.site-nav','.hero','.contact-form','.journal-layout','.project-case'].every(s=>relevant.has(s)));
+  check('Stylesheet: core component selectors are relevant', ['.site-shell','.site-header','.site-nav','.hero','.contact-form','.journal-layout','.project-case','.project-card','.strength-grid','.case-index','.case-details','.table-scroll','.entry-summary'].every(s=>relevant.has(s)));
   results.css = { totalSelectorRules: selectors.length, matchedAtRest: relevant.size, unmatchedAtRest: unmatched, note: 'Pseudo-elements and state selectors may intentionally not match at rest.' };
 
   await navigate('index.html');

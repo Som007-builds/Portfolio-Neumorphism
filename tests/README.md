@@ -26,7 +26,11 @@ Remove-Item Env:ALLOW_FONTS
 
 Only the exact value `1` enables font networking. Unset `ALLOW_FONTS` for the default offline mode. Override `EDGE_PATH` if Edge is not installed at `C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe`. No npm install is needed.
 
-**Validation status:** this documentation does not claim a current portfolio pass. Rerun after production changes and consult the resulting timestamps, checks, font observations and exit code. Existing screenshots/results may belong to an earlier run. The font-enabled harness update has not yet been exercised with network access.
+**Validation status:** the overhaul harness was exercised on 2026-10-15 in both
+modes — offline (`346 passed, 0 failed`) and font-enabled
+(`378 passed, 0 failed`). Rerun after production changes and consult the
+resulting timestamps, checks, font observations and exit code. Existing
+screenshots/results belong to the most recent run.
 
 ## Network policy and font evidence
 
@@ -71,8 +75,11 @@ All five pages: `index.html`, `systems.html`, `lab.html`, `codex.html`, `contact
 
 - Document/doctype/tag balance, charset, exact viewport and malformed/stray markup.
 - Duplicate IDs, ARIA/label references, current primary navigation, document-head assets and visible content/images.
+- Per-page canonical URL, favicon link, Open Graph / Twitter social metadata and 1200×630 raster social image, standardized footer résumé placeholder, and absence of a link to the missing résumé PDF.
+- Content scaffolding: three Home project cards, the Lab `#skills` target and nav labels, Systems case-study anchors/classes, four Codex entry summaries, normalized Arbiter naming, no stale first-year biography, `robots.txt` sitemap, and sitemap clean paths.
 - Local asset/internal link/fragment resolution and dummy links.
-- Horizontal overflow and responsive navigation at **320, 375, 760, 1024 and 1440 CSS pixels**.
+- Single `h1` with no skipped heading levels, and 24 px minimum height for primary navigation/action controls at 375 px.
+- Horizontal overflow and responsive navigation at **320, 360, 375, 390, 760, 768, 1024 and 1440 CSS pixels**.
 - Real mouse/key input: mobile menu, Tab navigation, Escape/focus restoration, Enter activation and outside click.
 - Skip-link order/focus and natural cross-page/journal fragment navigation.
 - Browser-parsed stylesheet selector relevance and home portrait's intended 4:5 crop.

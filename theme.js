@@ -153,7 +153,7 @@
         reveal(entry.target, Math.min(index * 45, 135));
       });
     }, { threshold: 0, rootMargin: '0px 0px -24px 0px' });
-    document.querySelectorAll('.section-heading, .feature-visual, .feature-copy, .work-row, .about-layout > *, .notes-preview > *, .contact-strip > *, .case-heading, .case-art, .learning-list > article, .idea-row, .journal-entry > header').forEach(function (element) {
+    document.querySelectorAll('.section-heading, .project-card, .strength-grid > div, .about-layout > *, .notes-preview > *, .contact-strip > *, .case-heading, .case-art, .learning-list > article, .idea-row, .journal-entry > header').forEach(function (element) {
       observer.observe(element);
     });
 

@@ -3,8 +3,25 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Three design case studies by Soham Singh: Foretyx / Arbiter AI, an AI Browser Chatbot, and Smart Home Automation. Proposed architectures, evidence, tradeoffs, and testing roadmaps.">
+  <meta name="description" content="Three design case studies by Soham Singh: Foretyx / Arbiter, an AI Browser Chatbot, and Smart Home Automation. Proposed architectures, evidence, tradeoffs, and testing roadmaps.">
+  <meta name="author" content="Soham Singh">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Soham Singh">
+  <meta property="og:title" content="Projects — Soham Singh">
+  <meta property="og:description" content="Design case studies in privacy, local AI, and accessible automation: Foretyx / Arbiter, AI Browser Chatbot, Smart Home Automation.">
+  <meta property="og:url" content="https://sohamsingh.indevs.in/systems">
+  <meta property="og:image" content="https://sohamsingh.indevs.in/assets/social-preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Soham Singh — Building private AI systems">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Projects — Soham Singh">
+  <meta name="twitter:description" content="Design case studies in privacy, local AI, and accessible automation.">
+  <meta name="twitter:image" content="https://sohamsingh.indevs.in/assets/social-preview.png">
+  <meta name="twitter:image:alt" content="Soham Singh — Building private AI systems">
   <title>Projects — Soham Singh</title>
+  <link rel="canonical" href="https://sohamsingh.indevs.in/systems">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Silkscreen&display=swap" rel="stylesheet">
@@ -40,7 +57,7 @@
       </header>
 
       <nav class="case-index" aria-label="Case studies">
-        <a href="#foretyx">01 / Foretyx · Arbiter AI</a>
+        <a href="#foretyx">01 / Foretyx · Arbiter</a>
         <a href="#browser-chatbot">02 / AI Browser Chatbot</a>
         <a href="#home-automation">03 / Smart Home Automation</a>
       </nav>
@@ -49,18 +66,18 @@
         <header class="case-heading">
           <span class="case-number" aria-hidden="true">01</span>
           <div>
-            <h2 id="foretyx-title">Foretyx / Arbiter AI</h2>
+            <h2 id="foretyx-title">Foretyx / Arbiter</h2>
             <p class="muted">Venture / AI security, governance &amp; privacy gateway · Design &amp; feasibility</p>
           </div>
         </header>
-        <p class="case-summary">Foretyx is my venture; Arbiter AI is its proposed product: a gateway that makes the decision to share data with a model explicit, inspectable, and policy-aware.</p>
+        <p class="case-summary">Foretyx is my venture; Arbiter is its proposed product: a gateway that makes the decision to share data with a model explicit, inspectable, and policy-aware.</p>
         <p class="status-note">Design documented; product implementation not independently verified. No matching public source or runtime demonstration was established in this review.</p>
         <div class="case-layout">
           <div class="case-copy">
             <h3>Problem</h3>
             <p>Adding an AI model to an application creates another boundary for sensitive data. Customer records, employee information, and financial details should not reach an external model simply because they happen to be available to the application.</p>
             <h3>Approach</h3>
-            <p>Arbiter AI would sit at an application’s model-call boundary, combining authorization with payload minimization. The first scope is one deliberately integrated application and one model adapter—not automatic protection for every AI tool an organization uses.</p>
+            <p>Arbiter would sit at an application’s model-call boundary, combining authorization with payload minimization. The first scope is one deliberately integrated application and one model adapter—not automatic protection for every AI tool an organization uses.</p>
             <h3>Proposed request lifecycle</h3>
             <ol>
               <li><strong>Intercept:</strong> accept a bounded request with trusted identity, role, purpose, and destination context from the application.</li>
@@ -74,7 +91,7 @@
           <div class="case-art">
             <figure>
               <svg class="diagram" viewBox="0 0 520 390" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="foretyx-diagram-title foretyx-diagram-desc">
-                <title id="foretyx-diagram-title">Proposed Arbiter AI request boundary — not verified runtime</title>
+                <title id="foretyx-diagram-title">Proposed Arbiter request boundary — not verified runtime</title>
                 <desc id="foretyx-diagram-desc">Application and identity context enter a policy check. Denied requests stop. Allowed requests pass through PII filtering and redaction or scoped pseudonymization before reaching an AI provider. Decisions feed an audit record.</desc>
                 <g fill="none" stroke="currentColor" stroke-width="1.5">
                   <rect x="24" y="24" width="300" height="58"/>
@@ -102,12 +119,12 @@
             </figure>
           </div>
         </div>
-        <div class="table-scroll" role="region" aria-label="Arbiter AI maturity matrix" tabindex="0">
+        <div class="table-scroll" role="region" aria-label="Arbiter maturity matrix" tabindex="0">
           <table class="case-status">
             <caption>What exists, what is designed, and what is next</caption>
             <thead><tr><th scope="col">Area</th><th scope="col">Status</th><th scope="col">Evidence boundary</th></tr></thead>
             <tbody>
-              <tr><th scope="row">Portfolio case-study document</th><td>Implemented</td><td>This page and linked writing exist; this is documentation, not product code.</td></tr>
+              <tr><th scope="row">Portfolio case-study document</th><td>Documentation available</td><td>This page and linked writing exist; this is documentation, not product code.</td></tr>
               <tr><th scope="row">Gateway lifecycle &amp; failure policy</th><td>Design documented</td><td>Conceptual architecture only; no matching implementation verified.</td></tr>
               <tr><th scope="row">PII detector, policy engine &amp; model adapter</th><td>Planned</td><td>Need a runnable narrow slice and synthetic fixtures.</td></tr>
               <tr><th scope="row">Audit persistence, response checks &amp; deployment</th><td>Planned</td><td>No execution results, production deployment, or compliance evidence reviewed.</td></tr>
@@ -316,7 +333,7 @@
         <a href="https://github.com/Som007-builds" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="https://www.linkedin.com/in/soham-singh-a21688307/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href="mailto:sohamsingh572@gmail.com" target="_blank" rel="noopener noreferrer">Email</a>
-        <span class="resume-unavailable" aria-label="Résumé not available yet">Résumé forthcoming</span>
+        <span class="resume-unavailable" data-resume-slot="footer" aria-label="Résumé not available yet">Résumé forthcoming</span>
         <a href="#main">Back to top ↑</a>
       </div>
     </footer>

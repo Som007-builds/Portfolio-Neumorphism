@@ -4,12 +4,12 @@ Review date: 2026-10-15. Scope: `systems.html` and this register only. No commit
 
 ## Claim boundaries
 
-- User-supplied source of truth: Soham Singh is a **second-year B.Tech IT student at NSEC, Garia, Kolkata**. **Foretyx is the venture; Arbiter AI is its proposed AI security/governance and privacy-gateway product.** These are owner-provided facts, not independently verified credentials or a public product release.
+- User-supplied source of truth: Soham Singh is a **second-year B.Tech IT student at NSEC, Garia, Kolkata**. **Foretyx is the venture; Arbiter is its proposed AI security/governance and privacy-gateway product.** These are owner-provided facts, not independently verified credentials or a public product release.
 - The local repository is a static portfolio, not the source for these three products. Existing portfolio prose and SVGs establish documented intent, not working software/hardware.
-- **Foretyx / Arbiter AI:** design documented; matching product implementation not independently verified.
+- **Foretyx / Arbiter:** design documented; matching product implementation not independently verified.
 - **AI Browser Chatbot:** **Design documented; implementation not independently verified.** No working browser extension is established by the reviewed evidence.
 - **Smart Home Automation:** concept; no verified hardware build, firmware, PCB, photos, BOM, or measurements.
-- “Implemented” in the page's maturity table refers only to the portfolio case-study document. It does not mean the gateway is implemented. All three retained SVGs are explicitly proposed architectures, not verified runtime diagrams.
+- “Documentation available” in the page's maturity table refers only to the portfolio case-study document. It does not mean the gateway is implemented. All three retained SVGs are explicitly proposed architectures, not verified runtime diagrams.
 - No production, compliance, perfect-detection, measured savings/latency, or verified sub-₹10,000 build claim is made. Acceptance criteria are future checks, not test results.
 
 ## Local material reviewed
@@ -132,4 +132,4 @@ Primary navigation routes remain unchanged; labels are Home, Projects, Skills & 
 
 Read-only Node assertions **passed** for HTML nesting, unique IDs, ARIA references, all local links/fragments, the required case/SVG anchors, exact preservation of every original SVG `rect`/`path`, three evidence/status/summary panels, and the maturity-table/resume-span presence. `git diff --check -- systems.html PROJECT_EVIDENCE.md` also passed. An initial static run caught a stray `</h3>` after the new lifecycle `<ol>`; it was corrected and the full assertion run passed afterward.
 
-Only these two task-owned files were edited by this work. Later Git status also showed concurrent parent-owned changes to `codex.html` and `contact.html`; those were left untouched. The existing browser smoke harness writes reports/screenshots/logs under parent-owned `tests/`, so it was not run. Browser layout, accessibility interaction, and final shared-class styling need the parent's integrated browser pass. No product runtime or benchmark validation is implied by the static portfolio checks.
+Only these two task-owned files were edited by this work. Later Git status also showed concurrent parent-owned changes to `codex.html` and `contact.html`; those were left untouched. The existing browser smoke harness writes reports/screenshots/logs under parent-owned `tests/`, so it was not run by that scoped edit. A later integrated overhaul did run the full harness across all five pages in offline and font-enabled modes (see `tests/results.json`); that validates the portfolio markup, metadata, and interactions, not the product concepts. No product runtime or benchmark validation is implied by the static portfolio checks.
