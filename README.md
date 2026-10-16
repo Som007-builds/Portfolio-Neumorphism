@@ -61,6 +61,20 @@ No percentages or logo walls — just what I can actually discuss.
 - Content and navigation work without JavaScript; keyboard focus, skip links, and
   reduced-motion preferences are respected.
 
+## Discoverability (SEO / GEO / AEO)
+
+- **SEO:** unique titles and meta descriptions per page, canonical URLs, Open Graph
+  and Twitter cards, a 1200×630 social image, `robots.txt`, an XML sitemap with
+  `lastmod`, and explicit `index, follow` directives.
+- **Structured data:** JSON-LD on every page — `WebSite` and `Person` sitewide, plus
+  `ProfilePage`, `CollectionPage`, `ItemList` (the four projects), `ContactPage`,
+  `BreadcrumbList`, and an `FAQPage`.
+- **GEO / AEO:** a root `llms.txt` summarising the site for AI answer engines, and a
+  visible FAQ on the contact page whose answers match the `FAQPage` schema.
+
+Crawling is intentionally open. `robots.txt` allows all agents, including GPTBot,
+OAI-SearchBot, ChatGPT-User, ClaudeBot, PerplexityBot, and Google-Extended.
+
 ## Project layout
 
 | Path | Purpose |
@@ -70,6 +84,7 @@ No percentages or logo walls — just what I can actually discuss.
 | `lab.html` | Skills & Lab — capabilities, learning, and early concepts |
 | `codex.html` | Writing — four technical notes |
 | `contact.html` | Contact and internship details |
+| `robots.txt`, `sitemap.xml`, `llms.txt` | Crawler policy, sitemap, and AI/answer-engine summary |
 | `styles.css`, `theme.js` | Shared styling and interaction |
 | `profile.webp` | Portrait |
 

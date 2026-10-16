@@ -1,4 +1,26 @@
+# Soham Singh — https://sohamsingh.indevs.in
+# Everything here is public and intended to be indexed by search and answer engines.
+
 User-agent: *
+Allow: /
+
+# Answer / AI engines — explicitly allowed (already covered by * above; listed for clarity).
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
 Allow: /
 
 Sitemap: https://sohamsingh.indevs.in/sitemap.xml

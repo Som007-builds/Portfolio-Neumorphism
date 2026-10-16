@@ -9,7 +9,7 @@ import { createHash } from 'node:crypto';
 const tests = path.dirname(fileURLToPath(import.meta.url));
 const root = path.dirname(tests);
 const pages = ['index.html', 'systems.html', 'lab.html', 'codex.html', 'contact.html'];
-const production = [...pages, 'styles.css', 'theme.js', 'README.md', 'vercel.json', 'robots.txt', 'sitemap.xml', 'assets/favicon.svg', 'assets/social-preview.png', 'assets/resume/README.md'];
+const production = [...pages, 'styles.css', 'theme.js', 'README.md', 'vercel.json', 'robots.txt', 'sitemap.xml', 'llms.txt', 'assets/favicon.svg', 'assets/social-preview.png', 'assets/resume/README.md'];
 const profile = path.join(tests, '.tmp', 'edge-profile');
 const screenshots = path.join(tests, 'screenshots');
 const edgePath = process.env.EDGE_PATH || 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe';

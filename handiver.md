@@ -16,6 +16,16 @@ The owner replaced the featured project set. Superseding the project plan below:
 - **Retained** *Foretyx / Arbiter* as the venture flagship. `systems.html` anchors are now `#foretyx`, `#axion`, `#orion`, `#indigent`.
 - `codex.html` related-case links were repointed to `#orion` and `#indigent`; `README.md`, `PROJECT_EVIDENCE.md`, `lab.html`, and `tests/smoke.mjs` were updated to match. See `PROJECT_EVIDENCE.md` for the current claim boundaries.
 
+## Update — 2026-10-17 (SEO / GEO / AEO pass)
+
+Discoverability work added on top of the project-set change:
+
+- **SEO:** per-page `<meta name="robots">` (`index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1`); home `<title>`, `og:title`, and `twitter:title` retitled to “Software, Backend & AI Systems Portfolio”; `sitemap.xml` gained `lastmod` dates.
+- **Structured data:** JSON-LD `@graph` on every page — `WebSite` + `Person` sitewide, plus `ProfilePage` (home), `CollectionPage` + `ItemList` of the four projects + `BreadcrumbList` (systems), `WebPage` + `BreadcrumbList` (lab), `CollectionPage` + `BreadcrumbList` (codex), and `ContactPage` + `BreadcrumbList` + `FAQPage` (contact).
+- **AEO:** a new visible FAQ on `contact.html` (five Q&As) whose text matches the `FAQPage` schema; new `.faq-list` rules in `styles.css`.
+- **GEO:** a new root `llms.txt` summarising the site for AI answer engines; `robots.txt` now explicitly allows GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, PerplexityBot, and Google-Extended (crawling stays open by the owner’s choice).
+- `llms.txt` was added to the harness `production` hash list. `node tests/smoke.mjs` → **347 passed, 0 failed**. The changes are **uncommitted** pending owner authorization.
+
 ## 1. Assignment and source of truth
 
 The owner requested an implemented, tested upgrade of the existing portfolio, not just an audit. It should help secure software engineering, AI engineering, backend engineering, and related developer internships while retaining the distinctive editorial/technical identity.

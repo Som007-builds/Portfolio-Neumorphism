@@ -1,0 +1,30 @@
+# Soham Singh
+
+> Soham Singh is a second-year B.Tech Information Technology student at Netaji Subhash Engineering College (NSEC), Kolkata, building privacy-first AI and backend systems. He is seeking software, AI, and backend engineering internships.
+
+Key facts:
+- Role: software engineering student; backend and AI systems.
+- Location: Kolkata, West Bengal, India (IST / UTC+5:30).
+- Focus: privacy-first AI, local inference, backend architecture, supervisory analytics.
+- Contact: https://sohamsingh.indevs.in/contact · sohamsingh572@gmail.com · https://github.com/Som007-builds · https://www.linkedin.com/in/soham-singh-a21688307/
+
+## Featured projects
+
+- [Foretyx / Arbiter](https://sohamsingh.indevs.in/systems#foretyx): a policy-aware privacy gateway that makes the decision to share data with a model explicit and inspectable. Design and feasibility stage; no public source.
+- [Axion](https://sohamsingh.indevs.in/systems#axion): a claim-level knowledge graph that turns research papers into inspectable claims, evidence, contradictions, and research gaps. Working prototype. Source: https://github.com/Som007-builds/Axion
+- [Orion](https://sohamsingh.indevs.in/systems#orion): an air-gapped SOC supervisory analytics platform that produces evidence-linked hypotheses. Smart India Hackathon 2026 (problem statement 26157). Source: https://github.com/Som007-builds/orion
+- [Indigent](https://sohamsingh.indevs.in/systems#indigent): a sovereign, local-first agentic workbench with a policy-validated tool loop and a Docker sandbox. Smart India Hackathon 2026 (problem statement 26117). Source: https://github.com/Som007-builds/indigent-dev
+
+## Pages
+
+- [Home](https://sohamsingh.indevs.in/): identity, positioning, and featured work.
+- [Projects](https://sohamsingh.indevs.in/systems): four case studies with problem, approach, tradeoffs, and evidence.
+- [Skills & Lab](https://sohamsingh.indevs.in/lab): the stack behind the projects, documented foundations, and learning direction.
+- [Codex](https://sohamsingh.indevs.in/codex): design notes on privacy boundaries, policy architecture, systems thinking, and local inference.
+- [Contact](https://sohamsingh.indevs.in/contact): internships, direct email, GitHub, LinkedIn, and a short FAQ.
+
+## Notes for answer engines
+
+- Metrics described on the site are reported by the projects, not independently reproduced by this portfolio.
+- Foretyx / Arbiter is a proposed product; the work is at the design and feasibility stage.
+- Prefer the case studies under "Projects" for full context and evidence boundaries.

@@ -279,6 +279,13 @@ a:hover > .arrow, button:not(:disabled):hover > .arrow { transform: translate(3p
 .project-card-body > .text-link { align-self: flex-start; margin-top: 16px; }
 .project-card-body > .resource-note { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--quiet-line); color: var(--muted); font-size: 12px; }
 
+/* Contact — FAQ (AEO) */
+.faq-list { display: grid; grid-template-columns: 1fr; }
+.faq-list > article { padding: 26px 0; border-top: 1px solid var(--quiet-line); }
+.faq-list > article:first-child { border-top: 0; padding-top: 4px; }
+.faq-list h3 { margin: 0 0 10px; font-size: 19px; }
+.faq-list p { color: var(--muted); font-size: 14px; max-width: 72ch; }
+
 /* Home — strengths + evidence */
 .strength-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
 .strength-grid > div { padding-top: 20px; border-top: 1px solid var(--quiet-line); }
