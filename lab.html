@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Soham Singh’s skills and learning lab: applied web fundamentals, documented foundations in C, Java, Python, DSA, and systems architecture, plus AI and local-inference direction.">
+  <meta name="description" content="Soham Singh’s skills and lab: the stack behind the Axion, Orion, and Indigent projects — Python, FastAPI, SQLite, DuckDB, Neo4j, ChromaDB, Qdrant, Ollama, Docker, and Next.js — plus documented foundations and learning direction.">
   <meta name="author" content="Soham Singh">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Soham Singh">
   <meta property="og:title" content="Skills &amp; Lab — Soham Singh">
-  <meta property="og:description" content="Applied web fundamentals, documented CS foundations, and the direction toward backend systems and local AI.">
+  <meta property="og:description" content="The stack behind the featured projects—Python, FastAPI, SQLite, DuckDB, Neo4j, ChromaDB, Qdrant, Ollama, Docker, Next.js—plus documented CS foundations and learning direction.">
   <meta property="og:url" content="https://sohamsingh.indevs.in/lab">
   <meta property="og:image" content="https://sohamsingh.indevs.in/assets/social-preview.png">
   <meta property="og:image:width" content="1200">
@@ -16,7 +16,7 @@
   <meta property="og:image:alt" content="Soham Singh — Building private AI systems">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Skills &amp; Lab — Soham Singh">
-  <meta name="twitter:description" content="Applied web fundamentals, documented CS foundations, and the direction toward backend systems and local AI.">
+  <meta name="twitter:description" content="The stack behind the featured projects—Python, FastAPI, SQLite, DuckDB, Neo4j, ChromaDB, Qdrant, Ollama, Docker, Next.js—plus documented CS foundations.">
   <meta name="twitter:image" content="https://sohamsingh.indevs.in/assets/social-preview.png">
   <meta name="twitter:image:alt" content="Soham Singh — Building private AI systems">
   <title>Skills &amp; Lab — Soham Singh</title>
@@ -53,7 +53,7 @@
       <header class="page-heading">
         <p class="eyebrow">/ 03 — Lab</p>
         <h1 class="display-title">IN THE<br>MAKING.</h1>
-        <p class="page-intro">The foundations I’m learning and the questions I haven’t turned into working systems yet. A place for exploration, not a list of finished capabilities.</p>
+        <p class="page-intro">The tools behind my featured projects, the foundations I’m still building, and the questions I haven’t turned into working systems yet. A record of what I can discuss and what still needs evidence.</p>
       </header>
 
       <section id="skills" class="section" aria-labelledby="skills-title">
@@ -61,25 +61,67 @@
           <h2 id="skills-title">Skills &amp; working context</h2>
           <p class="eyebrow">Applied / Documented / Direction</p>
         </header>
-        <p class="section-intro">What this portfolio demonstrates, what I am learning, and where I am heading. No percentages or logo walls—just what I can currently discuss and what would still need evidence.</p>
+        <p class="section-intro">What the featured projects demonstrate, what I am learning, and where I am heading. No percentages or logo walls—just what I can currently discuss and what would still need evidence.</p>
         <div class="strength-grid">
           <div>
+            <p class="eyebrow">Built in the projects</p>
+            <h3>Backend &amp; data</h3>
+            <p>Python and FastAPI services with SQLite and DuckDB, a Neo4j claim graph, and vector stores (ChromaDB, Qdrant). REST request/response boundaries, ingestion kept off the request thread, and explicit failure handling.</p>
+          </div>
+          <div>
+            <p class="eyebrow">Built in the projects</p>
+            <h3>AI &amp; local inference</h3>
+            <p>Hosted and local model integration through Ollama, embeddings and retrieval-augmented answers with citations, relation and gap reasoning, and deterministic rules paired with ML-assisted analytics.</p>
+          </div>
+          <div>
             <p class="eyebrow">Applied in this portfolio</p>
-            <h3>Web fundamentals</h3>
-            <p>Semantic HTML, responsive CSS, and vanilla JavaScript. Native fetch/FormData submission with success, error, and timeout states; accessible navigation and progressive enhancement without a build step.</p>
-          </div>
-          <div>
-            <p class="eyebrow">Documented learning</p>
-            <h3>Foundations</h3>
-            <p>C, Java, and Python alongside data structures, algorithms, and object-oriented and memory concepts. Systems architecture, ML fundamentals, and local-model integration thinking—learning tracks, not professional-level mastery.</p>
-          </div>
-          <div>
-            <p class="eyebrow">Working direction</p>
-            <h3>Backend &amp; local AI</h3>
-            <p>HTTP/REST boundaries and failure handling, plus local inference with Ollama. Axion, Orion, and Indigent put this into practice — FastAPI services, SQLite / DuckDB and graph / vector stores, and Docker-sandboxed execution. Model training remains a learning track.</p>
+            <h3>Web &amp; interfaces</h3>
+            <p>Semantic HTML, responsive CSS, and vanilla JavaScript here; Next.js, React, and Tailwind in the projects. Accessible navigation, explicit failure states, and progressive enhancement without a build step.</p>
           </div>
         </div>
-        <p class="section-evidence">Tools demonstrated in this repository: Git and a dependency-free Node + headless-Edge/CDP test harness. The contact form is a browser client; it is not proof of building a full backend service.</p>
+        <p class="section-evidence">Tools demonstrated in this repository: Git and a dependency-free Node + headless-Edge/CDP test harness. The portfolio itself is a static site; the backend services live in the project repositories.</p>
+      </section>
+
+      <section class="section" aria-labelledby="stack-title">
+        <header class="section-heading">
+          <h2 id="stack-title">Tools in the featured projects</h2>
+          <p class="eyebrow">Stack / Used, not just studied</p>
+        </header>
+        <p class="section-intro">The concrete tools behind Axion, Orion, and Indigent. These are working stacks I can discuss and point to in the source—not a claim of expert-level depth in every one.</p>
+        <div class="learning-list">
+          <article aria-labelledby="stack-backend-title">
+            <span class="eyebrow" aria-hidden="true">01</span>
+            <h3 id="stack-backend-title" class="learning-title">Backend &amp; data</h3>
+            <div class="learning-copy">
+              <p>Python and FastAPI services with REST request/response boundaries. SQLite (WAL) and DuckDB for operational data, with ingestion and analysis separated from the request thread.</p>
+              <p class="muted">Seen in: Orion (DuckDB analytics), Indigent (SQLite control plane).</p>
+            </div>
+          </article>
+          <article aria-labelledby="stack-retrieval-title">
+            <span class="eyebrow" aria-hidden="true">02</span>
+            <h3 id="stack-retrieval-title" class="learning-title">Data &amp; retrieval</h3>
+            <div class="learning-copy">
+              <p>A Neo4j property graph for claims and a ChromaDB vector index in Axion; Qdrant for local vectors in Indigent. Embeddings, semantic retrieval, and provenance that ties an answer back to its source.</p>
+              <p class="muted">Seen in: Axion (graph + vectors), Indigent (local Qdrant RAG).</p>
+            </div>
+          </article>
+          <article aria-labelledby="stack-ai-title">
+            <span class="eyebrow" aria-hidden="true">03</span>
+            <h3 id="stack-ai-title" class="learning-title">AI &amp; models</h3>
+            <div class="learning-copy">
+              <p>Integrating hosted LLM APIs and local models through Ollama, treating model output as a proposal, and combining deterministic rules with ML-assisted analytics such as peer-relative anomaly detection and feature attribution.</p>
+              <p class="muted">Seen in: Axion (relation / gap reasoning), Orion (rules + ML), Indigent (local agent loop).</p>
+            </div>
+          </article>
+          <article aria-labelledby="stack-isolation-title">
+            <span class="eyebrow" aria-hidden="true">04</span>
+            <h3 id="stack-isolation-title" class="learning-title">Isolation &amp; assurance</h3>
+            <div class="learning-copy">
+              <p>Policy validation before every tool call, fail-closed defaults, Docker sandboxes with <code>--network=none</code> and read-only filesystems, append-only audit ledgers, and air-gapped operation.</p>
+              <p class="muted">Seen in: Orion (air-gapped, ledger), Indigent (policy validator + sandbox), and the Arbiter design.</p>
+            </div>
+          </article>
+        </div>
       </section>
 
       <section class="section" aria-labelledby="learning-title">

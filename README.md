@@ -39,14 +39,16 @@ filtering, identity context in systems, and local-model tradeoffs.
 
 ## Skills
 
-- **Applied in this site:** semantic HTML, responsive CSS, and vanilla
-  JavaScript — accessible navigation, progressive enhancement, and a native
-  fetch/FormData contact form with real error and timeout handling.
+- **Built in the projects:** Python and FastAPI services; SQLite, DuckDB, Neo4j,
+  ChromaDB, and Qdrant; Ollama and hosted LLM integration; embeddings and
+  retrieval-augmented answers; deterministic rules plus ML-assisted analytics.
+- **Interfaces:** Next.js, React, and Tailwind in the projects; semantic HTML,
+  responsive CSS, and vanilla JavaScript in this site.
+- **Isolation & assurance:** policy validation, fail-closed design, network-disabled
+  Docker sandboxes, and append-only audit ledgers.
 - **Coursework and study:** C, Java, and Python; data structures and algorithms;
   object-oriented and memory concepts; systems architecture; machine-learning
   fundamentals.
-- **Direction:** backend request/response boundaries, HTTP/REST failure handling,
-  and local AI inference.
 - **Tools:** Git and a dependency-free Node + headless-Edge test harness.
 
 No percentages or logo walls — just what I can actually discuss.
