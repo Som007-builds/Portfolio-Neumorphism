@@ -4,6 +4,18 @@
 > The filename `handiver.md` is intentional: it was requested by the owner.
 > Prepared on 2026-10-15. No deployment or commits were made during this overhaul.
 
+## Update — 2026-10-17 (project set changed)
+
+The owner replaced the featured project set. Superseding the project plan below:
+
+- **Removed** the *AI Browser Chatbot* and *Smart Home Automation* case studies (and their `systems.html` anchors and `index.html` cards).
+- **Added** three real projects with public source:
+  - **Axion** — research-intelligence claim graph. <https://github.com/Som007-builds/Axion>
+  - **Orion** — air-gapped SOC supervisory analytics (SIH 2026, PS 26157). <https://github.com/Som007-builds/orion>
+  - **Indigent** — sovereign local-first agentic workbench (SIH 2026, PS 26117). <https://github.com/Som007-builds/indigent-dev>
+- **Retained** *Foretyx / Arbiter* as the venture flagship. `systems.html` anchors are now `#foretyx`, `#axion`, `#orion`, `#indigent`.
+- `codex.html` related-case links were repointed to `#orion` and `#indigent`; `README.md`, `PROJECT_EVIDENCE.md`, `lab.html`, and `tests/smoke.mjs` were updated to match. See `PROJECT_EVIDENCE.md` for the current claim boundaries.
+
 ## 1. Assignment and source of truth
 
 The owner requested an implemented, tested upgrade of the existing portfolio, not just an audit. It should help secure software engineering, AI engineering, backend engineering, and related developer internships while retaining the distinctive editorial/technical identity.

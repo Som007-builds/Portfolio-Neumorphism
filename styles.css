@@ -260,7 +260,9 @@ a:hover > .arrow, button:not(:disabled):hover > .arrow { transform: translate(3p
 
 /* Home — selected-work cards */
 .section > .section-intro { max-width: 760px; margin-bottom: 36px; color: var(--muted); font-size: 14px; }
-.project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+/* The flagship venture reads as the lead card without breaking the grid rhythm. */
+.project-card--featured { border-color: var(--line); }
 .project-card { display: flex; flex-direction: column; border: 1px solid var(--quiet-line); background: var(--paper); transition: transform .3s var(--ease-out), border-color .3s var(--ease-out); }
 @media (hover: hover) and (pointer: fine) {
   .project-card:hover { transform: translateY(-4px); border-color: var(--line); }

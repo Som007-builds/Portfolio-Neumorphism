@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Three design case studies by Soham Singh: Foretyx / Arbiter, an AI Browser Chatbot, and Smart Home Automation. Proposed architectures, evidence, tradeoffs, and testing roadmaps.">
+  <meta name="description" content="Four projects by Soham Singh: Foretyx / Arbiter, a policy-aware privacy gateway; Axion, a claim-level research knowledge graph; Orion, air-gapped SOC supervisory analytics; and Indigent, a sovereign local-first AI workbench. Architectures, evidence, tradeoffs, and source.">
   <meta name="author" content="Soham Singh">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Soham Singh">
   <meta property="og:title" content="Projects — Soham Singh">
-  <meta property="og:description" content="Design case studies in privacy, local AI, and accessible automation: Foretyx / Arbiter, AI Browser Chatbot, Smart Home Automation.">
+  <meta property="og:description" content="Four projects in privacy, local AI, and supervisory analytics: Foretyx / Arbiter, Axion, Orion, and Indigent.">
   <meta property="og:url" content="https://sohamsingh.indevs.in/systems">
   <meta property="og:image" content="https://sohamsingh.indevs.in/assets/social-preview.png">
   <meta property="og:image:width" content="1200">
@@ -16,7 +16,7 @@
   <meta property="og:image:alt" content="Soham Singh — Building private AI systems">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Projects — Soham Singh">
-  <meta name="twitter:description" content="Design case studies in privacy, local AI, and accessible automation.">
+  <meta name="twitter:description" content="Projects in privacy, local AI, and supervisory analytics: Foretyx / Arbiter, Axion, Orion, and Indigent.">
   <meta name="twitter:image" content="https://sohamsingh.indevs.in/assets/social-preview.png">
   <meta name="twitter:image:alt" content="Soham Singh — Building private AI systems">
   <title>Projects — Soham Singh</title>
@@ -53,13 +53,14 @@
       <header class="page-heading">
         <p class="eyebrow">/ 02 — Projects</p>
         <h1 class="display-title">DESIGNING<br>THE BOUNDARIES.</h1>
-        <p class="page-intro">Three case studies in privacy, local AI, and accessible automation. I’m Soham Singh, a second-year B.Tech IT student at NSEC, Garia, Kolkata. These documents show how I frame problems, choose boundaries, and turn open questions into testable next steps—not proof of shipped products.</p>
+        <p class="page-intro">Four projects in privacy, local AI, and supervisory analytics. I’m Soham Singh, a second-year B.Tech IT student at NSEC, Garia, Kolkata. Foretyx / Arbiter is a venture-stage product; Axion, Orion, and Indigent are working systems with public source. Each document shows how I frame problems, choose boundaries, and separate what runs today from what is still being designed.</p>
       </header>
 
       <nav class="case-index" aria-label="Case studies">
         <a href="#foretyx">01 / Foretyx · Arbiter</a>
-        <a href="#browser-chatbot">02 / AI Browser Chatbot</a>
-        <a href="#home-automation">03 / Smart Home Automation</a>
+        <a href="#axion">02 / Axion</a>
+        <a href="#orion">03 / Orion</a>
+        <a href="#indigent">04 / Indigent</a>
       </nav>
 
       <section id="foretyx" class="project-case" aria-labelledby="foretyx-title">
@@ -162,168 +163,250 @@
         <a class="text-link" href="codex.html#policy-architecture">Read the policy-boundary essay <span class="arrow" aria-hidden="true">↗</span></a>
       </section>
 
-      <section id="browser-chatbot" class="project-case" aria-labelledby="browser-title">
+      <section id="axion" class="project-case" aria-labelledby="axion-title">
         <header class="case-heading">
           <span class="case-number" aria-hidden="true">02</span>
           <div>
-            <h2 id="browser-title">AI Browser Chatbot</h2>
-            <p class="muted">Local inference / Browser-based interface · Design documented</p>
+            <h2 id="axion-title">Axion</h2>
+            <p class="muted">Research intelligence / Claim-level knowledge graph · Working prototype</p>
           </div>
         </header>
-        <p class="case-summary">A proposed browser chat interface for an explicitly selected local model, with page context added only after permission. The goal is a clear data boundary, not a claim to replace every cloud assistant.</p>
-        <p class="status-note">Design documented; implementation not independently verified. No matching chatbot source, working extension, or demo was established.</p>
+        <p class="case-summary">Axion turns scientific literature into a connected, inspectable graph of claims, evidence, contradictions, and research gaps — deliberately not a chatbot over PDFs.</p>
+        <p class="status-note">Working self-hosted prototype in active development. The end-to-end loop (ingest → extract → reason → API → workspace) runs on a real corpus, but several capabilities are experimental and the evaluation set is still limited.</p>
         <div class="case-layout">
           <div class="case-copy">
             <h3>Problem</h3>
-            <p>Cloud assistants are convenient, but sending a question and its supporting context to a remote service is not always the right tradeoff. Local models offer another route, although installing and using them still takes some setup.</p>
+            <p>Scientific findings are not stored in a form that makes them easy to compare. A single question is answered in fragments across many papers, and two papers can agree on a topic while disagreeing on one specific, parameter-scoped result. Plain summaries often quote a conclusion without the paper, section, or sentence it came from.</p>
             <h3>Approach</h3>
-            <p>The proposed HTML/JavaScript UI would keep conversation state in the browser and send requests to Ollama on the same machine. Inference would run in Ollama, not inside the browser. DeepSeek or Llama variants are model candidates, not verified project dependencies.</p>
-            <h3>Intended request lifecycle</h3>
-            <p>Choose a downloaded local model → compose a prompt → optionally preview and approve selected page text → send bounded conversation history to <code>http://localhost:11434/api/chat</code> → render response text safely. Cancellation, runtime-unavailable errors, and timeouts should leave the conversation recoverable without silently switching to a cloud provider.</p>
-            <p>A browser extension is a planned integration option, not an implemented feature. It would need narrow permissions, explicit context selection, a visible preview, and no automatic collection from every open tab.</p>
-            <p class="project-tags">Proposed: HTML / JavaScript · Ollama · Local model selection · Permissioned page context</p>
+            <p>Axion ingests papers from arXiv, extracts atomic structured claims (subject, metric, direction, confidence, evidence span, section), and stores them in a Neo4j property graph plus a ChromaDB vector index. It retrieves semantically similar claims, asks an LLM to judge their relationship (contradicts, supports, or unrelated), mines gaps, proposes experiments, and propagates confidence. A coordinator answers questions through a plan → retrieve → reflect → synthesize loop, and a six-view Next.js workspace lets a researcher inspect the graph, contradictions, gaps, timeline, and confidence drift.</p>
+            <h3>Pipeline</h3>
+            <ol>
+              <li><strong>Ingest:</strong> fetch papers from arXiv and split the text into sections.</li>
+              <li><strong>Extract:</strong> pull up to eight falsifiable claims per section, each with provenance.</li>
+              <li><strong>Store:</strong> persist claims to the graph and embed them into the vector index.</li>
+              <li><strong>Reason:</strong> retrieve candidate claims and adjudicate relationships with an LLM.</li>
+              <li><strong>Synthesize:</strong> mine gaps, propose experiments, propagate confidence, and answer with citations.</li>
+            </ol>
+            <p class="project-tags">Python · FastAPI · Neo4j · ChromaDB · Next.js / React · sentence-transformers</p>
           </div>
           <div class="case-art">
             <figure>
-              <svg class="diagram" viewBox="0 0 520 390" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="browser-diagram-title browser-diagram-desc">
-                <title id="browser-diagram-title">Proposed browser chatbot local inference flow — not verified runtime</title>
-                <desc id="browser-diagram-desc">In this proposed architecture, user-approved page context would join a prompt in the HTML and JavaScript interface. A local REST request goes to Ollama, which runs DeepSeek or LLaMA on the machine and returns a response.</desc>
+              <svg class="diagram" viewBox="0 0 520 390" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="axion-diagram-title axion-diagram-desc">
+                <title id="axion-diagram-title">Axion claim-graph pipeline</title>
+                <desc id="axion-diagram-desc">Papers are ingested from arXiv, split into atomic claims, and stored in a Neo4j graph and a ChromaDB vector index. Relationship and gap reasoning query both stores, and a FastAPI backend serves a Next.js research workspace.</desc>
                 <g fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M24 38h472v328H24z" stroke-dasharray="3 6" opacity="0.5"/>
-                  <rect x="54" y="70" width="180" height="62"/>
-                  <rect x="286" y="70" width="180" height="62"/>
-                  <path d="M234 101h52m-8-6 8 6-8 6M376 132v54m-6-8 6 8 6-8"/>
-                  <rect x="286" y="186" width="180" height="62"/>
-                  <path d="M286 217h-52m8-6-8 6 8 6"/>
-                  <rect x="54" y="186" width="180" height="62"/>
-                  <path d="M144 248v58h232v-58"/>
+                  <rect x="160" y="20" width="200" height="46"/>
+                  <path d="M260 66v30m-6-8 6 8 6-8"/>
+                  <rect x="110" y="96" width="300" height="50"/>
+                  <path d="M260 146v30m-6-8 6 8 6-8"/>
+                  <rect x="40" y="176" width="200" height="58"/>
+                  <rect x="280" y="176" width="200" height="58"/>
+                  <path d="M140 234v30m-6-8 6 8 6-8M380 234v30m-6-8 6 8 6-8"/>
+                  <rect x="110" y="264" width="300" height="50"/>
+                  <path d="M260 314v30m-6-8 6 8 6-8"/>
+                  <rect x="90" y="344" width="340" height="46"/>
                 </g>
                 <g fill="currentColor" font-family="monospace" font-size="13" text-anchor="middle">
-                  <text x="260" y="25" font-size="11">LOCAL MACHINE BOUNDARY</text>
-                  <text x="144" y="96">PAGE CONTEXT</text><text x="144" y="116" font-size="11">Explicit permission</text>
-                  <text x="376" y="96">CHAT INTERFACE</text><text x="376" y="116" font-size="11">HTML + JavaScript</text>
-                  <text x="401" y="165" font-size="11">REST ↓</text>
-                  <text x="376" y="212">OLLAMA</text><text x="376" y="232" font-size="11">Local runtime</text>
-                  <text x="144" y="212">MODEL</text><text x="144" y="232" font-size="11">DeepSeek / LLaMA</text>
-                  <text x="260" y="335" font-size="11">Response returns to the interface</text>
+                  <text x="260" y="40">ARXIV PAPERS</text><text x="260" y="58" font-size="11">Search + PDF download</text>
+                  <text x="260" y="117">CLAIM EXTRACTION</text><text x="260" y="136" font-size="11">Atomic, structured claims</text>
+                  <text x="140" y="200">NEO4J GRAPH</text><text x="140" y="219" font-size="11">Papers · Claims · Gaps</text>
+                  <text x="380" y="200">CHROMADB</text><text x="380" y="219" font-size="11">Claim + chunk vectors</text>
+                  <text x="260" y="284">RELATIONSHIP / GAP</text><text x="260" y="303" font-size="11">Contradiction · support · gaps</text>
+                  <text x="260" y="370">FASTAPI + NEXT.JS WORKSPACE</text>
                 </g>
               </svg>
-              <figcaption class="figure-caption">02 / Proposed architecture, not verified runtime. Intended local inference loop with permissioned context; this drawing is not evidence of a working extension or offline application.</figcaption>
+              <figcaption class="figure-caption">02 / Implemented pipeline. Relationship and confidence values are LLM-assisted hypotheses, not verified scientific results.</figcaption>
             </figure>
           </div>
         </div>
         <details class="case-details">
-          <summary>Setup outline &amp; configuration decisions</summary>
-          <p>This is a proposed integration checklist, not verified repository setup instructions.</p>
-          <ol>
-            <li><strong>Prerequisites:</strong> a supported Windows, macOS, or Linux machine, a modern browser, disk space for model downloads, and sufficient RAM/VRAM for the chosen model and context window.</li>
-            <li>Follow the <a class="text-link" href="https://docs.ollama.com/quickstart">official Ollama quickstart</a> to install the runtime and download a model explicitly intended for local execution. Check that model’s license, size, quantization, and task quality; start small.</li>
-            <li>Use the <a class="text-link" href="https://docs.ollama.com/api">official API reference</a> to verify a local request before browser integration. A loopback endpoint alone does not prove the selected model is local: Ollama also supports cloud models.</li>
-            <li>The future UI should configure model ID, loopback API base, bounded history/context, streaming choice, and request timeout. Restrict allowed browser origins as needed; do not expose the runtime publicly or broadly disable browser security to bypass an origin error.</li>
-          </ol>
+          <summary>Design decisions &amp; tradeoffs</summary>
           <dl class="tradeoff-list">
-            <dt>Model quality vs. device limits</dt><dd>Model size and context compete for memory. Measure quality on a small fixed prompt set and record time-to-first-token, completion time, and memory on named hardware; no measurements are available yet.</dd>
-            <dt>Local inference vs. a fully offline workflow</dt><dd>A downloaded local model can infer without a hosted provider. Downloads, new web pages, remote UI assets, fonts, telemetry, or a selected cloud model can still use the network. This portfolio itself loads Google Fonts; it is not the chatbot runtime.</dd>
-            <dt>Context convenience vs. exposure</dt><dd>Page text is untrusted input and may contain sensitive data or prompt injection. Preview, minimize, and require consent; do not grant generated answers authority to execute actions. Render answers as text and make clearing history explicit.</dd>
+            <dt>Document-level retrieval vs. a claim-level graph</dt><dd>A graph is inspectable and supports cross-document conflict, but it depends on extraction quality and adds moving parts. Retrieval is only as good as the claims that were extracted.</dd>
+            <dt>LLM verdicts are hypotheses</dt><dd>A <code>CONTRADICTS</code> edge is a prompt to investigate, not a fact. The model can mislabel an unrelated pair, and a verdict without a shared subject and metric should be treated as uncertain.</dd>
+            <dt>Confidence propagation</dt><dd>Confidence is updated heuristically — a small bonus for supporting claims, a larger penalty for contradictions, clamped to a range. It is a ranking signal, not a calibrated probability.</dd>
+            <dt>Two stores, loose consistency</dt><dd>The graph and vector index are kept roughly in sync by ingestion code and are not transactional across both; a failure mid-ingest can leave them temporarily inconsistent.</dd>
           </dl>
         </details>
         <div class="case-notes">
           <div class="case-copy">
-            <h3>Testing roadmap / One local conversation</h3>
-            <p><strong>Future acceptance criteria—not results:</strong> send one synthetic prompt to a confirmed local model; verify the selected model and endpoint, successful response, cancellation, missing model, unavailable runtime, timeout, and denied origin. Confirm page context is absent without approval and cleared history is not resent.</p>
-            <p>Inspect browser and runtime network traffic separately before any offline/privacy claim. Test safe display of HTML-like model output and check that no cloud fallback occurs. Hardware, storage, electricity, and machine security remain real costs.</p>
+            <h3>Status / Evaluation</h3>
+            <p>The loop runs on a real corpus, but several capabilities remain experimental. The current evaluation set contains only same-paper pairs that the production agent declines to compare, so it cannot yet measure production contradiction detection; the project reports macro F1 as the honest headline metric and states that limitation directly. It is a research prototype, not a production service.</p>
           </div>
-          <aside class="case-copy" aria-labelledby="browser-evidence-title">
-            <h3 id="browser-evidence-title">Evidence reviewed</h3>
+          <aside class="case-copy" aria-labelledby="axion-evidence-title">
+            <h3 id="axion-evidence-title">Evidence &amp; source</h3>
             <ul class="evidence-list">
-              <li>Reviewed: portfolio local-model writing, official Ollama docs, and Axion/orion public trees, READMEs, and selected code.</li>
-              <li>Axion’s API client targets its FastAPI research backend; its model router calls hosted providers. This does not verify the proposed Ollama chatbot.</li>
-              <li>Missing: matching frontend source, extension manifest/permissions, reproducible setup, and runtime/network test evidence.</li>
+              <li>Self-hosted prototype with an end-to-end API, graph, vector store, and Next.js workspace.</li>
+              <li>Relationship verdicts and confidence are heuristic; evaluation is limited to the reported dataset.</li>
             </ul>
-            <p><a class="text-link" href="PROJECT_EVIDENCE.md">Review scope &amp; exact source references</a></p>
+            <p><a class="text-link" href="https://github.com/Som007-builds/Axion" target="_blank" rel="noopener noreferrer">View source on GitHub ↗</a></p>
+            <p><a class="text-link" href="PROJECT_EVIDENCE.md">Review scope &amp; evidence boundaries</a></p>
           </aside>
         </div>
-        <a class="text-link" href="codex.html#local-models">Read the local-model notes <span class="arrow" aria-hidden="true">↗</span></a>
+        <a class="text-link" href="codex.html#systems-before-scripts">Read the systems-thinking notes <span class="arrow" aria-hidden="true">↗</span></a>
       </section>
 
-      <section id="home-automation" class="project-case" aria-labelledby="home-title">
+      <section id="orion" class="project-case" aria-labelledby="orion-title">
         <header class="case-heading">
           <span class="case-number" aria-hidden="true">03</span>
           <div>
-            <h2 id="home-title">Smart Home Automation</h2>
-            <p class="muted">Hardware concept / Local control &amp; scheduling · Feasibility unverified</p>
+            <h2 id="orion-title">Orion</h2>
+            <p class="muted">Supervisory analytics / Air-gapped SOC assessment · SIH 2026 build</p>
           </div>
         </header>
-        <p class="case-summary">A concept for an affordable local household-control hub: prove safe manual control and recovery first, then investigate scheduling and usage insights.</p>
-        <p class="status-note">Concept only in the reviewed evidence. No hardware photos, firmware, PCB design files, bill of materials, or working installation were verified.</p>
+        <p class="case-summary">Orion is an air-gapped supervisory analytics platform that turns SOC operational evidence into explainable, evidence-linked hypotheses for examiners.</p>
+        <p class="status-note">Built for Smart India Hackathon 2026 (problem statement 26157, NCIIPC). The project reports its backend suite passing and a working persisted validation path; it is a hackathon build, not a production security product.</p>
         <div class="case-layout">
           <div class="case-copy">
             <h3>Problem</h3>
-            <p>Household appliances often sit behind separate controls and disconnected automation products. For Indian homes, an affordable central system could make everyday control simpler and make usage patterns easier to understand—without requiring every device to depend on a cloud service.</p>
+            <p>SOC teams generate enormous operational evidence, but the supervisory signals that matter can be invisible in the reports built from it: critical alerts closed unusually fast, alerts acknowledged without real investigation, the same asset recurring without remediation, or systems producing unexpectedly little telemetry.</p>
             <h3>Approach</h3>
-            <p>The proposed design would combine manual control and schedules in one local hub for Indian homes. Usage monitoring would require separately selected and validated sensing hardware; relay state alone does not measure energy. Prediction and local inference are later research options, not delivered features.</p>
-            <h3>Proposed control lifecycle</h3>
-            <p>A mobile UI would send an authorized command over the home LAN to an SBC hub. The hub would validate it, send a WiFi command to a planned relay node, and wait for acknowledgement before showing confirmed state. A timeout should show unknown/unreachable—not a false success. Manual override, boot states, and recovery after WiFi/power loss must be defined before appliance control.</p>
-            <p>An SBC is the initial direction; a custom PCB is a possible later step after requirements and low-voltage bench validation, not evidence of a fabricated board.</p>
-            <p class="project-tags">Planned: SBC hub · WiFi nodes · Relay control · Mobile UI · Scheduling</p>
+            <p>Orion ingests periodic batches of SOC evidence (alerts, cases, investigations, escalations, assets, telemetry, notes), validates and quarantines records, and scores them through a deterministic rules engine plus ML-assisted analytics: peer-relative anomaly detection, feature attribution, and investigation-note similarity. Output is a set of prioritized hypotheses, each linked back to its evidence as a finding card.</p>
+            <h3>Design principles</h3>
+            <ul class="approach-list">
+              <li>Air-gapped: no external APIs, CDNs, or online inference.</li>
+              <li>Hypotheses, never verdicts.</li>
+              <li><code>NOT_ASSESSABLE</code> is a valid outcome; missing evidence stays missing.</li>
+              <li>No silent drops: rejected records are quarantined and visible.</li>
+              <li>Append-only ledger; findings reproduce from their evidence.</li>
+            </ul>
+            <p class="project-tags">Python · FastAPI · SQLite · DuckDB · Rules + ML analytics</p>
           </div>
           <div class="case-art">
             <figure>
-              <svg class="diagram" viewBox="0 0 520 390" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="home-diagram-title home-diagram-desc">
-                <title id="home-diagram-title">Proposed local home control network — not verified hardware</title>
-                <desc id="home-diagram-desc">A mobile interface connects over the local network to an SBC hub with scheduling and local inference. WiFi links the hub to relay modules, which switch appliances. Manual overrides and electrical protection are required at the device boundary.</desc>
+              <svg class="diagram" viewBox="0 0 520 390" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="orion-diagram-title orion-diagram-desc">
+                <title id="orion-diagram-title">Orion supervisory analytics pipeline</title>
+                <desc id="orion-diagram-desc">SOC operational records are validated and stored, then scored by a deterministic rules engine and ML analytics. Results are presented as finding and evidence cards for supervisory review packs.</desc>
                 <g fill="none" stroke="currentColor" stroke-width="1.5">
-                  <rect x="160" y="24" width="200" height="52"/>
-                  <path d="M260 76v38m-6-8 6 8 6-8"/>
-                  <rect x="110" y="114" width="300" height="76"/>
-                  <path d="M260 190v34M90 258v-34h340v34M260 224v34"/>
-                  <rect x="24" y="258" width="132" height="48"/>
-                  <rect x="194" y="258" width="132" height="48"/>
-                  <rect x="364" y="258" width="132" height="48"/>
-                  <path d="M90 306v28m170-28v28m170-28v28M24 334h472"/>
+                  <rect x="110" y="20" width="300" height="48"/>
+                  <path d="M260 68v30m-6-8 6 8 6-8"/>
+                  <rect x="90" y="98" width="340" height="48"/>
+                  <path d="M260 146v30m-6-8 6 8 6-8"/>
+                  <rect x="24" y="176" width="222" height="56"/>
+                  <rect x="274" y="176" width="222" height="56"/>
+                  <path d="M135 232v30m-6-8 6 8 6-8M385 232v30m-6-8 6 8 6-8"/>
+                  <rect x="110" y="262" width="300" height="48"/>
+                  <path d="M260 310v30m-6-8 6 8 6-8"/>
+                  <rect x="90" y="340" width="340" height="42"/>
                 </g>
                 <g fill="currentColor" font-family="monospace" font-size="13" text-anchor="middle">
-                  <text x="260" y="55">MOBILE UI</text>
-                  <text x="333" y="99" font-size="11">Local network</text>
-                  <text x="260" y="141">CENTRAL HUB / SBC</text>
-                  <text x="260" y="162" font-size="11">Schedules + local inference</text>
-                  <text x="260" y="179" font-size="11">Custom PCB direction</text>
-                  <text x="304" y="214" font-size="11">WiFi</text>
-                  <text x="90" y="287">RELAY 01</text><text x="260" y="287">RELAY 02</text><text x="430" y="287">RELAY 03</text>
-                  <text x="260" y="356" font-size="11">APPLIANCES / MANUAL OVERRIDE / PROTECTION</text>
-                  <text x="260" y="379" font-size="11">Cloud connection is not the control path</text>
+                  <text x="260" y="40">SOC RECORDS</text><text x="260" y="58" font-size="11">Alerts · cases · assets · notes</text>
+                  <text x="260" y="118">INGESTION</text><text x="260" y="137" font-size="11">Validation · quarantine · evidence store</text>
+                  <text x="135" y="200">RULES ENGINE</text><text x="135" y="219" font-size="11">Deterministic indicators</text>
+                  <text x="385" y="200">ML ANALYTICS</text><text x="385" y="219" font-size="11">Anomaly · attribution · NLP</text>
+                  <text x="260" y="282">FINDING / EVIDENCE CARDS</text><text x="260" y="300" font-size="11">Hypotheses linked to evidence</text>
+                  <text x="260" y="364">SUPERVISORY REVIEW</text>
                 </g>
               </svg>
-              <figcaption class="figure-caption">03 / Proposed architecture, not verified runtime or a built installation. Not an electrical wiring guide: appliance switching requires suitable isolation, protection, and qualified installation.</figcaption>
+              <figcaption class="figure-caption">03 / Implemented pipeline. Findings are hypotheses for a human examiner; the system does not assert misconduct.</figcaption>
             </figure>
           </div>
         </div>
         <details class="case-details">
-          <summary>Constraints, design decisions &amp; testing roadmap</summary>
+          <summary>Design decisions &amp; tradeoffs</summary>
           <dl class="tradeoff-list">
-            <dt>Budget target, not a quoted build</dt><dd>Under ₹10,000 is an aspirational household-setup target. There is no verified BOM or fixed device count; enclosure, power supply, sensing, protection, and qualified installation costs must be scoped before feasibility can be claimed.</dd>
-            <dt>Local control vs. operational responsibility</dt><dd>A LAN-first path reduces cloud dependence but still depends on hub, router, and node availability. Pairing/authentication, stale commands, acknowledgements, recovery, and manual override need testing. A safe state depends on the appliance; one universal “off” rule is insufficient.</dd>
-            <dt>Simple schedules before prediction</dt><dd>Deterministic schedules are easier to inspect and debug. Local inference adds compute and validation cost. No measured energy savings, control latency, reliability, or validated budget is available.</dd>
+            <dt>Hypotheses, not verdicts</dt><dd>Every finding carries its evidence so a reviewer can check it. The platform supports judgement; it does not replace it or claim to detect wrongdoing.</dd>
+            <dt>Exact anomaly evaluation vs. cost</dt><dd>Leave-one-out Isolation Forest scoring preserves semantics but fits a model per target, which limits very large detector workloads. The reported benchmark covers the streaming note path, not full detector throughput.</dd>
+            <dt><code>NOT_ASSESSABLE</code> is not “low risk”</dt><dd>When the required evidence structures are absent, the honest answer is that the question cannot be assessed — not a green result.</dd>
+            <dt>Single-writer storage</dt><dd>DuckDB is single-writer, so ingestion and analysis run outside the request thread to keep the API responsive.</dd>
           </dl>
-          <p><strong>Future acceptance criteria—not test results:</strong> begin with one low-voltage indicator/load and one node, not household mains. Verify authorized commands, rejection of unauthorized/replayed commands, acknowledgement versus unknown state, manual override, schedule persistence, node reboot, and WiFi/hub/power-loss recovery. Define appliance-specific safe behavior with qualified electrical review before any mains prototype.</p>
-          <p>Only after that bench milestone: publish the firmware revision, real build photos, scoped BOM, and repeatable measurements. Evaluate energy use against a defined baseline with suitable metering; do not infer savings from schedules alone. Industrial expansion would require a separate safety and requirements process.</p>
         </details>
         <div class="case-notes">
           <div class="case-copy">
-            <h3>Next milestone / One safe bench node</h3>
-            <p>Select a hub/node interface and document a low-voltage test plan with clear command, acknowledgement, timeout, and recovery states. Defer custom PCB design and prediction until the simplest control loop is demonstrated.</p>
+            <h3>Reported validation</h3>
+            <p>Project-reported: a passing backend suite, a streaming benchmark over 100,000 investigation notes, and a persisted RulesEngine path that produced real rapid-closure findings on synthetic data. Full detector throughput is deliberately not claimed, and no production or compliance result is implied.</p>
           </div>
-          <aside class="case-copy" aria-labelledby="home-evidence-title">
-            <h3 id="home-evidence-title">Evidence reviewed</h3>
+          <aside class="case-copy" aria-labelledby="orion-evidence-title">
+            <h3 id="orion-evidence-title">Evidence &amp; source</h3>
             <ul class="evidence-list">
-              <li>Reviewed: the existing portfolio concept, conceptual topology, and related industrial-automation writing.</li>
-              <li>Missing: hardware photos, firmware repository, PCB/schematic files, BOM, safety review, and measurement records.</li>
-              <li>The illustration communicates intent only; no fabricated photos, demo thumbnails, or source links substitute for a build.</li>
+              <li>Air-gapped FastAPI backend with a rules engine, ML analytics, quarantine, and an append-only ledger.</li>
+              <li>The figures above are reported by the project, not independently reproduced here.</li>
             </ul>
-            <p><a class="text-link" href="PROJECT_EVIDENCE.md">Review scope &amp; evidence gaps</a></p>
+            <p><a class="text-link" href="https://github.com/Som007-builds/orion" target="_blank" rel="noopener noreferrer">View source on GitHub ↗</a></p>
+            <p><a class="text-link" href="PROJECT_EVIDENCE.md">Review scope &amp; evidence boundaries</a></p>
           </aside>
         </div>
-        <a class="text-link" href="lab.html#ideas">Read the related industrial-automation concept <span class="arrow" aria-hidden="true">↗</span></a>
+        <a class="text-link" href="codex.html#policy-architecture">Read the policy-boundary essay <span class="arrow" aria-hidden="true">↗</span></a>
+      </section>
+
+      <section id="indigent" class="project-case" aria-labelledby="indigent-title">
+        <header class="case-heading">
+          <span class="case-number" aria-hidden="true">04</span>
+          <div>
+            <h2 id="indigent-title">Indigent</h2>
+            <p class="muted">Local-first agentic AI / Sovereign on-prem workbench · SIH 2026 build</p>
+          </div>
+        </header>
+        <p class="case-summary">Indigent is a sovereign agentic workbench: a system where the model, knowledge base, code execution, and audit trail all stay on one machine — and where the software can show that they did.</p>
+        <p class="status-note">Built for Smart India Hackathon 2026 (problem statement 26117). The control plane, policy enforcement, sandbox, audit, and local retrieval are implemented and tested; P&amp;ID production extraction and full multimodal transport remain in progress.</p>
+        <div class="case-layout">
+          <div class="case-copy">
+            <h3>Problem</h3>
+            <p>Industrial teams work with confidential information — P&amp;IDs, inspection reports, SOPs, and vendor terms — that cannot be sent to a cloud AI service. The requirement is not “mostly local” but demonstrable control: proof that inference, retrieval, and execution stayed on the machine.</p>
+            <h3>Approach</h3>
+            <p>A request is classified, planned, and run through a bounded state machine (intake → classify → plan → retrieve → tool → verify → artifact → validate → approve → complete). Model output is treated as an untrusted proposal: every tool call is authorized by a deterministic policy validator and re-checked by the runtime before execution, and consequential deliverables wait for a named approver. Code runs only inside a Docker sandbox with <code>--network=none</code> and a read-only filesystem. A live Sovereignty Monitor reports external-call counters and can never display <code>AIR-GAPPED</code> while a counter is non-zero.</p>
+            <h3>Stack</h3>
+            <p>Next.js (same-origin proxy) → FastAPI → SQLite (WAL), Ollama for local models, Qdrant for vectors, and a Docker sandbox. Deliverables include DOCX, XLSX, and code packages with SHA-256 integrity manifests.</p>
+            <p class="project-tags">FastAPI · Next.js · Ollama · Qdrant · Docker sandbox · SQLite</p>
+          </div>
+          <div class="case-art">
+            <figure>
+              <svg class="diagram" viewBox="0 0 520 390" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="indigent-diagram-title indigent-diagram-desc">
+                <title id="indigent-diagram-title">Indigent local-first agentic workbench</title>
+                <desc id="indigent-diagram-desc">A local browser talks to a Next.js proxy and a FastAPI control plane. The control plane runs a bounded task state machine, authorizes each tool call through a policy validator, and executes code only inside a network-disabled Docker sandbox, using loopback Ollama and Qdrant with an append-only audit.</desc>
+                <g fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="14" y="10" width="492" height="372" stroke-dasharray="3 6" opacity="0.5"/>
+                  <rect x="150" y="42" width="220" height="40"/>
+                  <path d="M260 82v24m-6-8 6 8 6-8"/>
+                  <rect x="110" y="106" width="300" height="40"/>
+                  <path d="M260 146v24m-6-8 6 8 6-8"/>
+                  <rect x="80" y="170" width="360" height="48"/>
+                  <path d="M180 218v24m-6-8 6 8 6-8M340 218v24m-6-8 6 8 6-8"/>
+                  <rect x="24" y="242" width="222" height="52"/>
+                  <rect x="274" y="242" width="222" height="52"/>
+                  <path d="M135 294v18m-6-8 6 8 6-8M385 294v18m-6-8 6 8 6-8"/>
+                  <rect x="24" y="312" width="472" height="56"/>
+                </g>
+                <g fill="currentColor" font-family="monospace" font-size="12" text-anchor="middle">
+                  <text x="260" y="27" font-size="10">SINGLE LOCAL MACHINE · NO EXTERNAL CALLS</text>
+                  <text x="260" y="60">LOCAL WORKBENCH</text><text x="260" y="76" font-size="10">Browser UI · same origin</text>
+                  <text x="260" y="124">NEXT.JS PROXY</text><text x="260" y="139" font-size="10">Server-side /api forwarding</text>
+                  <text x="260" y="192">FASTAPI CONTROL PLANE</text><text x="260" y="208" font-size="10">Bounded task state machine</text>
+                  <text x="135" y="264">POLICY VALIDATOR</text><text x="135" y="280" font-size="10">Authorizes each tool call</text>
+                  <text x="385" y="264">DOCKER SANDBOX</text><text x="385" y="280" font-size="10">network=none · read-only</text>
+                  <text x="260" y="336" font-size="11">LOOPBACK · OLLAMA + QDRANT · APPEND-ONLY AUDIT</text>
+                  <text x="260" y="356" font-size="10">Sovereignty monitor · no external inference</text>
+                </g>
+              </svg>
+              <figcaption class="figure-caption">04 / Implemented control plane. Local inference depends on the host hardware; the diagram shows the intended boundary, not a certified air gap.</figcaption>
+            </figure>
+          </div>
+        </div>
+        <details class="case-details">
+          <summary>Design decisions &amp; tradeoffs</summary>
+          <dl class="tradeoff-list">
+            <dt>Local inference vs. hardware limits</dt><dd>Keeping inference on-machine avoids a per-request API dependency and keeps data local, but model size and latency depend on the hardware someone actually has.</dd>
+            <dt>Fail-closed vs. availability</dt><dd>A bounded, fail-closed design favors safety over convenience: if the sandbox is unavailable, the system fails loudly instead of falling back to a host subprocess.</dd>
+            <dt>Application-level sovereignty</dt><dd>The monitor and egress guard operate at the application layer. Host firewall, OS hardening, and network isolation remain deployment responsibilities, not guarantees of the software alone.</dd>
+            <dt>Honest empty state</dt><dd>When extraction or a model is unavailable, the default composition reports an empty result rather than fabricating an answer.</dd>
+          </dl>
+        </details>
+        <div class="case-notes">
+          <div class="case-copy">
+            <h3>Status / Roadmap</h3>
+            <p>The control plane, policy validator, sandbox, audit ledger, and local retrieval loop are implemented. Production P&amp;ID graph extraction and full multimodal transport to a local vision model remain in progress. It is a hackathon build with a defensible core, not a hardened enterprise product.</p>
+          </div>
+          <aside class="case-copy" aria-labelledby="indigent-evidence-title">
+            <h3 id="indigent-evidence-title">Evidence &amp; source</h3>
+            <ul class="evidence-list">
+              <li>Local-first FastAPI + Next.js workbench with a policy-validated tool loop and a Docker sandbox.</li>
+              <li>Some capabilities are staged; the default composition reports empty state rather than inventing answers.</li>
+            </ul>
+            <p><a class="text-link" href="https://github.com/Som007-builds/indigent-dev" target="_blank" rel="noopener noreferrer">View source on GitHub ↗</a></p>
+            <p><a class="text-link" href="PROJECT_EVIDENCE.md">Review scope &amp; evidence boundaries</a></p>
+          </aside>
+        </div>
+        <a class="text-link" href="codex.html#local-models">Read the local-model notes <span class="arrow" aria-hidden="true">↗</span></a>
       </section>
     </main>
 

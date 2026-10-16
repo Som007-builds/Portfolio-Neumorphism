@@ -12,17 +12,25 @@ work I'm designing, the systems behind it, and what I'm learning along the way.
 
 ## Featured work
 
-- **Foretyx / Arbiter** — a proposed privacy and access-policy gateway that would
-  review identity and redact or tokenize personally identifiable information
-  before a request reaches a model. *Design and feasibility stage.*
-- **AI Browser Chatbot** — a browser assistant intended to run against a local
-  Ollama model with explicit, permissioned page context. *Design stage.*
-- **Smart Home Automation** — a low-voltage control concept for accessible home
-  automation with a cost target, starting from one safe bench node. *Concept stage.*
+- **Foretyx / Arbiter** — the venture flagship: a proposed privacy and access-policy
+  gateway that would review identity and redact or tokenize personally identifiable
+  information before a request reaches a model. *Design and feasibility stage.*
+- **Axion** — a research-intelligence platform that turns literature into an
+  inspectable graph of atomic claims, contradictions, and gaps instead of a chatbot
+  over PDFs. Python · FastAPI · Neo4j · ChromaDB · Next.js.
+  [Source](https://github.com/Som007-builds/Axion)
+- **Orion** — an air-gapped supervisory analytics platform that turns SOC
+  operational evidence into explainable, evidence-linked hypotheses for examiners.
+  Built for Smart India Hackathon 2026 (PS 26157).
+  [Source](https://github.com/Som007-builds/orion)
+- **Indigent** — a sovereign, local-first agentic workbench where the model,
+  knowledge base, execution, and audit trail all stay on one machine. Built for
+  Smart India Hackathon 2026 (PS 26117).
+  [Source](https://github.com/Som007-builds/indigent-dev)
 
-Each is presented as a design case study: intended architecture, tradeoffs, and
-open questions. Diagrams are labeled as proposed, not verified runtime. I keep
-the maturity honest rather than overstating what exists.
+Foretyx / Arbiter is a venture-stage design; the other three link to working source.
+Each is presented as a case study that separates what runs today from what is still
+being designed, and diagrams are labeled rather than overstating what exists.
 
 ## Writing
 
@@ -56,7 +64,7 @@ No percentages or logo walls — just what I can actually discuss.
 | Path | Purpose |
 | --- | --- |
 | `index.html` | Home — introduction, project cards, strengths, about |
-| `systems.html` | Projects — three in-page case studies |
+| `systems.html` | Projects — four in-page case studies |
 | `lab.html` | Skills & Lab — capabilities, learning, and early concepts |
 | `codex.html` | Writing — four technical notes |
 | `contact.html` | Contact and internship details |

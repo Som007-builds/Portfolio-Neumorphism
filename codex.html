@@ -140,11 +140,11 @@
               <p>The point is not to avoid scripts or design a large system for every small task. A short script is often the right tool. The habit I want to build is understanding where that tool fits, which assumptions it makes, and what happens when those assumptions stop holding.</p>
               <h3>Let a small implementation push back</h3>
               <p>Architecture only helps if implementation can challenge it. I’m learning to move between a small working example and the wider picture: sketch a boundary, implement the narrow path, test a failure, and revise the design. Understanding syntax and understanding the system are complementary skills, not competing identities.</p>
-              <p>For a home-automation design, that means asking who owns an actuator’s state before adding a dashboard. What should happen if a scheduled command and a manual command disagree? What should a restart restore? Those questions identify decisions the code must express; they do not require a distributed platform to answer.</p>
+              <p>For a local control design, that means asking who owns a device’s state before adding a dashboard. What should happen if a scheduled command and a manual command disagree? What should a restart restore? Those questions identify decisions the code must express; they do not require a distributed platform to answer.</p>
               <h3>Separate a decision from its evidence</h3>
               <p>A useful design note records the assumption, the simplest choice, and what would make that choice wrong. A local controller might be a reasonable starting point for avoiding a network dependency. It would still need checks for restart behavior, conflicting commands, and safe defaults before I could claim reliable operation.</p>
               <p>This is a learning habit, not evidence that those checks have passed. The case study records the intended boundaries; runtime behavior would need its own implementation and observations.</p>
-              <p class="article-links">Related case study: <a href="systems.html#home-automation">Smart Home Automation — local control and scheduling</a>.</p>
+              <p class="article-links">Related case study: <a href="systems.html#orion">Orion — findings must carry their evidence</a>.</p>
             </div>
           </article>
 
@@ -166,10 +166,10 @@
               <h3>Local is a configuration, not a guarantee</h3>
               <p>The <a href="https://docs.ollama.com/api/introduction" target="_blank" rel="noopener noreferrer">official Ollama API documentation</a> distinguishes local and cloud access. A local server address alone is not proof that inference stays on the device: the selected model and any cloud features also matter. The intended setup would use a downloaded local model and verify where requests go, without silently falling back to a hosted provider.</p>
               <p>There is an offline advantage once the model and runtime are installed, but it has boundaries: a local model cannot fetch a new web page without a connection, and running locally does not make its answers correct. Hosted models still have useful capabilities and operational advantages. I’m exploring local models because they offer a different set of tradeoffs—not because one approach has already replaced the other.</p>
-              <h3>A narrow browser workflow to evaluate</h3>
-              <p>The browser chatbot is a way to make those tradeoffs concrete: start with a prompt and a local REST call, then add page context only with explicit permission. Page text should remain untrusted input, not authority to access more tabs or invoke tools. Permissions should be narrow enough that choosing one page does not imply access to everything in the browser.</p>
-              <p>A useful evaluation would record the hardware, model, task, response time, and failure behavior with networking unavailable. I’m not reporting benchmark results here. The goal is a workflow that is understandable on the hardware someone actually has, with a visible error when the local runtime cannot serve the request.</p>
-              <p class="article-links">Related case study: <a href="systems.html#browser-chatbot">AI Browser Chatbot — local inference and browser context</a>.</p>
+              <h3>A narrow local-first workflow to evaluate</h3>
+              <p>A local-first workbench is a way to make those tradeoffs concrete: keep inference, retrieval, and tool execution on one machine, and treat every model proposal as untrusted until a deterministic check approves it. Page content and model output should remain untrusted input, not authority to reach outside the machine or invoke tools.</p>
+              <p>A useful evaluation would record the hardware, model, task, response time, and failure behavior with networking unavailable, and confirm that no request silently reaches a hosted provider. I’m not reporting benchmark results here. The goal is a workflow that is understandable on the hardware someone actually has, with a visible error when the local runtime cannot serve the request.</p>
+              <p class="article-links">Related case study: <a href="systems.html#indigent">Indigent — sovereign local-first workbench</a>.</p>
             </div>
           </article>
         </div>

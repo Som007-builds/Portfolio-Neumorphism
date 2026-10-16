@@ -106,12 +106,12 @@ try {
     check(`${file}: footer résumé placeholder standardized`, source.includes('data-resume-slot="footer"'));
     check(`${file}: no link to a missing résumé PDF`, !source.includes('href="assets/resume/'));
   }
-  check('Home: three project cards', (sources['index.html'].match(/class="project-card"/g) || []).length === 3);
+  check('Home: four project cards', (sources['index.html'].match(/<article class="project-card\b/g) || []).length === 4);
   check('Home: hero + footer résumé slots', sources['index.html'].includes('data-resume-slot="hero"') && sources['index.html'].includes('data-resume-slot="footer"'));
   check('Lab: skills target exists', sources['lab.html'].includes('id="skills"'));
   check('Lab: consistent navigation labels', sources['lab.html'].includes('>Skills &amp; Lab</a>') && sources['lab.html'].includes('>Projects</a>'));
   check('Systems: case-study scaffolding', ['class="case-index"', 'class="case-details"', 'class="table-scroll"', 'class="evidence-list"', 'class="case-status"'].every(token => sources['systems.html'].includes(token)));
-  check('Systems: all case anchors preserved', ['id="foretyx"', 'id="browser-chatbot"', 'id="home-automation"'].every(token => sources['systems.html'].includes(token)));
+  check('Systems: all case anchors preserved', ['id="foretyx"', 'id="axion"', 'id="orion"', 'id="indigent"'].every(token => sources['systems.html'].includes(token)));
   check('Codex: four entry summaries', (sources['codex.html'].match(/class="entry-summary"/g) || []).length === 4);
   check('Arbiter naming normalized', !/Arbiter AI/.test(sources['systems.html']) && !/Arbiter AI/.test(sources['index.html']) && !/Arbiter AI/.test(await readFile(path.join(root, 'PROJECT_EVIDENCE.md'), 'utf8')));
   check('No stale first-year biography in pages', pages.every(file => !/first[- ]year|year 1|\bY1\b|1st[- ]year/i.test(sources[file])));
