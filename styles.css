@@ -71,13 +71,16 @@ h3 { font-size: 21px; letter-spacing: -.025em; }
 .hero-intro { color: var(--muted); max-width: 380px; font-size: 15px; }
 .hero-intro strong { font-weight: 500; color: var(--ink); }
 .hero-actions { margin-top: 30px; display: flex; flex-wrap: wrap; align-items: center; gap: 24px; }
-.button { display: inline-flex; justify-content: space-between; align-items: center; gap: 32px; min-height: 49px; padding: 13px 20px; border: 1px solid var(--line); text-decoration: none; font: 11px/1.5 var(--mono); text-transform: uppercase; letter-spacing: .025em; background: transparent; color: var(--ink); transition: background-color .2s, color .2s, border-color .2s, transform .3s var(--ease-out); }
+.button { display: inline-flex; justify-content: space-between; align-items: center; gap: 32px; min-height: 49px; padding: 13px 20px; border: 1px solid var(--line); text-decoration: none; font: 11px/1.5 var(--mono); text-transform: uppercase; letter-spacing: .025em; background: transparent; color: var(--ink); transition: background-color .25s, color .25s, border-color .25s, transform .25s var(--ease-out); }
 .button:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 .button-primary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 .button-primary:hover { background: var(--paper); color: var(--ink); }
 .button:disabled { cursor: wait; opacity: .6; }
-.text-link { display: inline-flex; align-items: center; gap: 22px; font-size: 12px; text-decoration: none; border-bottom: 1px solid var(--line); padding: 7px 0; }
+.button:active { transform: translateY(0); }
+.text-link { display: inline-flex; align-items: center; gap: 22px; font-size: 12px; text-decoration: none; border-bottom: 1px solid var(--line); padding: 7px 0; transition: border-color .3s var(--ease-out); }
 .text-link:hover { border-color: var(--ink); }
+.text-link .arrow { transition: transform .3s var(--ease-out); }
+.text-link:hover .arrow { transform: translate(4px, -4px); }
 .arrow { font-family: var(--sans); font-size: 17px; line-height: 1; transition: transform .3s var(--ease-out); }
 a:hover > .arrow, button:not(:disabled):hover > .arrow { transform: translate(3px, -3px); }
 .hero-art { position: relative; }
@@ -238,7 +241,8 @@ a:hover > .arrow, button:not(:disabled):hover > .arrow { transform: translate(3p
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
   a:hover > .arrow, button:not(:disabled):hover > .arrow,
-  .button:not(:disabled):hover { transform: none; }
+  .button:not(:disabled):hover, .text-link:hover .arrow,
+  .project-card:hover { transform: none; }
 }
 
 /* ------------------------------------------------------------------
@@ -257,7 +261,10 @@ a:hover > .arrow, button:not(:disabled):hover > .arrow { transform: translate(3p
 /* Home — selected-work cards */
 .section > .section-intro { max-width: 760px; margin-bottom: 36px; color: var(--muted); font-size: 14px; }
 .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-.project-card { display: flex; flex-direction: column; border: 1px solid var(--quiet-line); background: var(--paper); }
+.project-card { display: flex; flex-direction: column; border: 1px solid var(--quiet-line); background: var(--paper); transition: transform .3s var(--ease-out), border-color .3s var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover { transform: translateY(-4px); border-color: var(--line); }
+}
 .project-visual { margin: 0; padding: 18px; background: var(--surface); border-bottom: 1px solid var(--quiet-line); }
 .project-diagram { width: 100%; height: auto; }
 .project-visual figcaption { margin-top: 14px; color: var(--muted); font: 10px/1.5 var(--mono); text-transform: uppercase; letter-spacing: .04em; }
@@ -344,4 +351,52 @@ a:hover > .arrow, button:not(:disabled):hover > .arrow { transform: translate(3p
 }
 @media (max-width: 380px) {
   .project-card-body { padding: 18px 16px; }
+}
+
+/* ------------------------------------------------------------------
+   Motion polish: restrained, state-driven transitions only.
+   Nothing animates on load and nothing loops, so the JS scroll reveals
+   in theme.js remain the single source of entrance motion. Every effect
+   here is neutralized by the prefers-reduced-motion rule above.
+   ------------------------------------------------------------------ */
+
+/* Theme cross-fade: surfaces ease between the light and dark editions. */
+body, .site-shell, .site-header, .site-footer, .project-card, .project-visual,
+.case-art, .table-scroll, .case-status, .strength-grid > div,
+.notes-list li, .channel-list li {
+  transition: background-color .35s var(--ease-out), color .35s var(--ease-out), border-color .35s var(--ease-out);
+}
+
+/* Case-study accordion: the "+" marker rotates into a close glyph. */
+.case-details > summary::after { transition: transform .3s var(--ease-out); transform-origin: center; }
+.case-details[open] > summary::after { content: '+'; transform: rotate(45deg); }
+.case-details[open] > summary + * { animation: details-in .32s var(--ease-out) backwards; }
+@keyframes details-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Case-study index links: eased ink and rule. */
+.case-index a { transition: color .25s var(--ease-out), border-color .25s var(--ease-out); }
+
+/* Maturity table: a quiet row highlight rather than a color wash. */
+.case-status tbody tr { transition: background-color .2s var(--ease-out); }
+.case-status tbody tr:hover { background: var(--surface); }
+
+/* Notes + channel rows: nudge the trailing arrow, keep the copy steady. */
+.notes-list a, .channel-list a { transition: color .25s var(--ease-out); }
+.notes-list a .arrow, .channel-list a .arrow { transition: transform .3s var(--ease-out); }
+.notes-list a:hover .arrow, .channel-list a:hover .arrow { transform: translate(3px, -3px); }
+
+/* Strength and idea blocks: subtle edge emphasis on hover. */
+.strength-grid > div:hover { border-color: var(--line); }
+
+/* Form controls: clearer focus feedback while typing. */
+.form-field input, .form-field textarea, .form-field select { transition: border-color .2s var(--ease-out), background-color .2s var(--ease-out); }
+.form-field input:focus, .form-field textarea:focus, .form-field select:focus { border-color: var(--ink); }
+
+/* Portrait: the monochrome study resolves to color on hover. */
+.portrait img { transition: filter .45s var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .portrait:hover img { filter: grayscale(0); }
 }

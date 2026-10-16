@@ -133,9 +133,9 @@
       if (preference.matches || element.contains(document.activeElement)) return;
       // Content is visible by default; motion never becomes a loading gate.
       var animation = element.animate([
-        { opacity: 0, transform: 'translateY(18px)' },
+        { opacity: 0, transform: 'translateY(14px)' },
         { opacity: 1, transform: 'translateY(0)' }
-      ], { duration: 650, delay: delay || 0, easing: 'cubic-bezier(.22, 1, .36, 1)', fill: 'backwards' });
+      ], { duration: 600, delay: delay || 0, easing: 'cubic-bezier(.22, 1, .36, 1)', fill: 'backwards' });
       active.set(element, animation);
       animation.onfinish = animation.oncancel = function () { active.delete(element); };
     }
